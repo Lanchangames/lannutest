@@ -4,7 +4,7 @@ const ITEM_DB = {
         { id: 'clothes1', name: 'ハートＴ', file: 'clothes_1.png', type: 'setup' },
         { id: 'clothes2', name: 'ビカラ服', file: 'clothes_2.png', type: 'setup' },
         { id: 'clothes3', name: 'キラキラメイド', file: 'clothes_3.png', type: 'setup' },
-        { id: 'clothes4', name: 'お出かけ服', file: 'clothes_4.png', type: 'setup' },
+        { id: 'clothes4', name: 'ぽんちょ', file: 'clothes_4.png', type: 'setup' },
         { id: 'clothes5', name: 'パジャマ', file: 'clothes_5.png', type: 'setup' },
         { id: 'clothes6', name: '水着', file: 'clothes_6.png', type: 'setup' },
         { id: 'clothes7', name: 'ハロウィン', file: 'clothes_7.png', type: 'setup' },
@@ -14,7 +14,7 @@ const ITEM_DB = {
     ],
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
-        { id: 'tops2', name: 'トップス2', file: 'tops_2.png', type: 'tops' },
+        { id: 'tops2', name: 'ゔぇいんT', file: 'tops_2.png', type: 'tops' },
         { id: 'tops3', name: 'トップス3', file: 'tops_3.png', type: 'tops' },
         { id: 'tops4', name: 'トップス4', file: 'tops_4.png', type: 'tops' },
         { id: 'tops5', name: 'トップス5', file: 'tops_5.png', type: 'tops' },
@@ -26,7 +26,7 @@ const ITEM_DB = {
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
-        { id: 'bottoms2', name: 'ボトムス2', file: 'bottoms_2.png', type: 'bottoms' },
+        { id: 'bottoms2', name: 'るーずそっくす', file: 'bottoms_2.png', type: 'bottoms' },
         { id: 'bottoms3', name: 'ボトムス3', file: 'bottoms_3.png', type: 'bottoms' },
         { id: 'bottoms4', name: 'ボトムス4', file: 'bottoms_4.png', type: 'bottoms' },
         { id: 'bottoms5', name: 'ボトムス5', file: 'bottoms_5.png', type: 'bottoms' },
@@ -47,7 +47,11 @@ const ITEM_DB = {
         { id: 'acc8', name: 'ビカラ帽', file: 'acc_8.png', type: 'acc' },
         { id: 'acc9', name: 'ビカラ杖', file: 'acc_9.png', type: 'acc' },
         { id: 'acc10', name: '花火', file: 'acc_10.png', type: 'acc' },
-        { id: 'acc11', name: 'チャイナリボン', file: 'acc_11.png', type: 'acc' }
+        { id: 'acc11', name: 'チャイナリボン', file: 'acc_11.png', type: 'acc' },
+        { id: 'acc12', name: 'うちわぱーしゔぁる', file: 'acc_12.png', type: 'acc' },
+        { id: 'acc13', name: 'うちわじーくふりーとさん', file: 'acc_13.png', type: 'acc' },
+        { id: 'acc14', name: 'カチューシャわっか', file: 'acc_14.png', type: 'acc' },
+        { id: 'acc15', name: 'はね', file: 'acc_15.png', type: 'acc' }
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
