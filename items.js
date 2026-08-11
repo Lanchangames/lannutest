@@ -58,7 +58,9 @@ const ITEM_DB = {
         { id: 'acc19', name: '星バッチ', file: 'acc_19.png', type: 'acc' },
         { id: 'acc20', name: 'リボンブローチ', file: 'acc_20.png', type: 'acc' },
         { id: 'acc21', name: 'スカーフ', file: 'acc_21.png', type: 'acc' },
-        { id: 'acc22', name: 'ドラゴンエプロン', file: 'acc_22.png', type: 'acc' }
+        { id: 'acc22', name: 'ドラゴンエプロン', file: 'acc_22.png', type: 'acc' },
+        { id: 'acc23', name: '両手大根', file: 'acc_23.png', type: 'acc' },
+        { id: 'acc24', name: '大根ぼうし', file: 'acc_24.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
@@ -70,6 +72,9 @@ const ITEM_DB = {
         { id: 'bg7', name: 'ヴェイン', file: 'bg_7.png', type: 'bg' },
         { id: 'bg8', name: 'ジークフリート', file: 'bg_8.png', type: 'bg' },
         { id: 'bg9', name: 'パーシヴァル', file: 'bg_9.png', type: 'bg' },
-        { id: 'bg10', name: '王城', file: 'bg_10.png', type: 'bg' }
+        { id: 'bg10', name: '大根（黒）', file: 'bg_10.png', type: 'bg' },
+        { id: 'bg11', name: '大根（白）', file: 'bg_11.png', type: 'bg' }
+        
+        
     ]
 };
