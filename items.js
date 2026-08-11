@@ -25,7 +25,7 @@ const ITEM_DB = {
         { id: 'tops10', name: 'トップス10', file: 'tops_10.png', type: 'tops' }
     ],
     bottoms: [
-        { id: 'bottoms1', name: 'ボトムス1', file: 'bottoms_1.png', type: 'bottoms' },
+        { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
         { id: 'bottoms2', name: 'ボトムス2', file: 'bottoms_2.png', type: 'bottoms' },
         { id: 'bottoms3', name: 'ボトムス3', file: 'bottoms_3.png', type: 'bottoms' },
         { id: 'bottoms4', name: 'ボトムス4', file: 'bottoms_4.png', type: 'bottoms' },
