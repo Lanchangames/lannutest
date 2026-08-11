@@ -728,7 +728,7 @@
             <!-- トップ画面の要素 -->
             <div id="section-top">
                 <div id="lancelot-area">
-                    <img id="lancelot-img" src="lancelot.png" alt="ランスロット" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
+                    <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
                     <div id="message-box"></div>
                 </div>
 
@@ -945,6 +945,9 @@
     let timerInterval = null;
     let typeWriterTimeout = null;
 
+    let currentLancelotImg = 'lancelot_1.png';
+    let fixScoreCount = 0;
+
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
 
@@ -1094,12 +1097,8 @@
 
     function updateLancelotImage() {
         const img = document.getElementById('lancelot-img');
-        if (state.reportCount >= 20) {
-            img.src = 'lancelot_3.png'; 
-        } else if (state.reportCount >= 10) {
-            img.src = 'lancelot_2.png'; 
-        } else {
-            img.src = 'lancelot.png';   
+        if (img) {
+            img.src = currentLancelotImg;
         }
     }
 
@@ -1474,10 +1473,13 @@
     }
 
     function reportScore() {
+        fixScoreCount = 0;
         const inputVal = parseInt(document.getElementById('input-score').value, 10);
         
         if (isNaN(inputVal) || inputVal <= state.totalScore) {
+            currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("前回より貢献度が増えていないようだが…報告ミスではないか？");
+            updateUI();
             return;
         }
 
@@ -1485,6 +1487,7 @@
         if (now - state.lastReportTime < COOLDOWN_MS && state.lastReportTime !== 0) {
             const remainMin = Math.ceil((COOLDOWN_MS - (now - state.lastReportTime)) / 1000 / 60);
             setLancelotMessage(`少し休憩したらどうだ？ 次の報告まであと ${remainMin} 分だ。`);
+            updateUI();
             return;
         }
 
@@ -1499,7 +1502,9 @@
                 const pacePer30Min = (diff / timeDiffMins) * 30;
                 
                 if (diff <= 10000) {
+                    currentLancelotImg = 'lancelot_2.png';
                     setLancelotMessage("うーん、もう少し頑張らないか？");
+                    updateUI();
                     return;
                 }
                 
@@ -1522,6 +1527,14 @@
 
         state.coins += earnedCoins;
         state.affection += earnedAffection;
+
+        if (isOverwork || state.totalScore >= 10000000000) {
+            currentLancelotImg = 'lancelot_4.png';
+        } else if (state.totalScore >= 1500000000) {
+            currentLancelotImg = 'lancelot_3.png';
+        } else {
+            currentLancelotImg = 'lancelot_1.png';
+        }
 
         if (isOverwork) {
             setLancelotMessage("……本当か？いくら団長でもそのペースは信じがたい。無理をして倒れないよう、適度な休息を取ってくれ。");
@@ -1553,6 +1566,13 @@
         if (isNaN(inputVal) || inputVal < 0) {
             setLancelotMessage("正しい貢献度を入力してくれ。");
             return;
+        }
+
+        fixScoreCount++;
+        if (fixScoreCount >= 2) {
+            currentLancelotImg = 'lancelot_2.png';
+        } else {
+            currentLancelotImg = 'lancelot_1.png';
         }
 
         state.totalScore = inputVal;
@@ -1608,7 +1628,9 @@
 
     function startGame() {
         document.getElementById('start-screen').style.display = 'none';
+        currentLancelotImg = 'lancelot_1.png';
         setLancelotMessage("団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。");
+        updateUI();
     }
 
     function shareOnX() {
