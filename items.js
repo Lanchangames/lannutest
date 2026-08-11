@@ -3,7 +3,7 @@ const ITEM_DB = {
     setup: [
         { id: 'clothes1', name: 'ハートＴ', file: 'clothes_1.png', type: 'setup' },
         { id: 'clothes2', name: 'ビカラ服', file: 'clothes_2.png', type: 'setup' },
-        { id: 'clothes3', name: 'カフェ店員', file: 'clothes_3.png', type: 'setup' },
+        { id: 'clothes3', name: 'キラキラメイド', file: 'clothes_3.png', type: 'setup' },
         { id: 'clothes4', name: 'お出かけ服', file: 'clothes_4.png', type: 'setup' },
         { id: 'clothes5', name: 'パジャマ', file: 'clothes_5.png', type: 'setup' },
         { id: 'clothes6', name: '水着', file: 'clothes_6.png', type: 'setup' },
@@ -13,7 +13,7 @@ const ITEM_DB = {
         { id: 'clothes10', name: '部屋着', file: 'clothes_10.png', type: 'setup' }
     ],
     tops: [
-        { id: 'tops1', name: 'トップス1', file: 'tops_1.png', type: 'tops' },
+        { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
         { id: 'tops2', name: 'トップス2', file: 'tops_2.png', type: 'tops' },
         { id: 'tops3', name: 'トップス3', file: 'tops_3.png', type: 'tops' },
         { id: 'tops4', name: 'トップス4', file: 'tops_4.png', type: 'tops' },
@@ -46,7 +46,8 @@ const ITEM_DB = {
         { id: 'acc7', name: 'オバケ', file: 'acc_7.png', type: 'acc' },
         { id: 'acc8', name: 'ビカラ帽', file: 'acc_8.png', type: 'acc' },
         { id: 'acc9', name: 'ビカラ杖', file: 'acc_9.png', type: 'acc' },
-        { id: 'acc10', name: '花火', file: 'acc_10.png', type: 'acc' }
+        { id: 'acc10', name: '花火', file: 'acc_10.png', type: 'acc' },
+        { id: 'acc11', name: 'チャイナリボン', file: 'acc_11.png', type: 'acc' }
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
