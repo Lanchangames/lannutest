@@ -1514,14 +1514,14 @@
 
         if (inputVal > state.highestReportedScore) {
             state.highestReportedScore = inputVal;
-            state.reportCount++;
-            
-            const earnedCoins = 200 + (state.reportCount * 50);
-            const earnedAffection = 10;
-
-            state.coins += earnedCoins;
-            state.affection += earnedAffection;
         }
+        state.reportCount++;
+        
+        const earnedCoins = 200 + (state.reportCount * 50);
+        const earnedAffection = 10;
+
+        state.coins += earnedCoins;
+        state.affection += earnedAffection;
 
         if (isOverwork) {
             setLancelotMessage("……本当か？いくら団長でもそのペースは信じがたい。無理をして倒れないよう、適度な休息を取ってくれ。");
