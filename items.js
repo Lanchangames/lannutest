@@ -15,7 +15,7 @@ const ITEM_DB = {
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
         { id: 'tops2', name: 'ゔぇいんT', file: 'tops_2.png', type: 'tops' },
-        { id: 'tops3', name: 'トップス3', file: 'tops_3.png', type: 'tops' },
+        { id: 'tops3', name: 'セーラー服', file: 'tops_3.png', type: 'tops' },
         { id: 'tops4', name: 'トップス4', file: 'tops_4.png', type: 'tops' },
         { id: 'tops5', name: 'トップス5', file: 'tops_5.png', type: 'tops' },
         { id: 'tops6', name: 'トップス6', file: 'tops_6.png', type: 'tops' },
@@ -27,7 +27,7 @@ const ITEM_DB = {
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
         { id: 'bottoms2', name: 'るーずそっくす', file: 'bottoms_2.png', type: 'bottoms' },
-        { id: 'bottoms3', name: 'ボトムス3', file: 'bottoms_3.png', type: 'bottoms' },
+        { id: 'bottoms3', name: 'みずいろ半ズボン', file: 'bottoms_3.png', type: 'bottoms' },
         { id: 'bottoms4', name: 'ボトムス4', file: 'bottoms_4.png', type: 'bottoms' },
         { id: 'bottoms5', name: 'ボトムス5', file: 'bottoms_5.png', type: 'bottoms' },
         { id: 'bottoms6', name: 'ボトムス6', file: 'bottoms_6.png', type: 'bottoms' },
@@ -51,7 +51,14 @@ const ITEM_DB = {
         { id: 'acc12', name: 'うちわぱーしゔぁる', file: 'acc_12.png', type: 'acc' },
         { id: 'acc13', name: 'うちわじーくふりーとさん', file: 'acc_13.png', type: 'acc' },
         { id: 'acc14', name: 'カチューシャわっか', file: 'acc_14.png', type: 'acc' },
-        { id: 'acc15', name: 'はね', file: 'acc_15.png', type: 'acc' }
+        { id: 'acc15', name: 'はね', file: 'acc_15.png', type: 'acc' },
+        { id: 'acc16', name: 'ネクタイ', file: 'acc_16.png', type: 'acc' },
+        { id: 'acc17', name: 'ヘアピン', file: 'acc_17.png', type: 'acc' },
+        { id: 'acc18', name: 'ベレー帽', file: 'acc_18.png', type: 'acc' },
+        { id: 'acc19', name: '星バッチ', file: 'acc_19.png', type: 'acc' },
+        { id: 'acc20', name: 'リボンブローチ', file: 'acc_20.png', type: 'acc' },
+        { id: 'acc21', name: 'スカーフ', file: 'acc_21.png', type: 'acc' },
+        { id: 'acc22', name: 'ドラゴンエプロン', file: 'acc_22.png', type: 'acc' }
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
