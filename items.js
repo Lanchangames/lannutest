@@ -10,7 +10,7 @@ const ITEM_DB = {
         { id: 'clothes7', name: 'バニー服（黒）', file: 'clothes_7.png', type: 'setup' },
         { id: 'clothes8', name: 'バニー服（青）', file: 'clothes_8.png', type: 'setup' },
         { id: 'clothes9', name: 'バニー服（白）', file: 'clothes_9.png', type: 'setup' },
-        { id: 'clothes10', name: '部屋着', file: 'clothes_10.png', type: 'setup' }
+        { id: 'clothes10', name: 'バニー服(網タイツ)', file: 'clothes_10.png', type: 'setup' }
     ],
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
