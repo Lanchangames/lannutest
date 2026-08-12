@@ -1095,6 +1095,18 @@
         }
     }
 
+    // --- 追加: 現在の貢献度に応じた平常時の画像を設定する処理 ---
+    function setDefaultLancelotImg() {
+        if (state.totalScore >= 10000000000) {
+            currentLancelotImg = 'lancelot_4.png';
+        } else if (state.totalScore >= 1500000000) {
+            currentLancelotImg = 'lancelot_3.png';
+        } else {
+            currentLancelotImg = 'lancelot_1.png';
+        }
+    }
+    // -------------------------------------------------------------
+
     function updateLancelotImage() {
         const img = document.getElementById('lancelot-img');
         if (img) {
@@ -1437,6 +1449,10 @@
         
         state.coins -= price;
         state.unlocked[previewTarget.id] = true;
+        
+        // 修正: 怒った顔等のままアイテムを買った時に、顔を元に戻す
+        setDefaultLancelotImg();
+        
         setLancelotMessage(`新しいアイテム「${previewTarget.name}」を手に入れたな。クローゼットに入れておいたぞ。`);
         
         const btn = document.getElementById('btn-buy-preview');
@@ -1486,6 +1502,8 @@
         const now = Date.now();
         if (now - state.lastReportTime < COOLDOWN_MS && state.lastReportTime !== 0) {
             const remainMin = Math.ceil((COOLDOWN_MS - (now - state.lastReportTime)) / 1000 / 60);
+            // 修正: クールダウンで弾かれた時に、顔を元に戻す
+            setDefaultLancelotImg();
             setLancelotMessage(`少し休憩したらどうだ？ 次の報告まであと ${remainMin} 分だ。`);
             updateUI();
             return;
@@ -1564,7 +1582,10 @@
         const inputVal = parseInt(document.getElementById('input-score').value, 10);
         
         if (isNaN(inputVal) || inputVal < 0) {
+            // 修正: 入力ミス時にスタックさせないよう、このメッセージも lancelot_2 に統一
+            currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("正しい貢献度を入力してくれ。");
+            updateUI();
             return;
         }
 
@@ -1572,7 +1593,8 @@
         if (fixScoreCount >= 2) {
             currentLancelotImg = 'lancelot_2.png';
         } else {
-            currentLancelotImg = 'lancelot_1.png';
+            // 修正: 強制的に lancelot_1 にするのではなく、点数に応じて正しく戻す
+            setDefaultLancelotImg();
         }
 
         state.totalScore = inputVal;
@@ -1628,7 +1650,10 @@
 
     function startGame() {
         document.getElementById('start-screen').style.display = 'none';
-        currentLancelotImg = 'lancelot_1.png';
+        
+        // 修正: ロードした点数が既に高い場合に、開始時から正しく反映させる
+        setDefaultLancelotImg(); 
+        
         setLancelotMessage("団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。");
         updateUI();
     }
