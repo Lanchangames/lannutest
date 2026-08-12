@@ -399,6 +399,7 @@
             height: 120px;
             object-fit: contain;
             flex-shrink: 0;
+            cursor: pointer;
         }
         #message-box {
             flex: 1;
@@ -728,7 +729,7 @@
             <!-- トップ画面の要素 -->
             <div id="section-top">
                 <div id="lancelot-area">
-                    <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
+                    <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onclick="pokeLancelot()" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
                     <div id="message-box"></div>
                 </div>
 
@@ -928,6 +929,7 @@
         affection: 0,
         lastReportTime: 0,
         highestReportedScore: 0,
+        lastLoginTime: 0,
         unlocked: {}
     };
 
@@ -947,6 +949,9 @@
 
     let currentLancelotImg = 'lancelot_1.png';
     let fixScoreCount = 0;
+
+    let afkTimer = null;
+    let isGameStarted = false;
 
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
@@ -1015,6 +1020,9 @@
         if (state.highestReportedScore === undefined) {
             state.highestReportedScore = state.totalScore;
         }
+        if (state.lastLoginTime === undefined) {
+            state.lastLoginTime = 0;
+        }
         state.version = SAVE_VERSION;
         
         ['setup', 'tops', 'bottoms', 'acc', 'bg'].forEach(type => applyAvatarImage(type, currentEquip[type]));
@@ -1058,6 +1066,9 @@
                     if (state.highestReportedScore === undefined) {
                         state.highestReportedScore = state.totalScore;
                     }
+                    if (state.lastLoginTime === undefined) {
+                        state.lastLoginTime = 0;
+                    }
                     state.version = SAVE_VERSION;
                     
                     currentEquip = normalizeEquip(decoded.equip);
@@ -1095,15 +1106,9 @@
         }
     }
 
-    // --- 追加: 現在の貢献度に応じた平常時の画像を設定する処理 ---
+    // --- 追加・修正: 平常時の顔は常に lancelot_1 に統一 ---
     function setDefaultLancelotImg() {
-        if (state.totalScore >= 10000000000) {
-            currentLancelotImg = 'lancelot_4.png';
-        } else if (state.totalScore >= 1500000000) {
-            currentLancelotImg = 'lancelot_3.png';
-        } else {
-            currentLancelotImg = 'lancelot_1.png';
-        }
+        currentLancelotImg = 'lancelot_1.png';
     }
     // -------------------------------------------------------------
 
@@ -1113,6 +1118,56 @@
             img.src = currentLancelotImg;
         }
     }
+
+    // --- 【新機能】AFK（5分放置）処理 ---
+    function triggerAfkEvent() {
+        const afkActions = [
+            { img: 'lancelot_5.png', msg: '団長、どうしたんだ⋯？' },
+            { img: 'lancelot_7.png', msg: 'すぅ……団長、無理しないでくれ……' },
+            { img: 'lancelot_8.png', msg: 'むにゃ……もうお肉は食べられないぞ……' }
+        ];
+        const act = afkActions[Math.floor(Math.random() * afkActions.length)];
+        currentLancelotImg = act.img;
+        setLancelotMessage(act.msg);
+        updateLancelotImage();
+    }
+
+    function resetAfkTimer() {
+        if (!isGameStarted) return;
+        if (afkTimer) clearTimeout(afkTimer);
+        afkTimer = setTimeout(triggerAfkEvent, 5 * 60 * 1000); 
+    }
+
+    // 各種操作時にAFKタイマーをリセット
+    document.addEventListener('mousemove', resetAfkTimer);
+    document.addEventListener('touchstart', resetAfkTimer, {passive: true});
+    document.addEventListener('keydown', resetAfkTimer);
+    document.addEventListener('click', resetAfkTimer);
+    // ------------------------------------
+
+    // --- 【新機能】つつく（タップ）処理 ---
+    function pokeLancelot() {
+        if (!isGameStarted) return;
+        resetAfkTimer();
+
+        const hour = new Date().getHours();
+        let pokes = [
+            { img: 'lancelot_1.png', msg: '頑張っているな、団長。' },
+            { img: 'lancelot_5.png', msg: '古戦場とは一体なんなんだろうな。俺たちはなぜ戦って…これ以上考えるのはやめておこう。' },
+            { img: 'lancelot_2.png', msg: 'そんなに触って⋯どうしたんだ？団長には任務があるだろう。' }
+        ];
+
+        // 0時〜7時のみ出現
+        if (hour >= 0 && hour < 7) {
+            pokes.push({ img: 'lancelot_8.png', msg: 'むにゃ⋯プリン⋯⋯⋯⋯' });
+        }
+
+        const act = pokes[Math.floor(Math.random() * pokes.length)];
+        currentLancelotImg = act.img;
+        setLancelotMessage(act.msg);
+        updateLancelotImage();
+    }
+    // ------------------------------------
 
     function switchMainTab(mode) {
         currentMode = mode;
@@ -1450,7 +1505,6 @@
         state.coins -= price;
         state.unlocked[previewTarget.id] = true;
         
-        // 修正: 怒った顔等のままアイテムを買った時に、顔を元に戻す
         setDefaultLancelotImg();
         
         setLancelotMessage(`新しいアイテム「${previewTarget.name}」を手に入れたな。クローゼットに入れておいたぞ。`);
@@ -1492,8 +1546,16 @@
         fixScoreCount = 0;
         const inputVal = parseInt(document.getElementById('input-score').value, 10);
         
-        if (isNaN(inputVal) || inputVal <= state.totalScore) {
+        // 修正: 無効値、マイナス、1000億以上の判定追加
+        if (isNaN(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
             currentLancelotImg = 'lancelot_2.png';
+            setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
+            updateUI();
+            return;
+        }
+
+        if (inputVal <= state.totalScore) {
+            currentLancelotImg = 'lancelot_5.png'; // 修正: 2から5へ変更
             setLancelotMessage("前回より貢献度が増えていないようだが…報告ミスではないか？");
             updateUI();
             return;
@@ -1502,7 +1564,6 @@
         const now = Date.now();
         if (now - state.lastReportTime < COOLDOWN_MS && state.lastReportTime !== 0) {
             const remainMin = Math.ceil((COOLDOWN_MS - (now - state.lastReportTime)) / 1000 / 60);
-            // 修正: クールダウンで弾かれた時に、顔を元に戻す
             setDefaultLancelotImg();
             setLancelotMessage(`少し休憩したらどうだ？ 次の報告まであと ${remainMin} 分だ。`);
             updateUI();
@@ -1546,31 +1607,35 @@
         state.coins += earnedCoins;
         state.affection += earnedAffection;
 
-        if (isOverwork || state.totalScore >= 10000000000) {
-            currentLancelotImg = 'lancelot_4.png';
-        } else if (state.totalScore >= 1500000000) {
-            currentLancelotImg = 'lancelot_3.png';
-        } else {
-            currentLancelotImg = 'lancelot_1.png';
-        }
+        setDefaultLancelotImg(); // 修正: 基本的に1を維持する
+        let msgToSet = "";
 
         if (isOverwork) {
-            setLancelotMessage("……本当か？いくら団長でもそのペースは信じがたい。無理をして倒れないよう、適度な休息を取ってくれ。");
+            msgToSet = "……本当か？いくら団長でもそのペースは信じがたい。無理をして倒れないよう、適度な休息を取ってくれ。";
         } else if (state.totalScore >= 50000000000) {
-            setLancelotMessage("信じられない記録だな。団長は本当に誇り高き戦士だ。白竜騎士団も見習わないとな。だが、倒れる前にしっかり休んでくれよ！");
+            msgToSet = "信じられない記録だな。団長は本当に誇り高き戦士だ。白竜騎士団も見習わないとな。だが、倒れる前にしっかり休んでくれよ！";
         } else if (state.totalScore >= 30000000000) {
-            setLancelotMessage("すさまじい戦果だ！団長の頑張りには頭が下がる思いだよ。英雄となった団長を見届けるため、引き続き応援しているぞ。");
+            msgToSet = "すさまじい戦果だ！団長の頑張りには頭が下がる思いだよ。英雄となった団長を見届けるため、引き続き応援しているぞ。";
         } else if (state.totalScore >= 20000000000) {
-            setLancelotMessage("200億到達おめでとう！もしかして古戦場の英雄を目指しているのか？素晴らしい団長に付いて行けて光栄だ。");
+            msgToSet = "200億到達おめでとう！もしかして古戦場の英雄を目指しているのか？素晴らしい団長に付いて行けて光栄だ。";
         } else if (state.totalScore >= 15000000000) {
-            setLancelotMessage("150億到達おめでとう！途方のない数字だな。俺も身が引き締まる思いだよ。団長は古戦場が好きなんだな。");
+            msgToSet = "150億到達おめでとう！途方のない数字だな。俺も身が引き締まる思いだよ。団長は古戦場が好きなんだな。";
         } else if (state.totalScore >= 10000000000) {
-            setLancelotMessage("100億到達おめでとう！俺が初めて騎空艇に乗った時だと考えられない数字だな。適度に休憩を取るんだぞ。");
+            msgToSet = "100億到達おめでとう！俺が初めて騎空艇に乗った時だと考えられない数字だな。適度に休憩を取るんだぞ。";
         } else {
             const maxScore = 8000000000;
             const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
-            setLancelotMessage(msgsProgress[rank]);
+            msgToSet = msgsProgress[rank];
         }
+
+        // 修正: 深夜・早朝の報告分岐を追加
+        const hour = new Date().getHours();
+        if (hour >= 0 && hour < 7) {
+            currentLancelotImg = 'lancelot_4.png';
+            msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも忘れないでくれよ！";
+        }
+
+        setLancelotMessage(msgToSet);
 
         document.getElementById('input-score').value = '';
         updateUI();
@@ -1581,10 +1646,10 @@
     function fixScore() {
         const inputVal = parseInt(document.getElementById('input-score').value, 10);
         
-        if (isNaN(inputVal) || inputVal < 0) {
-            // 修正: 入力ミス時にスタックさせないよう、このメッセージも lancelot_2 に統一
+        // 修正: 無効値、マイナス、1000億以上の判定追加
+        if (isNaN(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
             currentLancelotImg = 'lancelot_2.png';
-            setLancelotMessage("正しい貢献度を入力してくれ。");
+            setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
             updateUI();
             return;
         }
@@ -1593,7 +1658,6 @@
         if (fixScoreCount >= 2) {
             currentLancelotImg = 'lancelot_2.png';
         } else {
-            // 修正: 強制的に lancelot_1 にするのではなく、点数に応じて正しく戻す
             setDefaultLancelotImg();
         }
 
@@ -1651,11 +1715,37 @@
     function startGame() {
         document.getElementById('start-screen').style.display = 'none';
         
-        // 修正: ロードした点数が既に高い場合に、開始時から正しく反映させる
-        setDefaultLancelotImg(); 
-        
-        setLancelotMessage("団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。");
+        const now = Date.now();
+        const hour = new Date(now).getHours();
+
+        let loginImg = 'lancelot_1.png';
+        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
+
+        // --- 修正: ログイン時の条件分岐を追加 ---
+        if (hour >= 2 && hour < 5) {
+            loginImg = 'lancelot_2.png';
+            loginMsg = '団長、深夜に何をしているんだ…？休息も任務のうちだぞ。ここは俺が守る、休むんだ。';
+        } else if ((hour >= 0 && hour < 2) || (hour >= 5 && hour < 7)) {
+            loginImg = 'lancelot_7.png';
+            loginMsg = '…？団長か。すまない、少しうとうとしてしまってな…。';
+        } else if (state.lastLoginTime && (now - state.lastLoginTime >= 24 * 60 * 60 * 1000)) {
+            loginImg = 'lancelot_5.png';
+            loginMsg = '団長、忙しかったのか？たまには俺のことを思い出してくれると嬉しいな。';
+        } else if (state.coins >= 3000 && Math.random() < 0.3) {
+            loginImg = 'lancelot_5.png';
+            loginMsg = '団長、ショップへ行かないのか？素敵なものがたくさんあるようだぞ…？';
+        }
+
+        state.lastLoginTime = now;
+        saveGame();
+
+        currentLancelotImg = loginImg;
+        setLancelotMessage(loginMsg);
         updateUI();
+        
+        // ゲーム開始フラグを立ててAFKタイマーをスタート
+        isGameStarted = true;
+        resetAfkTimer();
     }
 
     function shareOnX() {
