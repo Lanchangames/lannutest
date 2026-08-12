@@ -105,7 +105,7 @@ const ITEM_DB = {
         { id: 'acc59', name: '学生ポシェット', file: 'acc_59.png', type: 'acc' },
         { id: 'acc60', name: 'ウエディングヴェール', file: 'acc_60.png', type: 'acc' },
         { id: 'acc61', name: 'ウエディングブーケ', file: 'acc_61.png', type: 'acc' },
-        { id: 'acc62', name: 'aaaa', file: 'acc_62.png', type: 'acc' },
+        { id: 'acc62', name: 'トランプ', file: 'acc_62.png', type: 'acc' },
         { id: 'acc63', name: 'aaaa', file: 'acc_63.png', type: 'acc' },
         { id: 'acc64', name: 'aaaa', file: 'acc_64.png', type: 'acc' },
     ],
