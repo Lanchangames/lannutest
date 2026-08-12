@@ -81,6 +81,7 @@ const ITEM_DB = {
         { id: 'acc42', name: 'ミルク', file: 'acc_42.png', type: 'acc' },
         { id: 'acc43', name: 'ゆあがりタオル', file: 'acc_43.png', type: 'acc' },
         { id: 'acc44', name: 'ばけつ', file: 'acc_44.png', type: 'acc' },
+        { id: 'acc45', name: 'ねこじゃらし', file: 'acc_45.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
