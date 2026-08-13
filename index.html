@@ -733,7 +733,7 @@
                 </div>
                 <!-- 完全に独立させた開放ボタンコンテナ -->
                 <div style="padding: 10px; display: flex; justify-content: center; align-items: center; border: 2px solid #94a3b8; border-radius: 10px; background-color: #f8fafc; flex-shrink: 0;">
-                    <button id="btn-buy-preview" style="display:none; background-color: #27ae60; color: white; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.2); width: 80%;" onclick="buyPreviewItem()">500コインで解放</button>
+                    <button id="btn-buy-preview" disabled style="background-color: #27ae60; color: white; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.2); width: 80%;" onclick="buyPreviewItem()">衣装を選んでくれ！</button>
                 </div>
             </div>
             
@@ -1573,7 +1573,6 @@
         
         const buyBtn = document.getElementById('btn-buy-preview');
         buyBtn.innerText = `${price}コインで解放`;
-        buyBtn.style.display = 'inline-block';
         buyBtn.disabled = state.coins < price;
     }
 
@@ -1619,7 +1618,10 @@
         previewTarget = null;
         document.getElementById('preview-img').style.display = 'none';
         document.getElementById('preview-layer-bg').style.display = 'none';
-        document.getElementById('btn-buy-preview').style.display = 'none';
+        
+        const buyBtnPreview = document.getElementById('btn-buy-preview');
+        buyBtnPreview.innerText = '衣装を選んでくれ！';
+        buyBtnPreview.disabled = true;
         
         updateUI();
         renderItems();
