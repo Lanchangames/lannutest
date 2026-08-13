@@ -765,7 +765,7 @@
                 </div>
 
                 <div class="input-group" style="align-items: stretch;">
-                    <input type="number" id="input-score" placeholder="現在の累計貢献度を入力">
+                    <input type="number" id="input-score" placeholder="現在の累計貢献度を入力" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();">
                     <div style="display: grid; grid-auto-rows: 1fr; gap: 10px; flex-shrink: 0;">
                         <button id="btn-report" onclick="reportScore()" style="width: 100%; height: 100%;">報告する</button>
                         <button id="btn-fix" onclick="fixScore()" style="width: 100%; height: 100%; background-color: #f39c12;">貢献度修正<br><span style="font-size:10px;">（コインは増加しません。）</span></button>
@@ -1696,6 +1696,7 @@
         let msgToSet = "";
 
         if (isOverwork) {
+            currentLancelotImg = 'lancelot_2.png';
             msgToSet = "……本当か？いくら団長でもそのペースは信じがたい。無理をして倒れないよう、適度な休息を取ってくれ。";
         } else if (state.totalScore >= 50000000000) {
             msgToSet = "信じられない記録だな。団長は本当に誇り高き戦士だ。白竜騎士団も見習わないとな。だが、倒れる前にしっかり休んでくれよ！";
