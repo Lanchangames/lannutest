@@ -145,10 +145,19 @@
             overflow: hidden;
         }
 
+        /* 改修②: 左側カラムの追加設定 */
+        #left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-shrink: 0;
+            width: 360px;
+        }
+
         /* アバターエリア (左側) */
         #avatar-area {
             position: relative;
-            width: 360px;
+            width: 100%;
             height: 480px;
             border: 2px solid #94a3b8;
             border-radius: 10px;
@@ -362,25 +371,25 @@
 
         #ui-area.show-top #section-room, 
         #ui-area.show-top #section-shop, 
-        #ui-area.show-top #sub-nav,
         #ui-area.show-top #section-data { display: none !important; }
         
         #ui-area.show-room #section-top, 
         #ui-area.show-room #section-shop,
         #ui-area.show-room #section-data { display: none !important; }
-        #ui-area.show-room #sub-nav { display: flex !important; }
 
         #ui-area.show-shop #section-top, 
         #ui-area.show-shop #section-room,
         #ui-area.show-shop #section-data { display: none !important; }
-        #ui-area.show-shop #sub-nav { display: flex !important; }
 
         #ui-area.show-data #section-top,
         #ui-area.show-data #section-room,
-        #ui-area.show-data #section-shop,
-        #ui-area.show-data #sub-nav { display: none !important; }
+        #ui-area.show-data #section-shop { display: none !important; }
 
-        #game-container.mode-data #avatar-area {
+        /* 着せ替えモード時のヘッダ表示制御 */
+        #game-container.mode-dressup #dressup-header {
+            display: flex !important;
+        }
+        #game-container.mode-data #left-column {
             display: none;
         }
 
@@ -579,19 +588,9 @@
         }
         
         /* プレビュー枠 */
-        #preview-panel {
-            display: flex;
-            gap: 15px;
-            background: #eef2f7;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #cbd5e1;
-            margin-bottom: 15px;
-            align-items: center;
-        }
         #preview-img-container {
-            width: 100px;
-            height: 120px;
+            width: 120px;
+            height: 150px;
             background: rgba(255, 255, 255, 0.7);
             background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%);
             background-size: 20px 20px;
@@ -606,7 +605,7 @@
         }
         #preview-img { max-width: 90%; max-height: 90%; display: none; object-fit: contain; }
         .preview-info { flex: 1; }
-        .preview-info p { margin: 5px 0 15px 0; font-size: 14px; }
+        .preview-info p { margin: 5px 0 15px 0; font-size: 14px; color: #555; }
 
         @media (max-width: 768px) {
             #game-container {
@@ -625,12 +624,15 @@
             }
             body { padding: 0 0 50px 0; }
             
+            #left-column {
+                width: 100%;
+            }
+
             #avatar-area {
                 width: 100%;
                 max-width: 252px;
                 height: 336px; 
                 margin: 0 auto;
-                position: relative;
             }
 
             #game-container.mode-dressup #avatar-area {
@@ -639,6 +641,18 @@
                 margin: 0 auto;
                 border: 2px solid #cbd5e1;
             }
+            
+            #game-container.mode-dressup #shop-preview-area {
+                width: 100% !important;
+                max-width: 150px !important;
+                height: 200px !important;
+                margin: 0 auto;
+                padding: 10px !important;
+            }
+            #shop-preview-area h3 { font-size: 12px; margin-bottom: 5px; }
+            #shop-preview-area .preview-info h4 { font-size: 12px; }
+            #shop-preview-area .preview-info p { font-size: 10px; margin: 3px 0; }
+            #preview-img-container { width: 80px; height: 100px; }
 
             #game-container.mode-dressup #unlocked-list,
             #game-container.mode-dressup #locked-list {
@@ -660,10 +674,6 @@
             .input-group {
                 flex-direction: column;
                 align-items: stretch;
-            }
-            #preview-panel {
-                flex-direction: column;
-                text-align: center;
             }
         }
 
@@ -707,24 +717,47 @@
     </div>
 
     <div id="content-wrapper">
-        <!-- アバターエリア -->
-        <div id="avatar-area">
-            <img id="layer-bg" class="avatar-layer" style="z-index: 1; display:none;" src="" alt="背景">
-            <img id="layer-base" class="avatar-layer" style="z-index: 2;" src="avatar.png" alt="素体">
-            <img id="layer-setup" class="avatar-layer" style="z-index: 3; display:none;" src="" alt="セットアップ">
-            <img id="layer-bottoms" class="avatar-layer" style="z-index: 4; display:none;" src="" alt="ボトムス">
-            <img id="layer-tops" class="avatar-layer" style="z-index: 5; display:none;" src="" alt="トップス">
-            <img id="layer-acc" class="avatar-layer" style="z-index: 6; display:none;" src="" alt="アクセ">
+        <!-- 改修②: 左側カラムを追加し、ここにプレビュー全般をまとめる -->
+        <div id="left-column">
+            
+            <!-- 着せ替えモード時のみ表示されるヘッダ（コインとサブタブ） -->
+            <div id="dressup-header" style="display: none; flex-direction: column; gap: 10px;">
+                <div class="status-card" style="padding: 10px;">
+                    <span class="label" style="font-size: 12px; color: #64748b; font-weight: bold;">🪙 所持コイン</span>
+                    <span class="val" id="val-coins-dressup" style="font-size: 18px; color: var(--primary); font-weight: bold; margin-top: 5px; display: block;">0</span>
+                </div>
+                <div id="sub-nav" style="display: flex; margin-bottom: 0;">
+                    <button class="sub-tab-btn active" onclick="switchSubTab('room')">クローゼット</button>
+                    <button class="sub-tab-btn" onclick="switchSubTab('shop')">ショップ</button>
+                </div>
+            </div>
+
+            <!-- アバターエリア (トップ画面 および クローゼット画面で表示) -->
+            <div id="avatar-area">
+                <img id="layer-bg" class="avatar-layer" style="z-index: 1; display:none;" src="" alt="背景">
+                <img id="layer-base" class="avatar-layer" style="z-index: 2;" src="avatar.png" alt="素体">
+                <!-- 改修①: ここから下のレイヤーはJSで動的に生成・重なり順を管理します -->
+            </div>
+            
+            <!-- ショップ画面用プレビューエリア (ショップ画面で表示) -->
+            <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; background: #eef2f7; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box; flex-shrink: 0;">
+                <h3 style="margin-top:0;">アイテムプレビュー</h3>
+                <div id="preview-img-container">
+                    <img id="preview-layer-bg" src="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; display: none; z-index: 1;">
+                    <img id="preview-layer-base" src="avatar.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; opacity: 0.5; display: block; z-index: 2;">
+                    <img id="preview-img" src="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; display: none; z-index: 3;">
+                </div>
+                <div class="preview-info" style="margin-top: 15px;">
+                    <h4 id="preview-name" style="font-size: 16px; margin:0;">アイテムを選択</h4>
+                    <p id="preview-desc">アイテムを選ぶと絵柄を確認できます。</p>
+                    <button id="btn-buy-preview" style="display:none; background-color: #27ae60; color: white; margin-top: 10px;" onclick="buyPreviewItem()">500コインで解放</button>
+                </div>
+            </div>
+            
         </div>
 
         <!-- メインUIエリア -->
         <div id="ui-area" class="show-top">
-            
-            <!-- 小タブ -->
-            <div id="sub-nav">
-                <button class="sub-tab-btn active" onclick="switchSubTab('room')">クローゼット</button>
-                <button class="sub-tab-btn" onclick="switchSubTab('shop')">ショップ</button>
-            </div>
 
             <!-- トップ画面の要素 -->
             <div id="section-top">
@@ -784,14 +817,6 @@
 
             <!-- ショップ画面の要素 -->
             <div id="section-shop">
-                
-                <div class="status-container" style="margin-bottom: 15px;">
-                    <div class="status-card">
-                        <span class="label">🪙 所持コイン</span>
-                        <span class="val" id="val-coins-shop">0</span>
-                    </div>
-                </div>
-
                 <div class="cat-tabs-wrapper" id="shop-category-tabs">
                     <div class="cat-tab-item active" id="cat-clothes-shop" onclick="changeShopCategory('clothes')">衣装</div>
                     <div class="cat-tab-item" id="cat-acc-shop" onclick="changeShopCategory('acc')">アクセサリー</div>
@@ -802,22 +827,6 @@
                     <div class="sub-cat-tab-item active" id="tab-setup-shop" onclick="changeShopTab('setup')">セットアップ</div>
                     <div class="sub-cat-tab-item" id="tab-tops-shop" onclick="changeShopTab('tops')">トップス</div>
                     <div class="sub-cat-tab-item" id="tab-bottoms-shop" onclick="changeShopTab('bottoms')">ボトムス</div>
-                </div>
-
-                <div class="shop-area" id="preview-section" style="padding-top: 5px;">
-                    <h3>アイテムプレビュー</h3>
-                    <div id="preview-panel">
-                        <div id="preview-img-container">
-                            <img id="preview-layer-bg" src="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; display: none; z-index: 1;">
-                            <img id="preview-layer-base" src="avatar.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; opacity: 0.5; display: block; z-index: 2;">
-                            <img id="preview-img" src="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; display: none; z-index: 3;">
-                        </div>
-                        <div class="preview-info">
-                            <h4 id="preview-name" style="font-size: 16px; margin:0;">アイテムを選択してください</h4>
-                            <p id="preview-desc">アイテムを選ぶと絵柄を確認できます。</p>
-                            <button id="btn-buy-preview" style="display:none; background-color: #27ae60; color: white;" onclick="buyPreviewItem()">500コインで解放</button>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="shop-area">
@@ -919,6 +928,9 @@
     const defaultEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
     let currentEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
     
+    // 改修①: 着用順を記録する配列
+    let equipOrder = [];
+
     const SAVE_VERSION = 1;
 
     let state = {
@@ -953,6 +965,10 @@
     let afkTimer = null;
     let isGameStarted = false;
 
+    // 改修③: 最後に表示されたアクションを記録する変数
+    let lastLoginAction = null;
+    let lastReportAction = null;
+
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
 
@@ -980,6 +996,17 @@
             norm.acc = norm.acc.filter(item => typeof item === 'string');
         }
         return norm;
+    }
+
+    // 改修①: 装備のロード時に着用順序を初期化
+    function initEquipOrder() {
+        equipOrder = [];
+        if (currentEquip.setup) equipOrder.push({type: 'setup', file: currentEquip.setup});
+        if (currentEquip.bottoms) equipOrder.push({type: 'bottoms', file: currentEquip.bottoms});
+        if (currentEquip.tops) equipOrder.push({type: 'tops', file: currentEquip.tops});
+        if (currentEquip.acc && currentEquip.acc.length > 0) {
+            currentEquip.acc.forEach(a => equipOrder.push({type: 'acc', file: a}));
+        }
     }
 
     function isValidState(s) {
@@ -1025,7 +1052,9 @@
         }
         state.version = SAVE_VERSION;
         
-        ['setup', 'tops', 'bottoms', 'acc', 'bg'].forEach(type => applyAvatarImage(type, currentEquip[type]));
+        // 改修①: 着用順初期化と全レイヤー適用
+        initEquipOrder();
+        applyAvatarImageAll();
     }
 
     async function exportData() {
@@ -1091,8 +1120,9 @@
         document.getElementById('val-reports').innerText = state.reportCount;
         document.getElementById('val-coins').innerText = state.coins;
         
-        const shopCoins = document.getElementById('val-coins-shop');
-        if(shopCoins) shopCoins.innerText = state.coins;
+        // 着せ替えヘッダ用のコイン表示を更新
+        const dressupCoins = document.getElementById('val-coins-dressup');
+        if(dressupCoins) dressupCoins.innerText = state.coins;
 
         updateLancelotImage();
 
@@ -1106,11 +1136,9 @@
         }
     }
 
-    // --- 追加・修正: 平常時の顔は常に lancelot_1 に統一 ---
     function setDefaultLancelotImg() {
         currentLancelotImg = 'lancelot_1.png';
     }
-    // -------------------------------------------------------------
 
     function updateLancelotImage() {
         const img = document.getElementById('lancelot-img');
@@ -1119,7 +1147,6 @@
         }
     }
 
-    // --- 【新機能】AFK（5分放置）処理 ---
     function triggerAfkEvent() {
         const afkActions = [
             { img: 'lancelot_5.png', msg: '団長、どうしたんだ⋯？' },
@@ -1138,14 +1165,12 @@
         afkTimer = setTimeout(triggerAfkEvent, 5 * 60 * 1000); 
     }
 
-    // 各種操作時にAFKタイマーをリセット
     document.addEventListener('mousemove', resetAfkTimer);
     document.addEventListener('touchstart', resetAfkTimer, {passive: true});
     document.addEventListener('keydown', resetAfkTimer);
     document.addEventListener('click', resetAfkTimer);
-    // ------------------------------------
 
-    // --- 【新機能】つつく（タップ）処理 ---
+    // --- 改修③: つつく（タップ）処理のバリエーション追加 ---
     function pokeLancelot() {
         if (!isGameStarted) return;
         resetAfkTimer();
@@ -1162,12 +1187,21 @@
             pokes.push({ img: 'lancelot_8.png', msg: 'むにゃ⋯プリン⋯⋯⋯⋯' });
         }
 
+        // ログイン時のアクションを追加
+        if (lastLoginAction) {
+            pokes.push(lastLoginAction);
+        }
+        
+        // 直前の報告アクションを追加
+        if (lastReportAction) {
+            pokes.push(lastReportAction);
+        }
+
         const act = pokes[Math.floor(Math.random() * pokes.length)];
         currentLancelotImg = act.img;
         setLancelotMessage(act.msg);
         updateLancelotImage();
     }
-    // ------------------------------------
 
     function switchMainTab(mode) {
         currentMode = mode;
@@ -1182,10 +1216,14 @@
             btns[0].classList.add('active');
             gc.classList.add('mode-top');
             uiArea.className = 'show-top';
+            // トップ画面時はアバターを表示
+            document.getElementById('avatar-area').style.display = 'block';
+            document.getElementById('shop-preview-area').style.display = 'none';
         } else if (mode === 'dressup') {
             btns[1].classList.add('active');
             gc.classList.add('mode-dressup');
-            uiArea.className = `show-${currentSubTab}`;
+            // 着せ替え時の現在のサブタブを再適用して表示を切り替え
+            switchSubTab(currentSubTab);
         } else if (mode === 'data') {
             btns[2].classList.add('active');
             gc.classList.add('mode-data');
@@ -1197,6 +1235,7 @@
         }
     }
 
+    // 改修②: サブタブ切替時にアバターとプレビューの表示を制御
     function switchSubTab(tab) {
         currentSubTab = tab;
         const uiArea = document.getElementById('ui-area');
@@ -1206,9 +1245,15 @@
         if (tab === 'room') {
             btns[0].classList.add('active');
             uiArea.className = 'show-room';
+            // クローゼット選択時はアバターを表示
+            document.getElementById('avatar-area').style.display = 'block';
+            document.getElementById('shop-preview-area').style.display = 'none';
         } else {
             btns[1].classList.add('active');
             uiArea.className = 'show-shop';
+            // ショップ選択時はプレビューを表示（アバターは非表示）
+            document.getElementById('avatar-area').style.display = 'none';
+            document.getElementById('shop-preview-area').style.display = 'flex';
         }
         
         if(window.innerWidth <= 768) {
@@ -1394,66 +1439,92 @@
         renderShopItems();
     }
 
-    function applyAvatarImage(type, file) {
-        if (type === 'acc') {
-            const avatarArea = document.getElementById('avatar-area');
-            avatarArea.querySelectorAll('.dynamic-acc').forEach(el => el.remove());
-            const staticAcc = document.getElementById('layer-acc');
-            if(staticAcc) staticAcc.style.display = 'none';
-
-            if (Array.isArray(file)) {
-                file.forEach(f => {
-                    const img = document.createElement('img');
-                    img.className = 'avatar-layer dynamic-acc';
-                    img.style.zIndex = 6;
-                    img.src = f;
-                    avatarArea.appendChild(img);
-                });
-            }
+    // 改修①: 着用順に基づいて動的にレイヤーを再生成する関数
+    function applyAvatarImageAll() {
+        const avatarArea = document.getElementById('avatar-area');
+        
+        // 既存の動的レイヤーを一旦すべて削除
+        avatarArea.querySelectorAll('.dynamic-layer').forEach(el => el.remove());
+        
+        // 背景は常に一番下 (z-index: 1)
+        const bgLayer = document.getElementById('layer-bg');
+        if (currentEquip.bg === '') {
+            bgLayer.style.display = 'none';
         } else {
-            const layer = document.getElementById(`layer-${type}`);
-            if (file === '') {
-                layer.style.display = 'none';
-            } else {
-                layer.src = file;
-                layer.style.display = 'block';
-            }
+            bgLayer.src = currentEquip.bg;
+            bgLayer.style.display = 'block';
         }
+        
+        // 素体(layer-base)は常に z-index: 2
+        
+        // 装備した順序に従ってレイヤーを z-index 3 から配置
+        let z = 3;
+        equipOrder.forEach(item => {
+            const img = document.createElement('img');
+            img.className = 'avatar-layer dynamic-layer';
+            img.style.zIndex = z++;
+            img.src = item.file;
+            avatarArea.appendChild(img);
+        });
     }
 
+    // 改修①: toggleEquip内で装備順(equipOrder)を更新する
     function toggleEquip(type, file) {
+        let isRemoving = false;
+
         if (type === 'setup') {
-            currentEquip.setup = (currentEquip.setup === file && file !== '') ? '' : file;
+            if (currentEquip.setup === file && file !== '') isRemoving = true;
+
+            if (!isRemoving && file !== '') {
+                // 新しく着る場合: トップスとボトムス、古いセットアップを履歴から消す
+                equipOrder = equipOrder.filter(e => e.type !== 'tops' && e.type !== 'bottoms' && e.type !== 'setup');
+                equipOrder.push({type: 'setup', file: file});
+            } else if (isRemoving || file === '') {
+                // 外す場合
+                equipOrder = equipOrder.filter(e => e.type !== 'setup');
+            }
+            
+            currentEquip.setup = isRemoving ? '' : file;
             if (currentEquip.setup !== '') {
                 currentEquip.tops = '';
                 currentEquip.bottoms = '';
             }
         } else if (type === 'tops' || type === 'bottoms') {
-            currentEquip[type] = (currentEquip[type] === file && file !== '') ? '' : file;
+            if (currentEquip[type] === file && file !== '') isRemoving = true;
+
+            if (!isRemoving && file !== '') {
+                // 新しく着る場合: 同種とセットアップを履歴から消す
+                equipOrder = equipOrder.filter(e => e.type !== type && e.type !== 'setup');
+                equipOrder.push({type: type, file: file});
+            } else if (isRemoving || file === '') {
+                equipOrder = equipOrder.filter(e => e.type !== type);
+            }
+
+            currentEquip[type] = isRemoving ? '' : file;
             if (currentEquip.tops !== '' || currentEquip.bottoms !== '') {
                 currentEquip.setup = '';
             }
         } else if (type === 'acc') {
-            if (file === '') {
+            if (file === '') { // 全部外す
                 currentEquip.acc = [];
+                equipOrder = equipOrder.filter(e => e.type !== 'acc');
             } else {
                 const idx = currentEquip.acc.indexOf(file);
-                if (idx > -1) {
+                if (idx > -1) { // 既に付いているものを外す
                     currentEquip.acc.splice(idx, 1);
-                } else {
+                    const orderIdx = equipOrder.findIndex(e => e.type === 'acc' && e.file === file);
+                    if (orderIdx > -1) equipOrder.splice(orderIdx, 1);
+                } else { // 新しく付ける
                     currentEquip.acc.push(file);
+                    equipOrder.push({type: 'acc', file: file});
                 }
             }
         } else {
+            // 背景の場合
             currentEquip[type] = (currentEquip[type] === file && file !== '') ? '' : file;
         }
         
-        applyAvatarImage('setup', currentEquip.setup);
-        applyAvatarImage('tops', currentEquip.tops);
-        applyAvatarImage('bottoms', currentEquip.bottoms);
-        applyAvatarImage('acc', currentEquip.acc);
-        applyAvatarImage('bg', currentEquip.bg);
-        
+        applyAvatarImageAll();
         renderItems();
         saveGame(); 
     }
@@ -1481,9 +1552,9 @@
         
         document.getElementById('preview-name').innerText = item.name;
         if (state.coins < price) {
-            document.getElementById('preview-desc').innerHTML = `絵柄を確認中。${price}コインでクローゼットに追加できます。<br><span style="color: #e74c3c; font-weight: bold;">コインが足りません！</span>`;
+            document.getElementById('preview-desc').innerHTML = `絵柄を確認中。<br><span style="color: #e74c3c; font-weight: bold;">${price}コイン必要です！</span>`;
         } else {
-            document.getElementById('preview-desc').innerText = `絵柄を確認中。${price}コインでクローゼットに追加できます。`;
+            document.getElementById('preview-desc').innerText = `絵柄を確認中。`;
         }
         
         const buyBtn = document.getElementById('btn-buy-preview');
@@ -1546,7 +1617,6 @@
         fixScoreCount = 0;
         const inputVal = parseInt(document.getElementById('input-score').value, 10);
         
-        // 修正: 無効値、マイナス、1000億以上の判定追加
         if (isNaN(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
             currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
@@ -1555,7 +1625,7 @@
         }
 
         if (inputVal <= state.totalScore) {
-            currentLancelotImg = 'lancelot_5.png'; // 修正: 2から5へ変更
+            currentLancelotImg = 'lancelot_5.png';
             setLancelotMessage("前回より貢献度が増えていないようだが…報告ミスではないか？");
             updateUI();
             return;
@@ -1607,7 +1677,7 @@
         state.coins += earnedCoins;
         state.affection += earnedAffection;
 
-        setDefaultLancelotImg(); // 修正: 基本的に1を維持する
+        setDefaultLancelotImg();
         let msgToSet = "";
 
         if (isOverwork) {
@@ -1628,12 +1698,14 @@
             msgToSet = msgsProgress[rank];
         }
 
-        // 修正: 深夜・早朝の報告分岐を追加
         const hour = new Date().getHours();
         if (hour >= 0 && hour < 7) {
             currentLancelotImg = 'lancelot_4.png';
             msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも忘れないでくれよ！";
         }
+
+        // 改修③: 直前の報告アクションを保存
+        lastReportAction = { img: currentLancelotImg, msg: msgToSet };
 
         setLancelotMessage(msgToSet);
 
@@ -1646,7 +1718,6 @@
     function fixScore() {
         const inputVal = parseInt(document.getElementById('input-score').value, 10);
         
-        // 修正: 無効値、マイナス、1000億以上の判定追加
         if (isNaN(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
             currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
@@ -1721,7 +1792,6 @@
         let loginImg = 'lancelot_1.png';
         let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
 
-        // --- 修正: ログイン時の条件分岐を追加 ---
         if (hour >= 2 && hour < 5) {
             loginImg = 'lancelot_2.png';
             loginMsg = '団長、深夜に何をしているんだ…？休息も任務のうちだぞ。ここは俺が守る、休むんだ。';
@@ -1736,6 +1806,9 @@
             loginMsg = '団長、ショップへ行かないのか？素敵なものがたくさんあるようだぞ…？';
         }
 
+        // 改修③: ログイン時のアクションを保存
+        lastLoginAction = { img: loginImg, msg: loginMsg };
+
         state.lastLoginTime = now;
         saveGame();
 
@@ -1743,7 +1816,6 @@
         setLancelotMessage(loginMsg);
         updateUI();
         
-        // ゲーム開始フラグを立ててAFKタイマーをスタート
         isGameStarted = true;
         resetAfkTimer();
     }
@@ -1770,7 +1842,6 @@
     renderItems();
     startCooldownTimer();
     
-    // info.js から「はじめに読んでね」の内容を読み込んでセット
     if (typeof infoContentHTML !== 'undefined') {
         document.getElementById('info-content').innerHTML = infoContentHTML;
     }
