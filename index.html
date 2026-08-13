@@ -587,26 +587,6 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
         }
         
-        /* プレビュー枠 */
-        #preview-img-container {
-            width: 120px;
-            height: 150px;
-            background: rgba(255, 255, 255, 0.7);
-            background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-        #preview-img { max-width: 90%; max-height: 90%; display: none; object-fit: contain; }
-        .preview-info { flex: 1; }
-        .preview-info p { margin: 5px 0 15px 0; font-size: 14px; color: #555; }
-
         @media (max-width: 768px) {
             #game-container {
                 max-height: none;
@@ -647,12 +627,9 @@
                 max-width: 150px !important;
                 height: 200px !important;
                 margin: 0 auto;
-                padding: 10px !important;
+                padding: 0 !important;
+                border: 2px solid #cbd5e1;
             }
-            #shop-preview-area h3 { font-size: 12px; margin-bottom: 5px; }
-            #shop-preview-area .preview-info h4 { font-size: 12px; }
-            #shop-preview-area .preview-info p { font-size: 10px; margin: 3px 0; }
-            #preview-img-container { width: 80px; height: 100px; }
 
             #game-container.mode-dressup #unlocked-list,
             #game-container.mode-dressup #locked-list {
@@ -722,9 +699,10 @@
             
             <!-- 着せ替えモード時のみ表示されるヘッダ（コインとサブタブ） -->
             <div id="dressup-header" style="display: none; flex-direction: column; gap: 10px;">
-                <div class="status-card" style="padding: 10px;">
+                <!-- 修正箇所: コイン表示を1段にまとめる -->
+                <div class="status-card" style="padding: 10px; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
                     <span class="label" style="font-size: 12px; color: #64748b; font-weight: bold;">🪙 所持コイン</span>
-                    <span class="val" id="val-coins-dressup" style="font-size: 18px; color: var(--primary); font-weight: bold; margin-top: 5px; display: block;">0</span>
+                    <span class="val" id="val-coins-dressup" style="font-size: 18px; color: var(--primary); font-weight: bold; display: inline;">0</span>
                 </div>
                 <div id="sub-nav" style="display: flex; margin-bottom: 0;">
                     <button class="sub-tab-btn active" onclick="switchSubTab('room')">クローゼット</button>
@@ -739,18 +717,14 @@
                 <!-- 改修①: ここから下のレイヤーはJSで動的に生成・重なり順を管理します -->
             </div>
             
-            <!-- ショップ画面用プレビューエリア (ショップ画面で表示) -->
-            <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; background: #eef2f7; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box; flex-shrink: 0;">
-                <h3 style="margin-top:0;">アイテムプレビュー</h3>
-                <div id="preview-img-container">
-                    <img id="preview-layer-bg" src="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; display: none; z-index: 1;">
-                    <img id="preview-layer-base" src="avatar.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; opacity: 0.5; display: block; z-index: 2;">
-                    <img id="preview-img" src="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; object-fit: contain; display: none; z-index: 3;">
-                </div>
-                <div class="preview-info" style="margin-top: 15px;">
-                    <h4 id="preview-name" style="font-size: 16px; margin:0;">アイテムを選択</h4>
-                    <p id="preview-desc">アイテムを選ぶと絵柄を確認できます。</p>
-                    <button id="btn-buy-preview" style="display:none; background-color: #27ae60; color: white; margin-top: 10px;" onclick="buyPreviewItem()">500コインで解放</button>
+            <!-- 修正箇所: ショップ画面用プレビューエリア (ショップ画面で表示) 文字を廃止しフルサイズ化 -->
+            <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; flex-direction: column; flex-shrink: 0; overflow: hidden; position: relative;">
+                <div id="preview-img-container" style="width: 100%; height: 100%; background: rgba(255, 255, 255, 0.7); background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;">
+                    <img id="preview-layer-bg" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; z-index: 1;">
+                    <img id="preview-layer-base" src="avatar.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; display: block; z-index: 2;">
+                    <img id="preview-img" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; z-index: 3;">
+                    
+                    <button id="btn-buy-preview" style="display:none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #27ae60; color: white; z-index: 10; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.3);" onclick="buyPreviewItem()">500コインで解放</button>
                 </div>
             </div>
             
@@ -830,7 +804,7 @@
                 </div>
 
                 <div class="shop-area">
-                    <h3>未解放アイテム</h3>
+                    <!-- 修正箇所: 「未解放アイテム」の文字を削除 -->
                     <div id="locked-list"></div>
                 </div>
 
@@ -1529,6 +1503,7 @@
         saveGame(); 
     }
 
+    // 修正箇所: プレビュー画面からテキスト更新関連を削除
     function showPreview(item) {
         previewTarget = item;
         const img = document.getElementById('preview-img');
@@ -1549,13 +1524,6 @@
         if (item.type === 'bg') price = 200;
         if (item.type === 'acc') price = 300;
         if (item.type === 'tops' || item.type === 'bottoms') price = 250;
-        
-        document.getElementById('preview-name').innerText = item.name;
-        if (state.coins < price) {
-            document.getElementById('preview-desc').innerHTML = `絵柄を確認中。<br><span style="color: #e74c3c; font-weight: bold;">${price}コイン必要です！</span>`;
-        } else {
-            document.getElementById('preview-desc').innerText = `絵柄を確認中。`;
-        }
         
         const buyBtn = document.getElementById('btn-buy-preview');
         buyBtn.innerText = `${price}コインで解放`;
@@ -1601,11 +1569,10 @@
             if (effectEl.parentNode) effectEl.parentNode.removeChild(effectEl);
         }, 1000);
 
+        // 修正箇所: リセット時のテキスト関連処理を削除
         previewTarget = null;
         document.getElementById('preview-img').style.display = 'none';
         document.getElementById('preview-layer-bg').style.display = 'none';
-        document.getElementById('preview-name').innerText = 'アイテムを選択してください';
-        document.getElementById('preview-desc').innerText = '未解放リストからアイテムを選ぶと、絵柄を確認できます。';
         document.getElementById('btn-buy-preview').style.display = 'none';
         
         updateUI();
