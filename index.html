@@ -699,7 +699,7 @@
     </div>
 
     <div id="content-wrapper">
-        <!-- 改修②: 左側カラムを追加し、ここにプレビュー全般をまとめる -->
+    
         <div id="left-column">
             
             <!-- 着せ替えモード時のみ表示されるヘッダ（コインとサブタブ） -->
@@ -910,8 +910,7 @@
     
     const defaultEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
     let currentEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
-    
-    // 改修①: 着用順を記録する配列
+
     let equipOrder = [];
 
     const SAVE_VERSION = 1;
@@ -952,7 +951,6 @@
     let pokeCount = 0;
     let pokeTimer = null;
 
-    // 改修③: 最後に表示されたアクションを記録する変数
     let lastLoginAction = null;
     let lastReportAction = null;
 
@@ -984,8 +982,6 @@
         }
         return norm;
     }
-
-    // 改修①: 装備のロード時に着用順序を初期化
     function initEquipOrder() {
         equipOrder = [];
         if (currentEquip.setup) equipOrder.push({type: 'setup', file: currentEquip.setup});
@@ -1039,7 +1035,6 @@
         }
         state.version = SAVE_VERSION;
         
-        // 改修①: 着用順初期化と全レイヤー適用
         initEquipOrder();
         applyAvatarImageAll();
     }
@@ -1157,7 +1152,6 @@
     document.addEventListener('keydown', resetAfkTimer);
     document.addEventListener('click', resetAfkTimer);
 
-    // --- 改修③: つつく（タップ）処理のバリエーション追加 ---
     function pokeLancelot() {
         if (!isGameStarted) return;
         resetAfkTimer();
@@ -1178,7 +1172,7 @@
 
         const hour = new Date().getHours();
         let pokes = [
-            { img: 'lancelot_1.png', msg: '頑張っているな、団長。' },
+            { img: 'lancelot_1.png', msg: '報告に来てくれてありがとう、団長。会えて嬉しいよ。' },
             { img: 'lancelot_5.png', msg: '古戦場とは一体なんなんだろうな。俺たちはなぜ戦って…これ以上考えるのはやめておこう。' },
             { img: 'lancelot_8.png', msg: '適度な休息も必要だぞ⋯おやつタイムには俺も呼んでくれ！' }
         ];
@@ -1255,7 +1249,6 @@
         }
     }
 
-    // 改修②: サブタブ切替時にアバターとプレビューの表示を制御
     function switchSubTab(tab) {
         currentSubTab = tab;
         const uiArea = document.getElementById('ui-area');
@@ -1459,7 +1452,6 @@
         renderShopItems();
     }
 
-    // 改修①: 着用順に基づいて動的にレイヤーを再生成する関数
     function applyAvatarImageAll() {
         const avatarArea = document.getElementById('avatar-area');
         
@@ -1488,7 +1480,6 @@
         });
     }
 
-    // 改修①: toggleEquip内で装備順(equipOrder)を更新する
     function toggleEquip(type, file) {
         let isRemoving = false;
 
@@ -1696,7 +1687,7 @@
         let msgToSet = "";
 
         if (isOverwork) {
-            currentLancelotImg = 'lancelot_2.png';
+            currentLancelotImg = 'lancelot_4.png';
             msgToSet = "……本当か？いくら団長でもそのペースは信じがたい。無理をして倒れないよう、適度な休息を取ってくれ。";
         } else if (state.totalScore >= 50000000000) {
             msgToSet = "信じられない記録だな。団長は本当に誇り高き戦士だ。白竜騎士団も見習わないとな。だが、倒れる前にしっかり休んでくれよ！";
