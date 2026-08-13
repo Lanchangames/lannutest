@@ -63,7 +63,7 @@ const ITEM_DB = {
         { id: 'bottoms11', name: 'ロングスカート（白）', file: 'bottoms_11.png', type: 'bottoms' },
         { id: 'bottoms12', name: 'ロングスカート（紺)', file: 'bottoms_12.png', type: 'bottoms' },
         { id: 'bottoms13', name: 'ロングスカート（ピンク）', file: 'bottoms_13.png', type: 'bottoms' },
-        { id: 'bottoms14', name: 'ああああ', file: 'bottoms_14.png', type: 'bottoms' },
+        { id: 'bottoms14', name: 'こしみの', file: 'bottoms_14.png', type: 'bottoms' },
         { id: 'bottoms15', name: 'ああああ', file: 'bottoms_15.png', type: 'bottoms' }
     ],
     acc: [
@@ -145,7 +145,7 @@ const ITEM_DB = {
         { id: 'acc76', name: 'ロボ耳', file: 'acc_76.png', type: 'acc' },
         { id: 'acc77', name: 'アンテナ', file: 'acc_77.png', type: 'acc' },
         { id: 'acc78', name: '漫画肉', file: 'acc_78.png', type: 'acc' },
-        { id: 'acc79', name: 'こしみの', file: 'acc_79.png', type: 'acc' },
+        { id: 'acc79', name: 'チーズ', file: 'acc_79.png', type: 'acc' },
         { id: 'acc80', name: 'ねぐせ', file: 'acc_80.png', type: 'acc' },
         { id: 'acc81', name: 'たいまつ', file: 'acc_81.png', type: 'acc' },
         { id: 'acc82', name: '丸ブレスレット青', file: 'acc_82.png', type: 'acc' },
