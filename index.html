@@ -924,7 +924,8 @@
         lastReportTime: 0,
         highestReportedScore: 0,
         lastLoginTime: 0,
-        unlocked: {}
+        unlocked: {},
+        hasReceivedSecretPresent: false // テスト用追加
     };
 
     let currentMode = 'top'; 
@@ -1162,6 +1163,19 @@
         pokeTimer = setTimeout(() => {
             pokeCount = 0;
         }, 1500); // 1.5秒間タップが無ければカウントリセット
+
+        // 10回連打のシークレットイベント
+        if (pokeCount === 10 && !state.hasReceivedSecretPresent) {
+            state.hasReceivedSecretPresent = true;
+            state.coins += 10000000; // テストの値（最終的には数値を変更する）
+            currentLancelotImg = 'lancelot_4.png';
+            setLancelotMessage('仕方ないな、団長は…。俺からのプレゼントだ。みんなには内緒だぞ。');
+            updateLancelotImage();
+            updateUI();
+            saveGame();
+            showCustomAlert('ランスロットさんからのプレゼントです！');
+            return;
+        }
 
         if (pokeCount >= 3) {
             currentLancelotImg = 'lancelot_2.png';
