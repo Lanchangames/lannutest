@@ -39,7 +39,7 @@ const ITEM_DB = {
         { id: 'tops9', name: '赤Tシャツ', file: 'tops_9.png', type: 'tops' },
         { id: 'tops10', name: 'オレンジTシャツ', file: 'tops_10.png', type: 'tops' },
         { id: 'tops11', name: 'レモンTシャツ', file: 'tops_11.png', type: 'tops' },
-        { id: 'tops12', name: '貝殻', file: 'tops_22.png', type: 'tops' },
+        { id: 'tops12', name: '貝殻', file: 'tops_12.png', type: 'tops' },
         { id: 'tops13', name: '学ラン（白）', file: 'tops_13.png', type: 'tops' },
         { id: 'tops14', name: '学ラン（黒）', file: 'tops_14.png', type: 'tops' },
         { id: 'tops15', name: 'セーラー学生服（白）', file: 'tops_15.png', type: 'tops' },
