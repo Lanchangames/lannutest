@@ -145,7 +145,7 @@ const ITEM_DB = {
         { id: 'acc76', name: 'ロボ耳', file: 'acc_76.png', type: 'acc' },
         { id: 'acc77', name: 'アンテナ', file: 'acc_77.png', type: 'acc' },
         { id: 'acc78', name: '漫画肉', file: 'acc_78.png', type: 'acc' },
-        { id: 'acc79', name: 'チーズ, file: 'acc_79.png', type: 'acc' },
+        { id: 'acc79', name: 'チーズ', file: 'acc_79.png', type: 'acc' },
         { id: 'acc80', name: 'ねぐせ', file: 'acc_80.png', type: 'acc' },
         { id: 'acc81', name: 'たいまつ', file: 'acc_81.png', type: 'acc' },
         { id: 'acc82', name: '丸ブレスレット青', file: 'acc_82.png', type: 'acc' },
