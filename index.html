@@ -87,7 +87,7 @@
         #info-content h2 {
             color: var(--primary);
             font-size: 18px;
-            margin-top: 25px;
+            margin-top: 5px;
             border-bottom: 2px solid var(--accent);
             padding-bottom: 5px;
         }
@@ -107,7 +107,7 @@
         }
         .custom-modal-content {
             background: white;
-            padding: 25px 30px;
+            padding: 5px 30px;
             border-radius: 12px;
             text-align: center;
             max-width: 400px;
@@ -117,7 +117,7 @@
         .custom-modal-content p {
             font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 5px;
             color: var(--text);
             white-space: pre-wrap;
             margin-top: 0;
@@ -677,7 +677,7 @@
 <div id="start-screen">
     <div id="start-box">
         <img src="logo.png" alt="タイトルロゴ" id="logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiIGZpbGw9IiNjY2MiLz48dGV4dCB4PSIxMDUiIHk9IjM1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+bG9nby5wbmc8L3RleHQ+PC9zdmc+'">
-        <p style="line-height: 1.6; margin-bottom: 25px; font-size: 15px; color: #555;">
+        <p style="line-height: 1.6; margin-bottom: 5px; font-size: 15px; color: #555;">
             古戦場の累計貢献度を報告してコインを獲得し、<br>
             アイテムを解放して自由に着せ替えを楽しもう！<br>
             
@@ -1193,7 +1193,9 @@
         let pokes = [
             { img: 'lancelot_1.png', msg: '報告に来てくれてありがとう、団長。会えて嬉しいよ。' },
             { img: 'lancelot_5.png', msg: '古戦場とは一体なんなんだろうな。俺たちはなぜ戦って…これ以上考えるのはやめておこう。' },
-            { img: 'lancelot_8.png', msg: '適度な休息も必要だぞ⋯おやつタイムには俺も呼んでくれ！' }
+            { img: 'lancelot_8.png', msg: '適度な休息も必要だぞ⋯おやつタイムには俺も呼んでくれ！' },
+            { img: 'lancelot_9.png', msg: '古戦場の魔物たちはとても手強いと聞いている。怪我をしないよう気をつけてくれ。' },
+            { img: 'lancelot_10.png', msg: '俺は…少しでも団長の力になれているだろうか？' }
         ];
 
         // 0時〜7時のみ出現
@@ -1727,7 +1729,7 @@
         const hour = new Date().getHours();
         if (hour >= 0 && hour < 7) {
             currentLancelotImg = 'lancelot_4.png';
-            msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも忘れないでくれよ！";
+            msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも休むことも忘れないでくれよ！";
         }
 
         
