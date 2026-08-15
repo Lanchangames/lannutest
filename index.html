@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
+<!DOCTYPE html><html lang="ja"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ランぬのわくわく古戦場！</title>
@@ -87,7 +85,7 @@
         #info-content h2 {
             color: var(--primary);
             font-size: 18px;
-            margin-top: 5px;
+            margin-top: 25px;
             border-bottom: 2px solid var(--accent);
             padding-bottom: 5px;
         }
@@ -107,7 +105,7 @@
         }
         .custom-modal-content {
             background: white;
-            padding: 5px 30px;
+            padding: 25px 30px;
             border-radius: 12px;
             text-align: center;
             max-width: 400px;
@@ -117,7 +115,7 @@
         .custom-modal-content p {
             font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 5px;
+            margin-bottom: 25px;
             color: var(--text);
             white-space: pre-wrap;
             margin-top: 0;
@@ -669,15 +667,10 @@
             20% { transform: translateY(-10px) scale(1.2); opacity: 1; }
             100% { transform: translateY(-40px) scale(1); opacity: 0; }
         }
-    </style>
-</head>
-<body>
-
-<!-- スタート画面-->
-<div id="start-screen">
+    </style></head><body><!-- スタート画面--><div id="start-screen">
     <div id="start-box">
         <img src="logo.png" alt="タイトルロゴ" id="logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiIGZpbGw9IiNjY2MiLz48dGV4dCB4PSIxMDUiIHk9IjM1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+bG9nby5wbmc8L3RleHQ+PC9zdmc+'">
-        <p style="line-height: 1.6; margin-bottom: 5px; font-size: 15px; color: #555;">
+        <p style="line-height: 1.6; margin-bottom: 25px; font-size: 15px; color: #555;">
             古戦場の累計貢献度を報告してコインを獲得し、<br>
             アイテムを解放して自由に着せ替えを楽しもう！<br>
             
@@ -691,10 +684,7 @@
     <!-- はじめに読んでね モーダル -->
     <div id="info-modal">
         <div id="info-content"></div>
-    </div>
-</div>
-
-<div id="game-container" class="mode-top">
+    </div></div><div id="game-container" class="mode-top">
     
     <!-- 大タブ -->
     <div id="main-nav">
@@ -846,34 +836,18 @@
             </div>
 
         </div>
-    </div>
-</div>
-
-<!-- カスタムアラートモーダル -->
-<div id="custom-alert-modal" class="custom-modal">
+    </div></div><!-- カスタムアラートモーダル --><div id="custom-alert-modal" class="custom-modal">
     <div class="custom-modal-content">
         <p id="custom-alert-message"></p>
         <button onclick="hideCustomAlert()" style="background-color: var(--primary);">OK</button>
-    </div>
-</div>
-
-<!-- カスタムコンファームモーダル -->
-<div id="custom-confirm-modal" class="custom-modal">
+    </div></div><!-- カスタムコンファームモーダル --><div id="custom-confirm-modal" class="custom-modal">
     <div class="custom-modal-content">
         <p id="custom-confirm-message"></p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button id="custom-confirm-yes" style="background-color: var(--accent); flex: 1;">はい</button>
             <button onclick="hideCustomConfirm()" style="background-color: #64748b; flex: 1;">いいえ</button>
         </div>
-    </div>
-</div>
-
-<!-- 外部データの読み込み -->
-<script src="items.js"></script>
-<script src="messages.js"></script>
-<script src="info.js"></script>
-
-<script>
+    </div></div><!-- 外部データの読み込み --><script src="items.js"></script><script src="messages.js"></script><script src="info.js"></script><script>
     // --- モーダル制御 ---
     function showInfo() {
         document.getElementById('info-modal').style.display = 'flex';
@@ -1208,8 +1182,9 @@
             pokes.push(lastLoginAction);
         }
         
-        // 直前の報告アクションを追加する代わりに、現在の貢献度に応じたセリフを常時候補に追加
+        // 修正箇所：テキストと画像セットで取得するように変更
         let currentScoreMsg = "";
+        let currentScoreImg = "lancelot_1.png";
         if (state.totalScore >= 50000000000) {
             currentScoreMsg = "信じられない記録だな。団長は本当に誇り高き戦士だ。白竜騎士団も見習わないとな。だが、倒れる前にしっかり休んでくれよ！";
         } else if (state.totalScore >= 30000000000) {
@@ -1223,13 +1198,14 @@
         } else {
             const maxScore = 8000000000;
             const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
-            if (typeof msgsProgress !== 'undefined') {
-                currentScoreMsg = msgsProgress[rank];
+            if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
+                currentScoreMsg = msgsProgress[rank].msg;
+                currentScoreImg = msgsProgress[rank].img;
             }
         }
         
         if (currentScoreMsg) {
-            pokes.push({ img: 'lancelot_1.png', msg: currentScoreMsg });
+            pokes.push({ img: currentScoreImg, msg: currentScoreMsg });
         }
 
         const act = pokes[Math.floor(Math.random() * pokes.length)];
@@ -1723,7 +1699,11 @@
         } else {
             const maxScore = 8000000000;
             const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
-            msgToSet = msgsProgress[rank];
+            // 修正箇所：テキストと画像セットで取得するように変更
+            if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
+                msgToSet = msgsProgress[rank].msg;
+                currentLancelotImg = msgsProgress[rank].img;
+            }
         }
 
         const hour = new Date().getHours();
@@ -1872,8 +1852,4 @@
     
     if (typeof infoContentHTML !== 'undefined') {
         document.getElementById('info-content').innerHTML = infoContentHTML;
-    }
-</script>
-
-</body>
-</html>
+    }</script></body></html>
