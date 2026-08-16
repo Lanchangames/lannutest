@@ -726,7 +726,7 @@
             
             <!-- アバター画像の直下に配置した保存ボタン（トップ画面のみ表示） -->
             <div id="avatar-save-btn-container" style="width: 100%;">
-                <button onclick="saveAvatarImage()" style="width: 100%; background-color: var(--accent);">アバター画像保存</button>
+                <button onclick="saveAvatarImage()" style="width: 100%; background-color: var(--accent);">このランぬを保存する</button>
             </div>
             
             <!-- ショップ画面用プレビューエリア -->
@@ -1852,7 +1852,7 @@
 
     function shareOnX() {
         const scoreStr = state.totalScore.toLocaleString();
-        const text = `古戦場お疲れ様。今の団長の貢献度は${scoreStr}だぞ。少し俺と休憩していかないか？`;
+        const text = `古戦場お疲れ様。今の団長の貢献度は${scoreStr}だぞ。少し俺と休憩していかないか？ #ランぬのわくわく古戦場`;
         const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
     }
@@ -1915,7 +1915,7 @@
                 try {
                     await navigator.share({
                         files: [file],
-                        title: 'アバター画像',
+                        title: 'ランぬの着せ替え画像',
                         text: 'ランぬの着せ替えアバターです！'
                     });
                     showCustomAlert("保存に成功しました！");
