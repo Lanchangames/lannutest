@@ -893,12 +893,13 @@
     let equipOrder = [];
 
     const SAVE_VERSION = 1;
+    const INITIAL_COINS = 2000;
 
-    let state = {
+    const defaultState = {
         version: SAVE_VERSION, 
         totalScore: 0,
         reportCount: 0,
-        coins: 5000,
+        coins: INITIAL_COINS,
         affection: 0,
         lastReportTime: 0,
         highestReportedScore: 0,
@@ -906,6 +907,8 @@
         unlocked: {},
         hasReceivedSecretPresent: false // テスト用追加
     };
+
+    let state = { ...defaultState };
 
     let currentMode = 'top'; 
     let currentSubTab = 'room';
@@ -990,9 +993,9 @@
         if (savedState) {
             try {
                 const parsedState = JSON.parse(savedState);
-                state = { ...state, ...parsedState };
+                state = { ...defaultState, ...parsedState };
                 if (parsedState.unlocked) {
-                    state.unlocked = { ...state.unlocked, ...parsedState.unlocked };
+                    state.unlocked = { ...parsedState.unlocked };
                 }
             } catch (e) {
                 console.error("セーブデータの読み込みに失敗しました。", e);
@@ -1013,10 +1016,25 @@
         if (state.lastLoginTime === undefined) {
             state.lastLoginTime = 0;
         }
-        state.version = SAVE_VERSION;
+        if (state.version === undefined) {
+            state.version = SAVE_VERSION;
+        }
         
         initEquipOrder();
         applyAvatarImageAll();
+    }
+
+    function initUnlockedItems() {
+        if (typeof ITEM_DB === 'undefined') return;
+        ['setup', 'tops', 'bottoms', 'acc', 'bg'].forEach(cat => {
+            if (ITEM_DB[cat]) {
+                ITEM_DB[cat].forEach(item => {
+                    if (state.unlocked[item.id] === undefined) {
+                        state.unlocked[item.id] = false;
+                    }
+                });
+            }
+        });
     }
 
     async function exportData() {
@@ -1050,20 +1068,26 @@
             const decoded = JSON.parse(decodeURIComponent(atob(code)));
             if (isValidState(decoded.state) && decoded.equip && typeof decoded.equip === 'object') {
                 showCustomConfirm("現在のデータは上書きされます。本当によろしいですか？", () => {
-                    state = { ...state, ...decoded.state };
+                    state = { ...defaultState, ...decoded.state };
                     if (decoded.state.unlocked) {
-                        state.unlocked = { ...state.unlocked, ...decoded.state.unlocked };
+                        state.unlocked = { ...decoded.state.unlocked };
+                    } else {
+                        state.unlocked = {};
                     }
+                    
                     if (state.highestReportedScore === undefined) {
                         state.highestReportedScore = state.totalScore;
                     }
                     if (state.lastLoginTime === undefined) {
                         state.lastLoginTime = 0;
                     }
-                    state.version = SAVE_VERSION;
+                    if (state.version === undefined) {
+                        state.version = SAVE_VERSION;
+                    }
                     
                     currentEquip = normalizeEquip(decoded.equip);
                     
+                    initUnlockedItems();
                     saveGame();
                     showCustomAlert("データを読み込みました！", () => {
                         location.reload();
@@ -1105,7 +1129,9 @@
     function updateLancelotImage() {
         const img = document.getElementById('lancelot-img');
         if (img) {
-            img.src = currentLancelotImg;
+            if (img.getAttribute('src') !== currentLancelotImg) {
+                img.src = currentLancelotImg;
+            }
         }
     }
 
@@ -1113,7 +1139,7 @@
         const afkActions = [
             { img: 'lancelot_5.png', msg: '団長、どうしたんだ⋯？' },
             { img: 'lancelot_7.png', msg: 'すぅ……団長、無理しないでくれ……' },
-            { img: 'lancelot_8.png', msg: 'うーん……もうプリンは食べられないぞ……' }
+            { img: 'lancelot_8.png', msg: 'むにゃ……もうお肉は食べられないぞ……' }
         ];
         const act = afkActions[Math.floor(Math.random() * afkActions.length)];
         currentLancelotImg = act.img;
@@ -1623,9 +1649,10 @@
 
     function reportScore() {
         fixScoreCount = 0;
-        const inputVal = parseInt(document.getElementById('input-score').value, 10);
+        const inputValStr = document.getElementById('input-score').value;
+        const inputVal = Number(inputValStr);
         
-        if (isNaN(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
+        if (isNaN(inputVal) || !Number.isInteger(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
             currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
             updateUI();
@@ -1719,7 +1746,7 @@
         const hour = new Date().getHours();
         if (hour >= 0 && hour < 7) {
             currentLancelotImg = 'lancelot_4.png';
-            msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも休むことも忘れないでくれよ！";
+            msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも忘れないでくれよ！";
         }
 
         
@@ -1734,9 +1761,10 @@
     }
 
     function fixScore() {
-        const inputVal = parseInt(document.getElementById('input-score').value, 10);
+        const inputValStr = document.getElementById('input-score').value;
+        const inputVal = Number(inputValStr);
         
-        if (isNaN(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
+        if (isNaN(inputVal) || !Number.isInteger(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
             currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
             updateUI();
@@ -1845,21 +1873,37 @@
         window.open(url, '_blank');
     }
 
-    ['setup', 'tops', 'bottoms', 'acc', 'bg'].forEach(cat => {
-        if(ITEM_DB[cat]) {
-            ITEM_DB[cat].forEach(item => {
-                if (state.unlocked[item.id] === undefined) {
-                    state.unlocked[item.id] = false;
+    function preloadImages() {
+        const imagesToPreload = [];
+        for (let i = 1; i <= 10; i++) {
+            imagesToPreload.push(`lancelot_${i}.png`);
+        }
+        if (typeof ITEM_DB !== 'undefined') {
+            ['setup', 'tops', 'bottoms', 'acc', 'bg'].forEach(cat => {
+                if (ITEM_DB[cat]) {
+                    ITEM_DB[cat].forEach(item => {
+                        if (item.file) imagesToPreload.push(item.file);
+                    });
                 }
             });
         }
-    });
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            if (img.decode) {
+                img.decode().catch(() => {}); // エラーは無視
+            }
+        });
+    }
 
     loadGame();
     updateUI();
     renderItems();
     startCooldownTimer();
+    initUnlockedItems();
+    preloadImages();
     
     if (typeof infoContentHTML !== 'undefined') {
         document.getElementById('info-content').innerHTML = infoContentHTML;
-    }</script></body></html>
+    }
+</script></body></html>
