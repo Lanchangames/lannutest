@@ -717,6 +717,9 @@
                 <!-- 改修①: ここから下のレイヤーはJSで動的に生成・重なり順を管理します -->
             </div>
             
+            <!-- アバター画像の直下に配置した保存ボタン -->
+            <button onclick="saveAvatarImage()" style="width: 100%; background-color: var(--accent);">アバター画像保存</button>
+            
             <!-- 修正箇所: ショップ画面用プレビューエリア ボタンを枠外へ分離 -->
             <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; flex-direction: column; gap: 10px; flex-shrink: 0;">
                 <div id="shop-preview-image-box" style="width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; overflow: hidden; position: relative; background-color: #fff; flex-shrink: 0;">
@@ -1871,6 +1874,61 @@
         const text = `古戦場お疲れ様。今の団長の貢献度は${scoreStr}だぞ。少し俺と休憩していかないか？`;
         const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
+    }
+
+    // アバター画像を合成して保存する関数
+    function saveAvatarImage() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 600;
+        canvas.height = 800;
+        const ctx = canvas.getContext('2d');
+
+        const sources = [];
+        if (currentEquip.bg !== '') {
+            sources.push({ src: currentEquip.bg });
+        }
+        sources.push({ src: 'avatar.png' });
+        equipOrder.forEach(item => {
+            sources.push({ src: item.file });
+        });
+
+        let loadedCount = 0;
+        const images = [];
+
+        sources.forEach((item, index) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                images[index] = img;
+                loadedCount++;
+                if (loadedCount === sources.length) {
+                    images.forEach(imgObj => {
+                        if (imgObj) {
+                            ctx.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+                        }
+                    });
+                    const link = document.createElement('a');
+                    link.download = 'lannu_avatar.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                }
+            };
+            img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === sources.length) {
+                    images.forEach(imgObj => {
+                        if (imgObj) {
+                            ctx.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+                        }
+                    });
+                    const link = document.createElement('a');
+                    link.download = 'lannu_avatar.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                }
+            };
+            img.src = item.src;
+        });
     }
 
     function preloadImages() {
