@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="ja"><head>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ランぬのわくわく古戦場！</title>
@@ -421,7 +423,6 @@
             border: 1px solid #cbd5e1;
             border-left: 5px solid var(--accent);
             flex-shrink: 0;
-            position: relative; /* ボタン配置用 */
         }
         #lancelot-img {
             width: 120px;
@@ -807,8 +808,10 @@
                 </div>
                 <div id="cooldown-text"></div>
                 
-                <button onclick="shareOnX()" style="background-color: #0f1419;">Xでシェア</button>
-                <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: #64748b; margin-top: 5px;">スタート画面に戻る</button>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button onclick="shareOnX()" style="background-color: #0f1419;">Xでシェア</button>
+                    <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: transparent; color: #64748b; box-shadow: none; font-size: 13px; font-weight: normal; padding: 5px 10px;">↩️戻る</button>
+                </div>
             </div>
 
             <!-- クローゼット画面の要素 -->
@@ -829,7 +832,7 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 10px;">
                         <p style="font-size: 12px; color: #666; margin: 0;">※着用中のアイテムを再度押すと外せます</p>
-                        <!-- ① おまかせ着せ替えボタン -->
+                        <!-- おまかせ着せ替えボタン（ご指定の幅・スタイル） -->
                         <button onclick="randomEquip()" style="
                             font-size: 11px;
                             padding: 5px 8px;
@@ -875,9 +878,8 @@
                         <strong>【データの取り扱いについて】</strong><br>
                         当ゲームのセーブデータは、お使いのブラウザのローカルストレージ（端末内）にのみ保存され、外部サーバ等への送信は一切行われません。<br><br>
                         ブラウザの履歴やキャッシュを削除した場合、またはシークレットモードを利用した場合はデータが消去されてしまいます。<br><br>
-                        <!-- ⑨ データ画面の誤字修正 -->
                         データ出力を行うと、セーブデータが消えた際や端末引き継ぎの際に同コードをペーストすることで、データの復元が可能です。定期的なデータ出力によるバックアップをおすすめします。<br><br>
-                        また、事故防止のためiOS版をお使いの場合は『ホーム画面に追加』機能の利用を推奨します。
+                        また, 事故防止のためiOS版をお使いの場合は『ホーム画面に追加』機能の利用を推奨します。
                     </div>
 
                     <div style="display: flex; gap: 10px;">
@@ -976,7 +978,6 @@
         hasReceivedSecretPresent: false
     };
 
-    // ⑧ defaultState.unlocked参照共有防止
     let state = { ...defaultState, unlocked: {} };
 
     let currentMode = 'top'; 
@@ -1006,13 +1007,11 @@
 
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
-    // ② equipOrderの保存キー
     const SAVE_KEY_EQUIP_ORDER = 'kosenjo_save_equip_order';
 
     function saveGame() {
         localStorage.setItem(SAVE_KEY_STATE, JSON.stringify(state));
         localStorage.setItem(SAVE_KEY_EQUIP, JSON.stringify(currentEquip));
-        // ② equipOrderの保存
         localStorage.setItem(SAVE_KEY_EQUIP_ORDER, JSON.stringify(equipOrder));
     }
 
@@ -1093,7 +1092,7 @@
             state.version = SAVE_VERSION;
         }
         
-        // ② equipOrderの復元処理（強化されたバリデーション付き）
+        // equipOrderの復元処理（指定された厳密な検証付き）
         let isEquipOrderRestored = false;
         if (savedEquipOrder) {
             try {
@@ -1192,7 +1191,6 @@
             const decoded = JSON.parse(decodeURIComponent(atob(code)));
             if (isValidState(decoded.state) && decoded.equip && typeof decoded.equip === 'object') {
                 showCustomConfirm("現在のデータは上書きされます。本当によろしいですか？", () => {
-                    // ③ 完全な上書きへの修正
                     state = { ...defaultState, ...decoded.state };
                     if (decoded.state.unlocked) {
                         state.unlocked = { ...decoded.state.unlocked };
@@ -1717,12 +1715,10 @@
         }
         
         applyAvatarImageAll();
-        // ⑥ 不要な全再描画を軽減（クローゼット画面のみ更新）
         renderRoomItems();
         saveGame(); 
     }
 
-    // ① おまかせ着せ替え機能の実装
     function randomEquip() {
         let newEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
         let newOrder = [];
@@ -1889,7 +1885,7 @@
         buyBtnPreview.disabled = true;
         
         updateUI();
-        renderItems(); // ショップとクローゼット両方の更新
+        renderItems();
         saveGame(); 
     }
 
@@ -1971,7 +1967,6 @@
         state.coins += earnedCoins;
         state.affection += earnedAffection;
 
-        // ② コイン獲得演出の追加
         if (earnedCoins === 500) {
             const btn = document.getElementById('btn-report');
             if (btn) {
@@ -2251,7 +2246,6 @@
         }
     }
 
-    // ① 画像のプリロード機能
     function preloadImages() {
         const imagesToPreload = [];
         for (let i = 1; i <= 10; i++) {
