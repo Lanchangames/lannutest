@@ -443,22 +443,6 @@
             white-space: pre-wrap;
         }
         
-        /* トップ画面の？ボタン */
-        #top-info-btn {
-            position: absolute;
-            top: 5px;
-            right: 8px;
-            font-size: 11px;
-            color: #64748b;
-            background: none;
-            border: none;
-            padding: 5px 10px;
-            box-shadow: none;
-            font-weight: normal;
-            cursor: pointer;
-            margin: 0;
-        }
-        
         .status-container {
             display: flex;
             gap: 10px;
@@ -795,7 +779,6 @@
             <!-- トップ画面の要素 -->
             <div id="section-top">
                 <div id="lancelot-area">
-                    <button id="top-info-btn" onclick="showInfo()">？ 遊び方</button>
                     <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onclick="pokeLancelot()" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
                     <div id="message-box"></div>
                 </div>
@@ -825,6 +808,7 @@
                 <div id="cooldown-text"></div>
                 
                 <button onclick="shareOnX()" style="background-color: #0f1419;">Xでシェア</button>
+                <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: #64748b; margin-top: 5px;">スタート画面に戻る</button>
             </div>
 
             <!-- クローゼット画面の要素 -->
@@ -846,7 +830,17 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 10px;">
                         <p style="font-size: 12px; color: #666; margin: 0;">※着用中のアイテムを再度押すと外せます</p>
                         <!-- ① おまかせ着せ替えボタン -->
-                        <button onclick="randomEquip()" style="font-size: 12px; padding: 6px 10px; background-color: #64748b; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 0;"><span style="font-size:14px;">🎲</span> おまかせ着せ替え</button>
+                        <button onclick="randomEquip()" style="
+                            font-size: 11px;
+                            padding: 5px 8px;
+                            background-color: #64748b;
+                            border-radius: 6px;
+                            box-shadow: none;
+                            margin: 0;
+                            white-space: nowrap;
+                        ">
+                            🎲 おまかせ
+                        </button>
                     </div>
                     <div id="unlocked-list"></div>
                 </div>
@@ -908,7 +902,7 @@
 
 <!-- カスタムコンファームモーダル -->
 <div id="custom-confirm-modal" class="custom-modal">
-    <div class="custom-modal-content">
+    <div class="custom-confirm-content">
         <p id="custom-confirm-message"></p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button id="custom-confirm-yes" style="background-color: var(--accent); flex: 1;">はい</button>
@@ -1099,7 +1093,7 @@
             state.version = SAVE_VERSION;
         }
         
-        // ② equipOrderの復元処理
+        // ② equipOrderの復元処理（強化されたバリデーション付き）
         let isEquipOrderRestored = false;
         if (savedEquipOrder) {
             try {
@@ -1113,7 +1107,6 @@
                     });
                     
                     if (isValid) {
-                        // 復元したオーダーから、現在の currentEquip に存在しないアイテムを除外
                         let validOrder = parsedOrder.filter(o => {
                             if (o.type === 'acc') {
                                 return currentEquip.acc.includes(o.file);
@@ -1121,8 +1114,26 @@
                                 return currentEquip[o.type] === o.file;
                             }
                         });
-                        equipOrder = validOrder;
-                        isEquipOrderRestored = true;
+
+                        let expectedItems = [];
+                        if (currentEquip.setup) expectedItems.push({type: 'setup', file: currentEquip.setup});
+                        if (currentEquip.tops) expectedItems.push({type: 'tops', file: currentEquip.tops});
+                        if (currentEquip.bottoms) expectedItems.push({type: 'bottoms', file: currentEquip.bottoms});
+                        if (currentEquip.acc && currentEquip.acc.length > 0) {
+                            currentEquip.acc.forEach(a => expectedItems.push({type: 'acc', file: a}));
+                        }
+
+                        if (validOrder.length === expectedItems.length) {
+                            let allPresent = true;
+                            expectedItems.forEach(exp => {
+                                let found = validOrder.some(vo => vo.type === exp.type && vo.file === exp.file);
+                                if (!found) allPresent = false;
+                            });
+                            if (allPresent) {
+                                equipOrder = validOrder;
+                                isEquipOrderRestored = true;
+                            }
+                        }
                     }
                 }
             } catch (e) {
@@ -1209,13 +1220,34 @@
                              }
                          });
                          if (isValid) {
-                              equipOrder = decoded.equipOrder.filter(o => {
+                              let validOrder = decoded.equipOrder.filter(o => {
                                   if (o.type === 'acc') {
                                       return currentEquip.acc.includes(o.file);
                                   } else {
                                       return currentEquip[o.type] === o.file;
                                   }
                               });
+                              let expectedItems = [];
+                              if (currentEquip.setup) expectedItems.push({type: 'setup', file: currentEquip.setup});
+                              if (currentEquip.tops) expectedItems.push({type: 'tops', file: currentEquip.tops});
+                              if (currentEquip.bottoms) expectedItems.push({type: 'bottoms', file: currentEquip.bottoms});
+                              if (currentEquip.acc && currentEquip.acc.length > 0) {
+                                  currentEquip.acc.forEach(a => expectedItems.push({type: 'acc', file: a}));
+                              }
+                              if (validOrder.length === expectedItems.length) {
+                                  let allPresent = true;
+                                  expectedItems.forEach(exp => {
+                                      let found = validOrder.some(vo => vo.type === exp.type && vo.file === exp.file);
+                                      if (!found) allPresent = false;
+                                  });
+                                  if (allPresent) {
+                                      equipOrder = validOrder;
+                                  } else {
+                                      initEquipOrder();
+                                  }
+                              } else {
+                                  initEquipOrder();
+                              }
                          } else {
                              initEquipOrder();
                          }
@@ -2219,6 +2251,7 @@
         }
     }
 
+    // ① 画像のプリロード機能
     function preloadImages() {
         const imagesToPreload = [];
         for (let i = 1; i <= 10; i++) {
