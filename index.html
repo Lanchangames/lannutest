@@ -1998,13 +1998,16 @@ function reportScore() {
     }
 
     loadGame();
-    updateUI();
-    renderItems();
-    startCooldownTimer();
-    initUnlockedItems();
-    preloadImages();
-    
-    if (typeof infoContentHTML !== 'undefined') {
-        document.getElementById('info-content').innerHTML = infoContentHTML;
-    }
+initUnlockedItems();
+
+// アイテム一覧を描画する前に画像のプリロードを開始
+preloadImages();
+
+updateUI();
+renderItems();
+startCooldownTimer();
+
+if (typeof infoContentHTML !== 'undefined') {
+    document.getElementById('info-content').innerHTML = infoContentHTML;
+}
 </script></body></html>
