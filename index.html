@@ -136,15 +136,17 @@
             border-radius: 12px;
             border: 2px solid #cbd5e1;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            max-height: 90vh; 
-            overflow: hidden; 
+            /* PC版で全体の下端を揃えるための高さ設定 */
+            height: 90vh;
+            max-height: 800px;
+            box-sizing: border-box;
         }
         
         #content-wrapper {
             display: flex;
             gap: 20px;
             flex: 1;
-            overflow: hidden;
+            min-height: 0; /* フレックスアイテムの縮小を許可 */
         }
 
         /* 左側カラムの設定 */
@@ -154,17 +156,20 @@
             gap: 15px;
             flex-shrink: 0;
             width: 360px;
+            height: 100%;
         }
 
         /* アバターエリア (左側) */
         #avatar-area {
             position: relative;
             width: 100%;
-            height: 480px;
+            /* フレックスで高さを可変に */
+            flex: 1;
+            min-height: 300px;
             border: 2px solid #94a3b8;
             border-radius: 10px;
             background-color: #fff;
-            flex-shrink: 0;
+            overflow: hidden; /* はみ出し防止 */
         }
         .avatar-layer {
             position: absolute;
@@ -181,17 +186,19 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            padding-right: 10px;
+            padding-right: 5px;
             padding-bottom: 0;
-            overflow: hidden; 
+            min-height: 0; /* はみ出し防止に必須 */
         }
 
+        /* スクロール領域の修正 */
         #unlocked-list, #locked-list {
             flex: 1;
             overflow-y: auto; 
-            max-height: 400px; 
             padding-right: 5px;
-            min-height: 0;
+            min-height: 0; /* これがないと縮まない */
+            /* iOS慣性スクロール用 */
+            -webkit-overflow-scrolling: touch;
         }
 
         /* ボタンデザイン */
@@ -226,8 +233,9 @@
             display: flex;
             width: 100%;
             border-bottom: 3px solid var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 5px; /* 余白調整 */
             gap: 5px;
+            flex-shrink: 0;
         }
         .tab-item {
             flex: 1;
@@ -256,6 +264,7 @@
             margin-bottom: 15px;
             border-bottom: 2px solid var(--accent);
             gap: 5px;
+            flex-shrink: 0;
         }
         .sub-tab-btn {
             flex: 1;
@@ -292,6 +301,7 @@
             width: 100%;
             gap: 5px;
             margin-bottom: 15px;
+            flex-shrink: 0;
         }
         .cat-tab-item {
             flex: 1;
@@ -328,6 +338,7 @@
             border-radius: 8px;
             box-sizing: border-box;
             position: relative;
+            flex-shrink: 0;
         }
         
         .sub-cat-tabs-wrapper::before {
@@ -406,6 +417,7 @@
         /* アバター保存ボタンの表示制御（トップ画面のみ表示） */
         #avatar-save-btn-container {
             display: block;
+            flex-shrink: 0;
         }
         #game-container.mode-dressup #avatar-save-btn-container {
             display: none !important;
@@ -423,6 +435,7 @@
             border: 1px solid #cbd5e1;
             border-left: 5px solid var(--accent);
             flex-shrink: 0;
+            position: relative; /* ボタン配置用 */
         }
         #lancelot-img {
             width: 120px;
@@ -442,6 +455,22 @@
             display: flex;
             align-items: center;
             white-space: pre-wrap;
+        }
+        
+        /* トップ画面の？ボタン */
+        #top-info-btn {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            font-size: 11px;
+            color: #64748b;
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            box-shadow: none;
+            font-weight: normal;
+            cursor: pointer;
+            margin: 0;
         }
         
         .status-container {
@@ -494,6 +523,10 @@
         
         .shop-area {
             border-top: none; 
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
         }
         #section-room .shop-area, 
         #section-shop .shop-area:last-child {
@@ -623,6 +656,7 @@
         
         @media (max-width: 768px) {
             #game-container {
+                height: auto;
                 max-height: none;
                 width: 100%;
                 box-sizing: border-box;
@@ -640,6 +674,7 @@
             
             #left-column {
                 width: 100%;
+                height: auto;
             }
 
             #avatar-area {
@@ -669,10 +704,15 @@
                 border: 2px solid #cbd5e1;
             }
 
+            #unlocked-list,
+            #locked-list {
+                max-height: none;
+                overflow-y: visible;
+                min-height: auto;
+            }
+
             #game-container.mode-dressup #unlocked-list,
             #game-container.mode-dressup #locked-list {
-                max-height: 35vh; 
-                overflow-y: auto;
                 border-top: 1px dashed #cbd5e1;
                 padding-top: 10px;
                 margin-top: 5px;
@@ -701,7 +741,7 @@
 </head>
 <body>
 
-<!-- ① スタート画面とモーダルを兄弟要素に変更 -->
+<!-- スタート画面とモーダルを兄弟要素に変更 -->
 <div id="start-screen">
     <div id="start-box">
         <img src="logo.png" alt="タイトルロゴ" id="logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiIGZpbGw9IiNjY2MiLz48dGV4dCB4PSIxMDUiIHk9IjM1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+bG9nby5wbmc8L3RleHQ+PC9zdmc+'">
@@ -717,7 +757,7 @@
     </div>
 </div>
 
-<!-- ① はじめに読んでね モーダル -->
+<!-- はじめに読んでね モーダル -->
 <div id="info-modal">
     <div id="info-content"></div>
 </div>
@@ -808,7 +848,7 @@
                 </div>
                 <div id="cooldown-text"></div>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
                     <button onclick="shareOnX()" style="background-color: #0f1419;">Xでシェア</button>
                     <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: transparent; color: #64748b; box-shadow: none; font-size: 13px; font-weight: normal; padding: 5px 10px;">↩️戻る</button>
                 </div>
@@ -832,7 +872,7 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 10px;">
                         <p style="font-size: 12px; color: #666; margin: 0;">※着用中のアイテムを再度押すと外せます</p>
-                        <!-- おまかせ着せ替えボタン（ご指定の幅・スタイル） -->
+                        <!-- おまかせ着せ替えボタン -->
                         <button onclick="randomEquip()" style="
                             font-size: 11px;
                             padding: 5px 8px;
@@ -1092,7 +1132,7 @@
             state.version = SAVE_VERSION;
         }
         
-        // equipOrderの復元処理（指定された厳密な検証付き）
+        // equipOrderの復元処理
         let isEquipOrderRestored = false;
         if (savedEquipOrder) {
             try {
