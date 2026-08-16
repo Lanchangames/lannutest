@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="ja"><head>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ランぬのわくわく古戦場！</title>
@@ -10,7 +12,6 @@
     <meta property="og:image" content="https://lanchangames.github.io/lannutest/avatar_2.png">
     <meta property="og:url" content="https://lanchangames.github.io/lannutest/">
     <meta name="twitter:card" content="summary_large_image">
-
 
     <style>
         :root {
@@ -53,6 +54,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             width: 90%;
             max-width: 500px;
+            box-sizing: border-box;
         }
         #logo-img {
             max-width: 100%;
@@ -81,6 +83,7 @@
             overflow-y: auto;
             text-align: left;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-sizing: border-box;
         }
         #info-content h2 {
             color: var(--primary);
@@ -111,6 +114,7 @@
             max-width: 400px;
             width: 80%;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-sizing: border-box;
         }
         .custom-modal-content p {
             font-size: 15px;
@@ -365,6 +369,14 @@
             gap: 15px;
             flex: 1;
             min-height: 0;
+        }
+
+        #section-top {
+            overflow-y: auto;
+        }
+
+        #section-data {
+            overflow-y: auto;
         }
 
         #ui-area.show-top #section-room, 
@@ -676,7 +688,11 @@
             20% { transform: translateY(-10px) scale(1.2); opacity: 1; }
             100% { transform: translateY(-40px) scale(1); opacity: 0; }
         }
-    </style></head><body><!-- スタート画面--><div id="start-screen">
+    </style>
+</head>
+<body>
+<!-- スタート画面-->
+<div id="start-screen">
     <div id="start-box">
         <img src="logo.png" alt="タイトルロゴ" id="logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiIGZpbGw9IiNjY2MiLz48dGV4dCB4PSIxMDUiIHk9IjM1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+bG9nby5wbmc8L3RleHQ+PC9zdmc+'">
         <p style="line-height: 1.6; margin-bottom: 25px; font-size: 15px; color: #555;">
@@ -693,7 +709,10 @@
     <!-- はじめに読んでね モーダル -->
     <div id="info-modal">
         <div id="info-content"></div>
-    </div></div><div id="game-container" class="mode-top">
+    </div>
+</div>
+
+<div id="game-container" class="mode-top">
     
     <!-- 大タブ -->
     <div id="main-nav">
@@ -750,6 +769,9 @@
 
             <!-- トップ画面の要素 -->
             <div id="section-top">
+                <div style="display: flex; justify-content: flex-end; margin-bottom: -5px;">
+                    <button onclick="showInfo()" style="font-size: 12px; color: #64748b; background: none; border: none; padding: 5px 10px; box-shadow: none; font-weight: normal; cursor: pointer; margin: 0;">？ 遊び方</button>
+                </div>
                 <div id="lancelot-area">
                     <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onclick="pokeLancelot()" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
                     <div id="message-box"></div>
@@ -780,7 +802,6 @@
                 <div id="cooldown-text"></div>
                 
                 <button onclick="shareOnX()" style="background-color: #0f1419; margin-top: 5px;">Xでシェア</button>
-                <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: #64748b; margin-top: 5px;">スタート画面に戻る</button>
             </div>
 
             <!-- クローゼット画面の要素 -->
@@ -799,7 +820,10 @@
                         <div class="sub-cat-tab-item" id="tab-bottoms-room" onclick="changeRoomTab('bottoms')">ボトムス</div>
                     </div>
 
-                    <p style="font-size: 12px; color: #666; margin-top:-5px;">※着用中のアイテムを再度押すと外せます</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 10px;">
+                        <p style="font-size: 12px; color: #666; margin: 0;">※着用中のアイテムを再度押すと外せます</p>
+                        <button onclick="randomEquip()" style="font-size: 12px; padding: 6px 10px; background-color: #64748b; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 0;"><span style="font-size:14px;">🎲</span> おまかせ着せ替え</button>
+                    </div>
                     <div id="unlocked-list"></div>
                 </div>
             </div>
@@ -833,7 +857,7 @@
                         <strong>【データの取り扱いについて】</strong><br>
                         当ゲームのセーブデータは、お使いのブラウザのローカルストレージ（端末内）にのみ保存され、外部サーバ等への送信は一切行われません。<br><br>
                         ブラウザの履歴やキャッシュを削除した場合、またはシークレットモードを利用した場合はデータが消去されてしまいます。<br><br>
-                        データ出力を行うと、セーブデータや消えた際や端末引き継ぎの際に同コードをペーストすることで、データの復元が可能です。定期的なデータ出力によるバックアップをおすすめします。<br><br>
+                        データ出力を行うと、セーブデータが消えた際や端末引き継ぎの際に同コードをペーストすることで、データの復元が可能です。定期的なデータ出力によるバックアップをおすすめします。<br><br>
                         また、事故防止のためiOS版をお使いの場合は『ホーム画面に追加』機能の利用を推奨します。
                     </div>
 
@@ -846,12 +870,19 @@
             </div>
 
         </div>
-    </div></div><!-- カスタムアラートモーダル --><div id="custom-alert-modal" class="custom-modal">
+    </div>
+</div>
+
+<!-- カスタムアラートモーダル -->
+<div id="custom-alert-modal" class="custom-modal">
     <div class="custom-modal-content">
         <p id="custom-alert-message"></p>
         <button onclick="hideCustomAlert()" style="background-color: var(--primary);">OK</button>
-    </div></div><!-- カスタムコンファームモーダル -->
-        <div id="custom-confirm-modal" class="custom-modal">
+    </div>
+</div>
+
+<!-- カスタムコンファームモーダル -->
+<div id="custom-confirm-modal" class="custom-modal">
     <div class="custom-modal-content">
         <p id="custom-confirm-message"></p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
@@ -859,7 +890,13 @@
             <button onclick="hideCustomConfirm()" style="background-color: #64748b; flex: 1;">いいえ</button>
         </div>
     </div>
-</div><!-- 外部データの読み込み --><script src="items.js"></script><script src="messages.js"></script><script src="info.js"></script><script>
+</div>
+
+<!-- 外部データの読み込み -->
+<script src="items.js"></script>
+<script src="messages.js"></script>
+<script src="info.js"></script>
+<script>
     // --- モーダル制御 ---
     function showInfo() {
         document.getElementById('info-modal').style.display = 'flex';
@@ -920,7 +957,7 @@
         hasReceivedSecretPresent: false
     };
 
-    let state = { ...defaultState };
+    let state = { ...defaultState, unlocked: {} };
 
     let currentMode = 'top'; 
     let currentSubTab = 'room';
@@ -946,7 +983,6 @@
     let pokeTimer = null;
 
     let lastLoginAction = null;
-    let lastReportAction = null;
 
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
@@ -1556,8 +1592,72 @@
         }
         
         applyAvatarImageAll();
-        renderItems();
+        renderRoomItems();
         saveGame(); 
+    }
+
+    function randomEquip() {
+        let newEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
+        let newOrder = [];
+
+        const getUnlockedFiles = (cat) => {
+            if(!ITEM_DB || !ITEM_DB[cat]) return [];
+            return ITEM_DB[cat].filter(item => state.unlocked[item.id]).map(item => item.file);
+        };
+
+        const bgs = getUnlockedFiles('bg');
+        if (bgs.length > 0) {
+            const choices = ['', ...bgs];
+            newEquip.bg = choices[Math.floor(Math.random() * choices.length)];
+        }
+
+        const setups = getUnlockedFiles('setup');
+        const tops = getUnlockedFiles('tops');
+        const bottoms = getUnlockedFiles('bottoms');
+
+        let clothesPattern = [];
+        if (setups.length > 0) clothesPattern.push('setup');
+        if (tops.length > 0 || bottoms.length > 0) clothesPattern.push('separate');
+
+        if (clothesPattern.length > 0) {
+            const pattern = clothesPattern[Math.floor(Math.random() * clothesPattern.length)];
+            if (pattern === 'setup') {
+                const choices = ['', ...setups];
+                const chosen = choices[Math.floor(Math.random() * choices.length)];
+                newEquip.setup = chosen;
+                if (chosen) newOrder.push({type: 'setup', file: chosen});
+            } else {
+                if (tops.length > 0) {
+                    const choices = ['', ...tops];
+                    const chosen = choices[Math.floor(Math.random() * choices.length)];
+                    newEquip.tops = chosen;
+                    if (chosen) newOrder.push({type: 'tops', file: chosen});
+                }
+                if (bottoms.length > 0) {
+                    const choices = ['', ...bottoms];
+                    const chosen = choices[Math.floor(Math.random() * choices.length)];
+                    newEquip.bottoms = chosen;
+                    if (chosen) newOrder.push({type: 'bottoms', file: chosen});
+                }
+            }
+        }
+
+        const accs = getUnlockedFiles('acc');
+        if (accs.length > 0) {
+            accs.forEach(accFile => {
+                if (Math.random() < 0.5) {
+                    newEquip.acc.push(accFile);
+                    newOrder.push({type: 'acc', file: accFile});
+                }
+            });
+        }
+
+        currentEquip = newEquip;
+        equipOrder = newOrder;
+
+        applyAvatarImageAll();
+        renderRoomItems();
+        saveGame();
     }
 
     function showPreview(item) {
@@ -1716,6 +1816,31 @@ function reportScore() {
         state.coins += earnedCoins;
         state.affection += earnedAffection;
 
+        if (earnedCoins === 500) {
+            const btn = document.getElementById('btn-report');
+            if (btn) {
+                const rect = btn.getBoundingClientRect();
+                const effectEl = document.createElement('div');
+                effectEl.innerText = "+500 🪙";
+                effectEl.style.position = 'fixed';
+                effectEl.style.left = (rect.left + rect.width / 2) + 'px';
+                effectEl.style.top = rect.top + 'px';
+                effectEl.style.transform = 'translate(-50%, -50%)';
+                effectEl.style.color = '#f1c40f';
+                effectEl.style.fontWeight = 'bold';
+                effectEl.style.fontSize = '24px';
+                effectEl.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
+                effectEl.style.pointerEvents = 'none';
+                effectEl.style.zIndex = '9999';
+                effectEl.style.animation = 'purchaseEffect 1s ease-out forwards';
+                document.body.appendChild(effectEl);
+                
+                setTimeout(() => {
+                    if (effectEl.parentNode) effectEl.parentNode.removeChild(effectEl);
+                }, 1000);
+            }
+        }
+
         setDefaultLancelotImg();
         let msgToSet = "";
 
@@ -1751,8 +1876,6 @@ function reportScore() {
             currentLancelotImg = 'lancelot_4.png';
             msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも忘れないでくれよ！";
         }
-
-        lastReportAction = { img: currentLancelotImg, msg: msgToSet };
 
         setLancelotMessage(msgToSet);
 
@@ -2012,4 +2135,6 @@ startCooldownTimer();
 if (typeof infoContentHTML !== 'undefined') {
     document.getElementById('info-content').innerHTML = infoContentHTML;
 }
-</script></body></html>
+</script>
+</body>
+</html>
