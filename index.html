@@ -391,6 +391,17 @@
             display: none;
         }
 
+        /* アバター保存ボタンの表示制御（トップ画面のみ表示） */
+        #avatar-save-btn-container {
+            display: block;
+        }
+        #game-container.mode-dressup #avatar-save-btn-container {
+            display: none !important;
+        }
+        #game-container.mode-data #avatar-save-btn-container {
+            display: none !important;
+        }
+
         #lancelot-area {
             display: flex;
             gap: 10px;
@@ -407,7 +418,6 @@
             object-fit: contain;
             flex-shrink: 0;
             cursor: pointer;
-            /* 追加：スマホでの連続タップ（ダブルタップズームや長押し）を無効化し、スムーズに連打させる */
             user-select: none;
             -webkit-user-select: none;
             -webkit-touch-callout: none;
@@ -625,7 +635,6 @@
                 border: 2px solid #cbd5e1;
             }
             
-            /* 修正箇所: プレビュー枠のレイアウト修正（スマホ幅） */
             #game-container.mode-dressup #shop-preview-area {
                 width: 100% !important;
                 margin: 0 auto;
@@ -699,7 +708,6 @@
             
             <!-- 着せ替えモード時のみ表示されるヘッダ（コインとサブタブ） -->
             <div id="dressup-header" style="display: none; flex-direction: column; gap: 10px;">
-                <!-- 修正箇所: コイン表示を1段にまとめる -->
                 <div class="status-card" style="padding: 10px; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
                     <span class="label" style="font-size: 12px; color: #64748b; font-weight: bold;">🪙 所持コイン</span>
                     <span class="val" id="val-coins-dressup" style="font-size: 18px; color: var(--primary); font-weight: bold; display: inline;">0</span>
@@ -714,13 +722,14 @@
             <div id="avatar-area">
                 <img id="layer-bg" class="avatar-layer" style="z-index: 1; display:none;" src="" alt="背景">
                 <img id="layer-base" class="avatar-layer" style="z-index: 2;" src="avatar.png" alt="素体">
-                <!-- 改修①: ここから下のレイヤーはJSで動的に生成・重なり順を管理します -->
             </div>
             
-            <!-- アバター画像の直下に配置した保存ボタン -->
-            <button onclick="saveAvatarImage()" style="width: 100%; background-color: var(--accent);">アバター画像保存</button>
+            <!-- アバター画像の直下に配置した保存ボタン（トップ画面のみ表示） -->
+            <div id="avatar-save-btn-container" style="width: 100%;">
+                <button onclick="saveAvatarImage()" style="width: 100%; background-color: var(--accent);">アバター画像保存</button>
+            </div>
             
-            <!-- 修正箇所: ショップ画面用プレビューエリア ボタンを枠外へ分離 -->
+            <!-- ショップ画面用プレビューエリア -->
             <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; flex-direction: column; gap: 10px; flex-shrink: 0;">
                 <div id="shop-preview-image-box" style="width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; overflow: hidden; position: relative; background-color: #fff; flex-shrink: 0;">
                     <div id="preview-img-container" style="width: 100%; height: 100%; position: relative; background: rgba(255, 255, 255, 0.7); background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;">
@@ -729,7 +738,6 @@
                         <img id="preview-img" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; z-index: 3;">
                     </div>
                 </div>
-                <!-- 完全に独立させた開放ボタンコンテナ -->
                 <div style="padding: 10px; display: flex; justify-content: center; align-items: center; border: 2px solid #94a3b8; border-radius: 10px; background-color: #f8fafc; flex-shrink: 0;">
                     <button id="btn-buy-preview" disabled style="background-color: #27ae60; color: white; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.2); width: 80%;" onclick="buyPreviewItem()">衣装を選んでくれ！</button>
                 </div>
@@ -771,7 +779,6 @@
                 </div>
                 <div id="cooldown-text"></div>
                 
-                <!-- Xでシェア ボタンを追加 -->
                 <button onclick="shareOnX()" style="background-color: #0f1419; margin-top: 5px;">Xでシェア</button>
             </div>
 
@@ -811,7 +818,6 @@
                 </div>
 
                 <div class="shop-area">
-                    <!-- 修正箇所: 「未解放アイテム」の文字を削除 -->
                     <div id="locked-list"></div>
                 </div>
 
@@ -844,7 +850,7 @@
         <p id="custom-alert-message"></p>
         <button onclick="hideCustomAlert()" style="background-color: var(--primary);">OK</button>
     </div></div><!-- カスタムコンファームモーダル --><div id="custom-confirm-modal" class="custom-modal">
-    <div class="custom-modal-content">
+    <div class="custom-confirm-content">
         <p id="custom-confirm-message"></p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button id="custom-confirm-yes" style="background-color: var(--accent); flex: 1;">はい</button>
@@ -908,7 +914,7 @@
         highestReportedScore: 0,
         lastLoginTime: 0,
         unlocked: {},
-        hasReceivedSecretPresent: false // テスト用追加
+        hasReceivedSecretPresent: false
     };
 
     let state = { ...defaultState };
@@ -933,7 +939,6 @@
     let afkTimer = null;
     let isGameStarted = false;
 
-    // 連続タップカウント用変数
     let pokeCount = 0;
     let pokeTimer = null;
 
@@ -1056,7 +1061,7 @@
                 showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
-            showCustomAlert("コードの出力に失敗しました。表示されたコードを手持動でコピーしてください。");
+            showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
         }
     }
 
@@ -1109,7 +1114,6 @@
         document.getElementById('val-reports').innerText = state.reportCount;
         document.getElementById('val-coins').innerText = state.coins;
         
-        // 着せ替えヘッダ用のコイン表示を更新
         const dressupCoins = document.getElementById('val-coins-dressup');
         if(dressupCoins) dressupCoins.innerText = state.coins;
 
@@ -1165,17 +1169,15 @@
         if (!isGameStarted) return;
         resetAfkTimer();
 
-        // 連続タップの判定処理
         pokeCount++;
         if (pokeTimer) clearTimeout(pokeTimer);
         pokeTimer = setTimeout(() => {
             pokeCount = 0;
-        }, 1500); // 1.5秒間タップが無ければカウントリセット
+        }, 1500);
 
-        // 10回連打のシークレットイベント（判定をより確実にするため >= 10 に変更）
         if (pokeCount >= 10 && !state.hasReceivedSecretPresent) {
             state.hasReceivedSecretPresent = true;
-            state.coins += 10000000; // テストの値（最終的には数値を変更する）
+            state.coins += 10000000;
             currentLancelotImg = 'lancelot_4.png';
             setLancelotMessage('仕方ないな、団長は…。俺からのプレゼントだ。みんなには内緒だぞ。');
             updateLancelotImage();
@@ -1195,23 +1197,20 @@
         const hour = new Date().getHours();
         let pokes = [
             { img: 'lancelot_1.png', msg: '報告に来てくれてありがとう、団長。会えて嬉しいよ。' },
-            { img: 'lancelot_5.png', msg: '古戦場とは一体なんなんだろうな。俺たちはなぜ戦って…これ以上考えるのはやめておこう。' },
+            { img: 'lancelot_5.png', msg: '古戦場とは一体なんだろうな。俺たちはなぜ戦って…これ以上考えるのはやめておこう。' },
             { img: 'lancelot_8.png', msg: '適度な休息も必要だぞ⋯おやつタイムには俺も呼んでくれ！' },
             { img: 'lancelot_9.png', msg: '古戦場の魔物たちはとても手強いと聞いている。怪我をしないよう気をつけてくれ。' },
             { img: 'lancelot_10.png', msg: '俺は…少しでも団長の力になれているだろうか？' }
         ];
 
-        // 0時〜7時のみ出現
         if (hour >= 0 && hour < 7) {
             pokes.push({ img: 'lancelot_8.png', msg: 'むにゃ⋯プリン⋯⋯⋯⋯' });
         }
 
-        // ログイン時のアクションを追加
         if (lastLoginAction) {
             pokes.push(lastLoginAction);
         }
         
-        // 修正箇所：テキストと画像セットで取得するように変更
         let currentScoreMsg = "";
         let currentScoreImg = "lancelot_3.png";
         if (state.totalScore >= 50000000000) {
@@ -1261,13 +1260,11 @@
             btns[0].classList.add('active');
             gc.classList.add('mode-top');
             uiArea.className = 'show-top';
-            // トップ画面時はアバターを表示
             document.getElementById('avatar-area').style.display = 'block';
             document.getElementById('shop-preview-area').style.display = 'none';
         } else if (mode === 'dressup') {
             btns[1].classList.add('active');
             gc.classList.add('mode-dressup');
-            // 着せ替え時の現在のサブタブを再適用して表示を切り替え
             switchSubTab(currentSubTab);
         } else if (mode === 'data') {
             btns[2].classList.add('active');
@@ -1289,13 +1286,11 @@
         if (tab === 'room') {
             btns[0].classList.add('active');
             uiArea.className = 'show-room';
-            // クローゼット選択時はアバターを表示
             document.getElementById('avatar-area').style.display = 'block';
             document.getElementById('shop-preview-area').style.display = 'none';
         } else {
             btns[1].classList.add('active');
             uiArea.className = 'show-shop';
-            // ショップ選択時はプレビューを表示（アバターは非表示）
             document.getElementById('avatar-area').style.display = 'none';
             document.getElementById('shop-preview-area').style.display = 'flex';
         }
@@ -1486,10 +1481,8 @@
     function applyAvatarImageAll() {
         const avatarArea = document.getElementById('avatar-area');
         
-        // 既存の動的レイヤーを一旦すべて削除
         avatarArea.querySelectorAll('.dynamic-layer').forEach(el => el.remove());
         
-        // 背景は常に一番下 (z-index: 1)
         const bgLayer = document.getElementById('layer-bg');
         if (currentEquip.bg === '') {
             bgLayer.style.display = 'none';
@@ -1498,9 +1491,6 @@
             bgLayer.style.display = 'block';
         }
         
-        // 素体(layer-base)は常に z-index: 2
-        
-        // 装備した順序に従ってレイヤーを z-index 3 から配置
         let z = 3;
         equipOrder.forEach(item => {
             const img = document.createElement('img');
@@ -1518,11 +1508,9 @@
             if (currentEquip.setup === file && file !== '') isRemoving = true;
 
             if (!isRemoving && file !== '') {
-                // 新しく着る場合: トップスとボトムス、古いセットアップを履歴から消す
                 equipOrder = equipOrder.filter(e => e.type !== 'tops' && e.type !== 'bottoms' && e.type !== 'setup');
                 equipOrder.push({type: 'setup', file: file});
             } else if (isRemoving || file === '') {
-                // 外す場合
                 equipOrder = equipOrder.filter(e => e.type !== 'setup');
             }
             
@@ -1535,7 +1523,6 @@
             if (currentEquip[type] === file && file !== '') isRemoving = true;
 
             if (!isRemoving && file !== '') {
-                // 新しく着る場合: 同種とセットアップを履歴から消す
                 equipOrder = equipOrder.filter(e => e.type !== type && e.type !== 'setup');
                 equipOrder.push({type: type, file: file});
             } else if (isRemoving || file === '') {
@@ -1547,22 +1534,21 @@
                 currentEquip.setup = '';
             }
         } else if (type === 'acc') {
-            if (file === '') { // 全部外す
+            if (file === '') {
                 currentEquip.acc = [];
                 equipOrder = equipOrder.filter(e => e.type !== 'acc');
             } else {
                 const idx = currentEquip.acc.indexOf(file);
-                if (idx > -1) { // 既に付いているものを外す
+                if (idx > -1) {
                     currentEquip.acc.splice(idx, 1);
                     const orderIdx = equipOrder.findIndex(e => e.type === 'acc' && e.file === file);
                     if (orderIdx > -1) equipOrder.splice(orderIdx, 1);
-                } else { // 新しく付ける
+                } else {
                     currentEquip.acc.push(file);
                     equipOrder.push({type: 'acc', file: file});
                 }
             }
         } else {
-            // 背景の場合
             currentEquip[type] = (currentEquip[type] === file && file !== '') ? '' : file;
         }
         
@@ -1571,7 +1557,6 @@
         saveGame(); 
     }
 
-    // 修正箇所: プレビュー画面からテキスト更新関連を削除
     function showPreview(item) {
         previewTarget = item;
         const img = document.getElementById('preview-img');
@@ -1636,7 +1621,6 @@
             if (effectEl.parentNode) effectEl.parentNode.removeChild(effectEl);
         }, 1000);
 
-        // 修正箇所: リセット時のテキスト関連処理を削除
         previewTarget = null;
         document.getElementById('preview-img').style.display = 'none';
         document.getElementById('preview-layer-bg').style.display = 'none';
@@ -1739,7 +1723,6 @@
         } else {
             const maxScore = 8000000000;
             const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
-            // 修正箇所：テキストと画像セットで取得するように変更
             if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
                 msgToSet = msgsProgress[rank].msg;
                 currentLancelotImg = msgsProgress[rank].img;
@@ -1752,7 +1735,6 @@
             msgToSet = "こんな時間に報告か！？団長はすごいな。無理をせず休むことも忘れないでくれよ！";
         }
 
-        
         lastReportAction = { img: currentLancelotImg, msg: msgToSet };
 
         setLancelotMessage(msgToSet);
@@ -1855,7 +1837,6 @@
             loginMsg = '団長、ショップへ行かないのか？素敵なものがたくさんあるようだぞ…？';
         }
 
-        // 改修③: ログイン時のアクションを保存
         lastLoginAction = { img: loginImg, msg: loginMsg };
 
         state.lastLoginTime = now;
@@ -1876,7 +1857,7 @@
         window.open(url, '_blank');
     }
 
-    // アバター画像を合成して保存する関数
+    // アバター画像を合成して保存する関数（PWA対応 & 成功時モーダル表示）
     function saveAvatarImage() {
         const canvas = document.createElement('canvas');
         canvas.width = 600;
@@ -1902,33 +1883,66 @@
                 images[index] = img;
                 loadedCount++;
                 if (loadedCount === sources.length) {
-                    images.forEach(imgObj => {
-                        if (imgObj) {
-                            ctx.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
-                        }
-                    });
-                    const link = document.createElement('a');
-                    link.download = 'lannu_avatar.png';
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
+                    processCanvasExport(canvas, ctx, images);
                 }
             };
             img.onerror = () => {
                 loadedCount++;
                 if (loadedCount === sources.length) {
-                    images.forEach(imgObj => {
-                        if (imgObj) {
-                            ctx.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
-                        }
-                    });
-                    const link = document.createElement('a');
-                    link.download = 'lannu_avatar.png';
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
+                    processCanvasExport(canvas, ctx, images);
                 }
             };
             img.src = item.src;
         });
+    }
+
+    function processCanvasExport(canvas, ctx, images) {
+        images.forEach(imgObj => {
+            if (imgObj) {
+                ctx.drawImage(imgObj, 0, 0, canvas.width, canvas.height);
+            }
+        });
+
+        canvas.toBlob(async (blob) => {
+            if (!blob) {
+                fallbackDownload(canvas);
+                return;
+            }
+            const file = new File([blob], 'lannu_avatar.png', { type: 'image/png' });
+
+            // スマホなどのWeb Share API（共有シート）が使える場合
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        files: [file],
+                        title: 'アバター画像',
+                        text: 'ランぬの着せ替えアバターです！'
+                    });
+                    showCustomAlert("保存に成功しました！");
+                    return;
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        fallbackDownload(canvas);
+                    }
+                    return;
+                }
+            }
+
+            // 通常のダウンロードフォールバック
+            fallbackDownload(canvas);
+        }, 'image/png');
+    }
+
+    function fallbackDownload(canvas) {
+        try {
+            const link = document.createElement('a');
+            link.download = 'lannu_avatar.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showCustomAlert("保存に成功しました！");
+        } catch (e) {
+            showCustomAlert("画像の保存に失敗しました。");
+        }
     }
 
     function preloadImages() {
@@ -1949,7 +1963,7 @@
             const img = new Image();
             img.src = src;
             if (img.decode) {
-                img.decode().catch(() => {}); // エラーは無視
+                img.decode().catch(() => {});
             }
         });
     }
