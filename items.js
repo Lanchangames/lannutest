@@ -52,8 +52,17 @@ const ITEM_DB = {
         { id: 'tops19', name: '体操服（上）', file: 'tops_19.png', type: 'tops' },
         { id: 'tops20', name: 'へそ出しシャツ（白）', file: 'tops_20.png', type: 'tops' },
         { id: 'tops21', name: 'へそ出しシャツ（黒）', file: 'tops_21.png', type: 'tops' },
-        { id: 'tops22', name: 'ああああ', file: 'tops_22.png', type: 'tops' },
-        { id: 'tops23', name: 'ああああ', file: 'tops_23.png', type: 'tops' }
+        { id: 'tops22', name: 'ジャージ上（赤）', file: 'tops_22.png', type: 'tops' },
+        { id: 'tops23', name: 'ジャージ上（黄）', file: 'tops_23.png', type: 'tops' },
+        { id: 'tops24', name: 'ジャージ上（紫）', file: 'tops_24.png', type: 'tops' },
+        { id: 'tops25', name: 'ジャージ上（緑）', file: 'tops_25.png', type: 'tops' },
+        { id: 'tops26', name: '丸襟ブラウス（白）', file: 'tops_26.png', type: 'tops' },
+        { id: 'tops27', name: '丸襟ブラウス（青）', file: 'tops_27.png', type: 'tops' },
+        { id: 'tops28', name: '丸襟ブラウス（水色）', file: 'tops_28.png', type: 'tops' },
+        { id: 'tops29', name: '丸襟ブラウス（黒）', file: 'tops_29.png', type: 'tops' },
+        { id: 'tops30', name: 'ああああ', file: 'tops_30.png', type: 'tops' },
+        { id: 'tops31', name: 'ああああ', file: 'tops_31.png', type: 'tops' },
+        { id: 'tops32', name: 'ああああ', file: 'tops_32.png', type: 'tops' }
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
@@ -70,7 +79,11 @@ const ITEM_DB = {
         { id: 'bottoms12', name: 'ロングスカート（紺)', file: 'bottoms_12.png', type: 'bottoms' },
         { id: 'bottoms13', name: 'ロングスカート（ピンク）', file: 'bottoms_13.png', type: 'bottoms' },
         { id: 'bottoms14', name: 'こしみの', file: 'bottoms_14.png', type: 'bottoms' },
-        { id: 'bottoms15', name: 'ああああ', file: 'bottoms_15.png', type: 'bottoms' }
+        { id: 'bottoms15', name: 'ジャージ下（赤）', file: 'bottoms_15.png', type: 'bottoms' },
+        { id: 'bottoms16', name: 'ジャージ下（黄）', file: 'bottoms_16.png', type: 'bottoms' },
+        { id: 'bottoms17', name: 'ジャージ下（紫）', file: 'bottoms_17.png', type: 'bottoms' },
+        { id: 'bottoms18', name: 'ジャージ下（緑）', file: 'bottoms_18.png', type: 'bottoms' },
+        { id: 'bottoms19', name: 'ああああ', file: 'bottoms_19.png', type: 'bottoms' }
     ],
     acc: [
         { id: 'acc1', name: 'リボン', file: 'acc_1.png', type: 'acc' },
