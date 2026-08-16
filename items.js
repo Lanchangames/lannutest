@@ -26,6 +26,9 @@ const ITEM_DB = {
         { id: 'clothes23', name: 'タキシード', file: 'clothes_23.png', type: 'setup' },
         { id: 'clothes24', name: 'huku', file: 'clothes_24.png', type: 'setup' },
         { id: 'clothes25', name: 'huku', file: 'clothes_25.png', type: 'setup' },
+        { id: 'clothes26', name: 'タキシード', file: 'clothes_26.png', type: 'setup' },
+        { id: 'clothes27', name: 'huku', file: 'clothes_27.png', type: 'setup' },
+        { id: 'clothes28', name: 'huku', file: 'clothes_28.png', type: 'setup' },
     ],
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
@@ -47,7 +50,10 @@ const ITEM_DB = {
         { id: 'tops17', name: 'セーラー学生服（ピンク）', file: 'tops_17.png', type: 'tops' },
         { id: 'tops18', name: 'ああああ', file: 'tops_18.png', type: 'tops' },
         { id: 'tops19', name: 'ああああ', file: 'tops_19.png', type: 'tops' },
-        { id: 'tops20', name: 'ああああ', file: 'tops_20.png', type: 'tops' }
+        { id: 'tops20', name: 'ああああ', file: 'tops_20.png', type: 'tops' },
+        { id: 'tops21', name: 'ああああ', file: 'tops_21.png', type: 'tops' },
+        { id: 'tops22', name: 'ああああ', file: 'tops_22.png', type: 'tops' },
+        { id: 'tops23', name: 'ああああ', file: 'tops_23.png', type: 'tops' }
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
@@ -160,6 +166,15 @@ const ITEM_DB = {
         { id: 'acc91', name: 'ああああ', file: 'acc_91.png', type: 'acc' },
         { id: 'acc92', name: 'ああああ', file: 'acc_92.png', type: 'acc' },
         { id: 'acc93', name: 'ああああ', file: 'acc_93.png', type: 'acc' },
+        { id: 'acc94', name: 'ああああ', file: 'acc_94.png', type: 'acc' },
+        { id: 'acc95', name: 'ああああ', file: 'acc_95.png', type: 'acc' },
+        { id: 'acc96', name: 'ああああ', file: 'acc_96.png', type: 'acc' },
+        { id: 'acc97', name: 'ああああ', file: 'acc_97.png', type: 'acc' },
+        { id: 'acc98', name: 'ああああ', file: 'acc_98.png', type: 'acc' },
+        { id: 'acc100', name: 'ああああ', file: 'acc_99.png', type: 'acc' },
+        { id: 'acc101', name: 'ああああ', file: 'acc_100.png', type: 'acc' },
+        { id: 'acc102', name: 'ああああ', file: 'acc_101.png', type: 'acc' },
+        { id: 'acc103', name: 'ああああ', file: 'acc_102.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
@@ -187,7 +202,12 @@ const ITEM_DB = {
         { id: 'bg23', name: '静かな森', file: 'bg_23.png', type: 'bg' },
         { id: 'bg24', name: '夜の花畑（紫）', file: 'bg_24.png', type: 'bg' },
         { id: 'bg25', name: '夜の花畑（緑）', file: 'bg_25.png', type: 'bg' },
-        { id: 'bg26', name: 'ジュエルリゾート', file: 'bg_26.png', type: 'bg' }
+        { id: 'bg26', name: 'ジュエルリゾート', file: 'bg_26.png', type: 'bg' },
+        { id: 'bg27', name: 'クリアケース', file: 'bg_27.png', type: 'bg' },
+        { id: 'bg28', name: '静かな森', file: 'bg_28.png', type: 'bg' },
+        { id: 'bg29', name: '夜の花畑（紫）', file: 'bg_29.png', type: 'bg' },
+        { id: 'bg30', name: '夜の花畑（緑）', file: 'bg_30.png', type: 'bg' },
+        { id: 'bg31', name: 'ジュエルリゾート', file: 'bg_31.png', type: 'bg' }
         
         
         
