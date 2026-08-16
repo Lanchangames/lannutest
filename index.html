@@ -1075,8 +1075,53 @@
             state.version = SAVE_VERSION;
         }
         
-        initEquipOrder();
-        applyAvatarImageAll();
+        let equipOrderLoaded = false;
+
+if (savedEquipOrder) {
+    try {
+        const parsedOrder = JSON.parse(savedEquipOrder);
+
+        if (
+            Array.isArray(parsedOrder) &&
+            parsedOrder.every(item =>
+                item &&
+                typeof item === 'object' &&
+                typeof item.type === 'string' &&
+                typeof item.file === 'string'
+            )
+        ) {
+            equipOrder = parsedOrder.filter(item => {
+                if (item.type === 'setup') {
+                    return currentEquip.setup === item.file;
+                }
+
+                if (item.type === 'tops') {
+                    return currentEquip.tops === item.file;
+                }
+
+                if (item.type === 'bottoms') {
+                    return currentEquip.bottoms === item.file;
+                }
+
+                if (item.type === 'acc') {
+                    return currentEquip.acc.includes(item.file);
+                }
+
+                return false;
+            });
+
+            equipOrderLoaded = true;
+        }
+    } catch (e) {
+        console.error("装備順データの読み込みに失敗しました。", e);
+    }
+}
+
+if (!equipOrderLoaded) {
+    initEquipOrder();
+}
+
+applyAvatarImageAll();
     }
 
     function initUnlockedItems() {
