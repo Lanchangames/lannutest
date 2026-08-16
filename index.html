@@ -1939,8 +1939,9 @@ function reportScore() {
             }
             const file = new File([blob], 'lannu_avatar.png', { type: 'image/png' });
 
-            // スマホなどのWeb Share API（共有シート）が使える場合
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            // PCでは直接ダウンロードさせ、スマホでのみWeb Share API（共有シート）を呼び出す
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
                     await navigator.share({
                         files: [file],
