@@ -1762,15 +1762,28 @@ function reportScore() {
     }
 
     function fixScore() {
-        const inputValStr = document.getElementById('input-score').value;
-        const inputVal = Number(inputValStr);
-        
-        if (isNaN(inputVal) || !Number.isInteger(inputVal) || inputVal < 0 || inputVal >= 100000000000) {
-            currentLancelotImg = 'lancelot_2.png';
-            setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
-            updateUI();
-            return;
-        }
+    const inputValStr = document.getElementById('input-score').value.trim();
+
+    // 空欄・小数・指数表記・符号付き数値などを拒否
+    if (inputValStr === '' || !/^\d+$/.test(inputValStr)) {
+        currentLancelotImg = 'lancelot_2.png';
+        setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
+        updateUI();
+        return;
+    }
+
+    const inputVal = Number(inputValStr);
+    
+    if (
+        !Number.isSafeInteger(inputVal) ||
+        inputVal < 0 ||
+        inputVal >= 100000000000
+    ) {
+        currentLancelotImg = 'lancelot_2.png';
+        setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
+        updateUI();
+        return;
+    }
 
         fixScoreCount++;
         if (fixScoreCount >= 2) {
