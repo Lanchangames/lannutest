@@ -181,7 +181,7 @@ const ITEM_DB = {
         { id: 'acc106', name: '財宝の指輪（緑）', file: 'acc_106.png', type: 'acc' },
         { id: 'acc107', name: '財宝の指輪（オレンジ）', file: 'acc_107.png', type: 'acc' },
         { id: 'acc108', name: '財宝の指輪（紫）', file: 'acc_108.png', type: 'acc' },
-        { id: 'acc109', name: 'ああああ', file: 'acc_109.png', type: 'acc' },
+        { id: 'acc109', name: '問診票', file: 'acc_109.png', type: 'acc' },
         { id: 'acc110', name: 'ああああ', file: 'acc_110.png', type: 'acc' },   
         { id: 'acc111', name: 'ああああ', file: 'acc_111.png', type: 'acc' },
     ],
