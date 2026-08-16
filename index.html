@@ -849,14 +849,16 @@
     <div class="custom-modal-content">
         <p id="custom-alert-message"></p>
         <button onclick="hideCustomAlert()" style="background-color: var(--primary);">OK</button>
-    </div></div><!-- カスタムコンファームモーダル --><div id="custom-confirm-modal" class="custom-modal">
-    <div class="custom-confirm-content">
+    </div></div><!-- カスタムコンファームモーダル -->
+        <div id="custom-confirm-modal" class="custom-modal">
+    <div class="custom-modal-content">
         <p id="custom-confirm-message"></p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button id="custom-confirm-yes" style="background-color: var(--accent); flex: 1;">はい</button>
             <button onclick="hideCustomConfirm()" style="background-color: #64748b; flex: 1;">いいえ</button>
         </div>
-    </div></div><!-- 外部データの読み込み --><script src="items.js"></script><script src="messages.js"></script><script src="info.js"></script><script>
+    </div>
+</div><!-- 外部データの読み込み --><script src="items.js"></script><script src="messages.js"></script><script src="info.js"></script><script>
     // --- モーダル制御 ---
     function showInfo() {
         document.getElementById('info-modal').style.display = 'flex';
