@@ -991,11 +991,13 @@
 
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
+    const SAVE_KEY_EQUIP_ORDER = 'kosenjo_save_equip_order';
 
     function saveGame() {
-        localStorage.setItem(SAVE_KEY_STATE, JSON.stringify(state));
-        localStorage.setItem(SAVE_KEY_EQUIP, JSON.stringify(currentEquip));
-    }
+    localStorage.setItem(SAVE_KEY_STATE, JSON.stringify(state));
+    localStorage.setItem(SAVE_KEY_EQUIP, JSON.stringify(currentEquip));
+    localStorage.setItem(SAVE_KEY_EQUIP_ORDER, JSON.stringify(equipOrder));
+}
 
     function normalizeEquip(loadedEquip) {
         let norm = { ...defaultEquip, ...loadedEquip };
@@ -1039,8 +1041,9 @@
     }
 
     function loadGame() {
-        const savedState = localStorage.getItem(SAVE_KEY_STATE);
-        const savedEquip = localStorage.getItem(SAVE_KEY_EQUIP);
+    const savedState = localStorage.getItem(SAVE_KEY_STATE);
+    const savedEquip = localStorage.getItem(SAVE_KEY_EQUIP);
+    const savedEquipOrder = localStorage.getItem(SAVE_KEY_EQUIP_ORDER);
         
         if (savedState) {
             try {
