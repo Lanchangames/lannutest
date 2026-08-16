@@ -1149,7 +1149,8 @@ applyAvatarImageAll();
 
     async function exportData() {
         try {
-            const data = { state: state, equip: currentEquip };
+            const data = {state: state,equip: currentEquip,equipOrder: equipOrder
+};
             const encoded = btoa(encodeURIComponent(JSON.stringify(data)));
             const textarea = document.getElementById('backup-code');
             textarea.value = encoded;
@@ -1196,6 +1197,12 @@ applyAvatarImageAll();
                     }
                     
                     currentEquip = normalizeEquip(decoded.equip);
+
+if (Array.isArray(decoded.equipOrder)) {
+    equipOrder = decoded.equipOrder;
+} else {
+    initEquipOrder();
+}
                     
                     initUnlockedItems();
                     saveGame();
