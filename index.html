@@ -409,13 +409,21 @@
             display: block;
             flex-shrink: 0;
         }
+        
         #game-container.mode-dressup #avatar-save-btn-container {
             display: none !important;
         }
+        
         #game-container.mode-data #avatar-save-btn-container {
             display: none !important;
         }
-
+        
+        /* PC版トップ画面のみ、左右の下端を揃える */
+        @media (min-width: 769px) {
+            #game-container.mode-top #avatar-save-btn-container {
+                margin-top: auto;
+            }
+        }
         #lancelot-area {
             display: flex;
             gap: 10px;
