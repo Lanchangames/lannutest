@@ -686,9 +686,9 @@
 
             #unlocked-list,
             #locked-list {
-                max-height: none;
-                overflow-y: visible;
-                min-height: auto;
+                max-height: 40vh;
+                overflow-y: auto;
+                min-height: 0;
             }
 
             #game-container.mode-dressup #unlocked-list,
@@ -1189,13 +1189,11 @@
             
             if (navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(encoded);
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
-機種変更時などのためにメモ帳等に保存してください。");
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             } else {
                 textarea.select();
                 document.execCommand('copy');
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
-機種変更時などのためにメモ帳等に保存してください。");
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
             showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
@@ -2146,8 +2144,7 @@
         const hour = new Date(now).getHours();
 
         let loginImg = 'lancelot_1.png';
-        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。
-報告を待っているぞ。";
+        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
 
         if (hour >= 2 && hour < 5) {
             loginImg = 'lancelot_2.png';
