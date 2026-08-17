@@ -144,7 +144,6 @@
             min-height: 0; /* Important for inner scroll */
         }
 
-        /* 左側カラムの設定 */
         #left-column {
             display: flex;
             flex-direction: column;
@@ -154,7 +153,6 @@
             height: 100%;
         }
 
-        /* アバターエリア (左側) */
         #avatar-area {
             position: relative;
             width: 100%;
@@ -191,7 +189,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* ボタンデザイン */
         button {
             padding: 10px 20px;
             background-color: var(--primary);
@@ -247,7 +244,6 @@
             color: white;
         }
 
-        /*  小タブ */
         #sub-nav {
             display: none;
             width: 100%;
@@ -285,7 +281,6 @@
             box-shadow: none !important;
         }
 
-        /*  カテゴリタブ  */
         .cat-tabs-wrapper {
             display: flex;
             width: 100%;
@@ -315,7 +310,6 @@
             color: var(--accent);
         }
 
-        /*  サブカテゴリ  */
         .sub-cat-tabs-wrapper {
             display: none;
             width: 100%;
@@ -363,7 +357,6 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        /*  各セクションの表示制御  */
         #section-top, #section-room, #section-shop, #section-data {
             display: flex;
             flex-direction: column;
@@ -396,7 +389,6 @@
         #ui-area.show-data #section-room,
         #ui-area.show-data #section-shop { display: none !important; }
 
-        /* 着せ替えモード時のヘッダ表示制御 */
         #game-container.mode-dressup #dressup-header {
             display: flex !important;
         }
@@ -404,7 +396,6 @@
             display: none;
         }
 
-        /* アバター保存ボタンの表示制御（トップ画面のみ表示） */
         #avatar-save-btn-container {
             display: block;
             flex-shrink: 0;
@@ -418,7 +409,6 @@
             display: none !important;
         }
         
-        /* PC版トップ画面のみ、左右の下端を揃える */
         @media (min-width: 769px) {
             #game-container.mode-top #avatar-save-btn-container {
                 margin-top: auto;
@@ -493,7 +483,6 @@
             flex: 1;
         }
         
-        /* クールダウン表示の高さ固定化 */
         #cooldown-text { 
             color: #e74c3c; 
             font-size: 14px; 
@@ -528,7 +517,6 @@
         h3 { margin: 0 0 10px 0; color: var(--primary); font-size: 16px; }
         h4 { margin: 0 0 10px 0; color: var(--secondary); font-size: 14px; }
         
-        /* カード形式アイテム一覧用のCSS */
         .item-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -598,7 +586,6 @@
             pointer-events: none;
         }
         
-        /* アイテムボタン */
         .item-btn, .equip-btn {
             margin: 4px;
             font-size: 13px;
@@ -641,7 +628,6 @@
         box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
     }
 
-/* PC版：ショッププレビューの高さを抑えて購入ボタンを表示 */
 @media (min-width: 769px) {
     #game-container.mode-dressup #shop-preview-image-box {
         width: 300px !important;
@@ -739,7 +725,6 @@
 </head>
 <body>
 
-<!-- スタート画面とモーダルを兄弟要素に変更 -->
 <div id="start-screen">
     <div id="start-box">
         <img src="logo.png" alt="タイトルロゴ" id="logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiIGZpbGw9IiNjY2MiLz48dGV4dCB4PSIxMDUiIHk9IjM1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+bG9nby5wbmc8L3RleHQ+PC9zdmc+'">
@@ -755,7 +740,6 @@
     </div>
 </div>
 
-<!-- はじめに読んでね モーダル -->
 <div id="info-modal">
     <div id="info-content"></div>
 </div>
@@ -773,7 +757,6 @@
     
         <div id="left-column">
             
-            <!-- 着せ替えモード時のみ表示されるヘッダ（コインとサブタブ） -->
             <div id="dressup-header" style="display: none; flex-direction: column; gap: 10px;">
                 <div class="status-card" style="padding: 10px; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
                     <span class="label" style="font-size: 12px; color: #64748b; font-weight: bold;">🪙 所持コイン</span>
@@ -785,18 +768,15 @@
                 </div>
             </div>
 
-            <!-- アバターエリア (トップ画面 および クローゼット画面で表示) -->
             <div id="avatar-area">
                 <img id="layer-bg" class="avatar-layer" style="z-index: 1; display:none;" src="" alt="背景">
                 <img id="layer-base" class="avatar-layer" style="z-index: 2;" src="avatar.png" alt="素体">
             </div>
             
-            <!-- アバター画像の直下に配置した保存ボタン（トップ画面のみ表示） -->
             <div id="avatar-save-btn-container" style="width: 100%;">
                 <button onclick="saveAvatarImage()" style="width: 100%; background-color: var(--accent);">このランぬを保存する</button>
             </div>
             
-            <!-- ショップ画面用プレビューエリア -->
             <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; flex-direction: column; gap: 10px; flex-shrink: 0;">
                 <div id="shop-preview-image-box" style="width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; overflow: hidden; position: relative; background-color: #fff; flex-shrink: 0;">
                     <div id="preview-img-container" style="width: 100%; height: 100%; position: relative; background: rgba(255, 255, 255, 0.7); background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;">
@@ -812,10 +792,8 @@
             
         </div>
 
-        <!-- メインUIエリア -->
         <div id="ui-area" class="show-top">
 
-            <!-- トップ画面の要素 -->
             <div id="section-top">
                 <div id="lancelot-area">
                     <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onclick="pokeLancelot()" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
@@ -852,7 +830,6 @@
                 </div>
             </div>
 
-            <!-- クローゼット画面の要素 -->
             <div id="section-room">
                 <div class="shop-area" style="padding-top: 5px; margin-top: 0;">
                     
@@ -870,7 +847,6 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 10px;">
                         <p style="font-size: 12px; color: #666; margin: 0;">※着用中のアイテムを再度押すと外せます</p>
-                        <!-- おまかせ着せ替えボタン -->
                         <button onclick="randomEquip()" style="
                             font-size: 11px;
                             padding: 5px 8px;
@@ -887,7 +863,6 @@
                 </div>
             </div>
 
-            <!-- ショップ画面の要素 -->
             <div id="section-shop">
                 <div class="cat-tabs-wrapper" id="shop-category-tabs">
                     <div class="cat-tab-item active" id="cat-clothes-shop" onclick="changeShopCategory('clothes')">衣装</div>
@@ -931,7 +906,6 @@
     </div>
 </div>
 
-<!-- カスタムアラートモーダル -->
 <div id="custom-alert-modal" class="custom-modal">
     <div class="custom-modal-content">
         <p id="custom-alert-message"></p>
@@ -939,7 +913,6 @@
     </div>
 </div>
 
-<!-- カスタムコンファームモーダル -->
 <div id="custom-confirm-modal" class="custom-modal">
     <div class="custom-modal-content">
         <p id="custom-confirm-message"></p>
@@ -950,12 +923,10 @@
     </div>
 </div>
 
-<!-- 外部データの読み込み -->
 <script src="items.js"></script>
 <script src="messages.js"></script>
 <script src="info.js"></script>
 <script>
-    // --- モーダル制御 ---
     function showInfo() {
         document.getElementById('info-modal').style.display = 'flex';
     }
@@ -991,7 +962,6 @@
         document.getElementById('custom-confirm-modal').style.display = 'none';
     }
 
-    // --- メイン処理 ---
     const categoryNames = { setup: "セットアップ", tops: "トップス", bottoms: "ボトムス", acc: "アクセサリー", bg: "背景" };
     
     const defaultEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
@@ -1129,7 +1099,6 @@
             state.version = SAVE_VERSION;
         }
         
-        // equipOrderの復元処理
         let isEquipOrderRestored = false;
         if (savedEquipOrder) {
             try {
@@ -1378,7 +1347,7 @@
             updateLancelotImage();
             updateUI();
             saveGame();
-            showCustomAlert('ランスロットさんからのプレゼントです！');
+            showCustomAlert('ランスロットさんから\n1000コインののプレゼントです！');
             return;
         }
 
@@ -1943,7 +1912,7 @@
         if (
             !Number.isSafeInteger(inputVal) ||
             inputVal < 0 ||
-            inputVal >= 100000000000
+            inputVal >= 250000000000
         ) {
             currentLancelotImg = 'lancelot_2.png';
             setLancelotMessage("そんな貢献度はあり得ないと思うが…報告を間違えたのか？");
@@ -2042,7 +2011,7 @@
             msgToSet = "すさまじい戦果だ！団長の頑張りには頭が下がる思いだよ。英雄となった団長を見届けるため、引き続き応援しているぞ。";
             currentLancelotImg = 'lancelot_6.png';
         } else if (state.totalScore >= 20000000000) {
-            msgToSet = "200億到達おめでとう！もしかして古戦場の英雄を目指しているのか？素晴らしい団長に付いて行けて光栄だ。";
+            msgToSet = "200億到達おめでとう！もしかして古戦場の英雄を目指しているのか？素晴らしい団長について行けて光栄だ。";
             currentLancelotImg = 'lancelot_6.png';
         } else if (state.totalScore >= 15000000000) {
             msgToSet = "150億到達おめでとう！途方のない数字だな。俺も身が引き締まる思いだよ。団長は古戦場が好きなんだな。";
@@ -2190,7 +2159,6 @@
         resetAfkTimer();
     }
     
-    // 【2】「スタート画面に戻る」処理の専用関数化
     function backToStart() {
         document.getElementById('start-screen').style.display = 'flex';
         isGameStarted = false;
