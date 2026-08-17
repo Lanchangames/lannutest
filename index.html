@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ランぬのわくわく古戦場！</title>
     
-    <!-- iPhoneホーム画面用アイコンの設定 -->
     <link rel="apple-touch-icon" href="avatar_2.png">
     <meta property="og:title" content="ランぬのわくわく古戦場！">
     <meta property="og:description" content="古戦場貢献度を報告してランぬを着せ替えよう！">
@@ -32,7 +31,6 @@
             justify-content: center;
         }
         
-        /* スタート画面 */
         #start-screen {
             position: fixed;
             top: 0;
@@ -63,7 +61,6 @@
             object-fit: contain;
         }
 
-        /* はじめに読んでね モーダル */
         #info-modal {
             display: none;
             position: fixed;
@@ -96,7 +93,6 @@
         #info-content p { font-size: 14px; line-height: 1.6; margin-top: 10px; color: #555; }
         .close-btn { display: block; margin: 30px auto 0; }
 
-        /* カスタムモーダル */
         .custom-modal {
             display: none;
             position: fixed;
@@ -906,7 +902,6 @@
 
             </div>
 
-            <!-- データ画面の要素 -->
             <div id="section-data">
                 <div style="padding: 20px; background: #f8fafc; border-radius: 10px; border: 1px solid #cbd5e1;">
                     <h3 style="margin-top: 0; color: var(--primary);">データ引継ぎ /バックアップ</h3>
@@ -1206,13 +1201,11 @@
             
             if (navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(encoded);
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
-機種変更時などのためにメモ帳等に保存してください。");
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             } else {
                 textarea.select();
                 document.execCommand('copy');
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
-機種変更時などのためにメモ帳等に保存してください。");
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
             showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
