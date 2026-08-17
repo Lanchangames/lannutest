@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="ja"><head>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ランぬのわくわく古戦場！</title>
@@ -10,7 +12,6 @@
     <meta property="og:image" content="https://lanchangames.github.io/lannutest/avatar_2.png">
     <meta property="og:url" content="https://lanchangames.github.io/lannutest/">
     <meta name="twitter:card" content="summary_large_image">
-
 
     <style>
         :root {
@@ -53,7 +54,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             width: 90%;
             max-width: 500px;
-            box-sizing: border-box; /* ④ スマホはみ出し修正 */
+            box-sizing: border-box;
         }
         #logo-img {
             max-width: 100%;
@@ -82,7 +83,7 @@
             overflow-y: auto;
             text-align: left;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            box-sizing: border-box; /* ④ スマホはみ出し修正 */
+            box-sizing: border-box;
         }
         #info-content h2 {
             color: var(--primary);
@@ -113,7 +114,7 @@
             max-width: 400px;
             width: 80%;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            box-sizing: border-box; /* ④ スマホはみ出し修正 */
+            box-sizing: border-box;
         }
         .custom-modal-content p {
             font-size: 15px;
@@ -135,15 +136,16 @@
             border-radius: 12px;
             border: 2px solid #cbd5e1;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            max-height: 90vh; 
-            overflow: hidden; 
+            height: 90vh;
+            max-height: 800px;
+            box-sizing: border-box;
         }
         
         #content-wrapper {
             display: flex;
             gap: 20px;
             flex: 1;
-            overflow: hidden;
+            min-height: 0;
         }
 
         /* 左側カラムの設定 */
@@ -153,17 +155,19 @@
             gap: 15px;
             flex-shrink: 0;
             width: 360px;
+            height: 100%;
         }
 
         /* アバターエリア (左側) */
         #avatar-area {
             position: relative;
             width: 100%;
-            height: 480px;
+            flex: 1;
+            min-height: 300px;
             border: 2px solid #94a3b8;
             border-radius: 10px;
             background-color: #fff;
-            flex-shrink: 0;
+            overflow: hidden;
         }
         .avatar-layer {
             position: absolute;
@@ -180,17 +184,17 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            padding-right: 10px;
+            padding-right: 5px;
             padding-bottom: 0;
-            overflow: hidden; 
+            min-height: 0; 
         }
 
         #unlocked-list, #locked-list {
             flex: 1;
             overflow-y: auto; 
-            max-height: 400px; 
             padding-right: 5px;
-            min-height: 0;
+            min-height: 0; 
+            -webkit-overflow-scrolling: touch;
         }
 
         /* ボタンデザイン */
@@ -225,8 +229,9 @@
             display: flex;
             width: 100%;
             border-bottom: 3px solid var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             gap: 5px;
+            flex-shrink: 0;
         }
         .tab-item {
             flex: 1;
@@ -255,6 +260,7 @@
             margin-bottom: 15px;
             border-bottom: 2px solid var(--accent);
             gap: 5px;
+            flex-shrink: 0;
         }
         .sub-tab-btn {
             flex: 1;
@@ -291,6 +297,7 @@
             width: 100%;
             gap: 5px;
             margin-bottom: 15px;
+            flex-shrink: 0;
         }
         .cat-tab-item {
             flex: 1;
@@ -327,6 +334,7 @@
             border-radius: 8px;
             box-sizing: border-box;
             position: relative;
+            flex-shrink: 0;
         }
         
         .sub-cat-tabs-wrapper::before {
@@ -365,12 +373,11 @@
         #section-top, #section-room, #section-shop, #section-data {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px; 
             flex: 1;
             min-height: 0;
         }
 
-        /* ⑤ PC・縦狭画面の見切れ修正 */
         #section-top {
             overflow-y: auto;
         }
@@ -406,6 +413,7 @@
         /* アバター保存ボタンの表示制御（トップ画面のみ表示） */
         #avatar-save-btn-container {
             display: block;
+            flex-shrink: 0;
         }
         #game-container.mode-dressup #avatar-save-btn-container {
             display: none !important;
@@ -423,6 +431,7 @@
             border: 1px solid #cbd5e1;
             border-left: 5px solid var(--accent);
             flex-shrink: 0;
+            position: relative; 
         }
         #lancelot-img {
             width: 120px;
@@ -471,7 +480,7 @@
         .input-group {
             display: flex;
             gap: 10px;
-            align-items: center;
+            align-items: stretch; 
             flex-shrink: 0;
         }
         input[type="number"] {
@@ -481,10 +490,23 @@
             border-radius: 8px;
             flex: 1;
         }
-        #cooldown-text { color: #e74c3c; font-size: 14px; font-weight: bold; }
+        
+        /* クールダウン表示の高さ固定化 */
+        #cooldown-text { 
+            color: #e74c3c; 
+            font-size: 14px; 
+            font-weight: bold; 
+            min-height: 20px; 
+            display: flex; 
+            align-items: center; 
+        }
         
         .shop-area {
             border-top: none; 
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
         }
         #section-room .shop-area, 
         #section-shop .shop-area:last-child {
@@ -614,6 +636,7 @@
         
         @media (max-width: 768px) {
             #game-container {
+                height: auto;
                 max-height: none;
                 width: 100%;
                 box-sizing: border-box;
@@ -631,6 +654,7 @@
             
             #left-column {
                 width: 100%;
+                height: auto;
             }
 
             #avatar-area {
@@ -660,10 +684,15 @@
                 border: 2px solid #cbd5e1;
             }
 
+            #unlocked-list,
+            #locked-list {
+                max-height: none;
+                overflow-y: visible;
+                min-height: auto;
+            }
+
             #game-container.mode-dressup #unlocked-list,
             #game-container.mode-dressup #locked-list {
-                max-height: 35vh; 
-                overflow-y: auto;
                 border-top: 1px dashed #cbd5e1;
                 padding-top: 10px;
                 margin-top: 5px;
@@ -692,7 +721,7 @@
 </head>
 <body>
 
-<!-- ① スタート画面とモーダルを兄弟要素に変更 -->
+<!-- スタート画面とモーダルを兄弟要素に変更 -->
 <div id="start-screen">
     <div id="start-box">
         <img src="logo.png" alt="タイトルロゴ" id="logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iNjAiIGZpbGw9IiNjY2MiLz48dGV4dCB4PSIxMDUiIHk9IjM1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+bG9nby5wbmc8L3RleHQ+PC9zdmc+'">
@@ -708,7 +737,7 @@
     </div>
 </div>
 
-<!-- ① はじめに読んでね モーダル -->
+<!-- はじめに読んでね モーダル -->
 <div id="info-modal">
     <div id="info-content"></div>
 </div>
@@ -770,10 +799,6 @@
 
             <!-- トップ画面の要素 -->
             <div id="section-top">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: -5px;">
-                    <!-- ③ トップ画面右上「？ 遊び方」 -->
-                    <button onclick="showInfo()" style="font-size: 12px; color: #64748b; background: none; border: none; padding: 5px 10px; box-shadow: none; font-weight: normal; cursor: pointer; margin: 0;">？ 遊び方</button>
-                </div>
                 <div id="lancelot-area">
                     <img id="lancelot-img" src="lancelot_1.png" alt="ランスロット" onclick="pokeLancelot()" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNDAiIHk9IjQ1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+Tk8gSU1BR0U8L3RleHQ+PC9zdmc+'">
                     <div id="message-box"></div>
@@ -794,7 +819,7 @@
                     </div>
                 </div>
 
-                <div class="input-group" style="align-items: stretch;">
+                <div class="input-group">
                     <input type="number" id="input-score" placeholder="現在の累計貢献度を入力" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();">
                     <div style="display: grid; grid-auto-rows: 1fr; gap: 10px; flex-shrink: 0;">
                         <button id="btn-report" onclick="reportScore()" style="width: 100%; height: 100%;">報告する</button>
@@ -803,8 +828,10 @@
                 </div>
                 <div id="cooldown-text"></div>
                 
-                <button onclick="shareOnX()" style="background-color: #0f1419; margin-top: 5px;">Xでシェア</button>
-                <!-- ⑩ スタート画面に戻るボタン削除 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 10px;">
+                    <button onclick="shareOnX()" style="background-color: #0f1419; flex: 1;">Xでシェア</button>
+                    <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: #64748b; flex: 1;">↩️スタート画面に戻る</button>
+                </div>
             </div>
 
             <!-- クローゼット画面の要素 -->
@@ -825,8 +852,18 @@
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -5px; margin-bottom: 10px;">
                         <p style="font-size: 12px; color: #666; margin: 0;">※着用中のアイテムを再度押すと外せます</p>
-                        <!-- ① おまかせ着せ替えボタン -->
-                        <button onclick="randomEquip()" style="font-size: 12px; padding: 6px 10px; background-color: #64748b; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 0;"><span style="font-size:14px;">🎲</span> おまかせ着せ替え</button>
+                        <!-- おまかせ着せ替えボタン -->
+                        <button onclick="randomEquip()" style="
+                            font-size: 11px;
+                            padding: 5px 8px;
+                            background-color: #64748b;
+                            border-radius: 6px;
+                            box-shadow: none;
+                            margin: 0;
+                            white-space: nowrap;
+                        ">
+                            🎲 おまかせ
+                        </button>
                     </div>
                     <div id="unlocked-list"></div>
                 </div>
@@ -861,7 +898,6 @@
                         <strong>【データの取り扱いについて】</strong><br>
                         当ゲームのセーブデータは、お使いのブラウザのローカルストレージ（端末内）にのみ保存され、外部サーバ等への送信は一切行われません。<br><br>
                         ブラウザの履歴やキャッシュを削除した場合、またはシークレットモードを利用した場合はデータが消去されてしまいます。<br><br>
-                        <!-- ⑨ データ画面の誤字修正 -->
                         データ出力を行うと、セーブデータが消えた際や端末引き継ぎの際に同コードをペーストすることで、データの復元が可能です。定期的なデータ出力によるバックアップをおすすめします。<br><br>
                         また、事故防止のためiOS版をお使いの場合は『ホーム画面に追加』機能の利用を推奨します。
                     </div>
@@ -962,7 +998,6 @@
         hasReceivedSecretPresent: false
     };
 
-    // ⑧ defaultState.unlocked参照共有防止
     let state = { ...defaultState, unlocked: {} };
 
     let currentMode = 'top'; 
@@ -992,13 +1027,11 @@
 
     const SAVE_KEY_STATE = 'kosenjo_save_state';
     const SAVE_KEY_EQUIP = 'kosenjo_save_equip';
-    // ② equipOrderの保存キー
     const SAVE_KEY_EQUIP_ORDER = 'kosenjo_save_equip_order';
 
     function saveGame() {
         localStorage.setItem(SAVE_KEY_STATE, JSON.stringify(state));
         localStorage.setItem(SAVE_KEY_EQUIP, JSON.stringify(currentEquip));
-        // ② equipOrderの保存
         localStorage.setItem(SAVE_KEY_EQUIP_ORDER, JSON.stringify(equipOrder));
     }
 
@@ -1079,7 +1112,7 @@
             state.version = SAVE_VERSION;
         }
         
-        // ② equipOrderの復元処理
+        // equipOrderの復元処理
         let isEquipOrderRestored = false;
         if (savedEquipOrder) {
             try {
@@ -1093,7 +1126,6 @@
                     });
                     
                     if (isValid) {
-                        // 復元したオーダーから、現在の currentEquip に存在しないアイテムを除外
                         let validOrder = parsedOrder.filter(o => {
                             if (o.type === 'acc') {
                                 return currentEquip.acc.includes(o.file);
@@ -1101,8 +1133,26 @@
                                 return currentEquip[o.type] === o.file;
                             }
                         });
-                        equipOrder = validOrder;
-                        isEquipOrderRestored = true;
+
+                        let expectedItems = [];
+                        if (currentEquip.setup) expectedItems.push({type: 'setup', file: currentEquip.setup});
+                        if (currentEquip.tops) expectedItems.push({type: 'tops', file: currentEquip.tops});
+                        if (currentEquip.bottoms) expectedItems.push({type: 'bottoms', file: currentEquip.bottoms});
+                        if (currentEquip.acc && currentEquip.acc.length > 0) {
+                            currentEquip.acc.forEach(a => expectedItems.push({type: 'acc', file: a}));
+                        }
+
+                        if (validOrder.length === expectedItems.length) {
+                            let allPresent = true;
+                            expectedItems.forEach(exp => {
+                                let found = validOrder.some(vo => vo.type === exp.type && vo.file === exp.file);
+                                if (!found) allPresent = false;
+                            });
+                            if (allPresent) {
+                                equipOrder = validOrder;
+                                isEquipOrderRestored = true;
+                            }
+                        }
                     }
                 }
             } catch (e) {
@@ -1146,7 +1196,7 @@
                 showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
-            showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
+            showCustomAlert("コードの出力に失敗しました。表示されたコードを手持でコピーしてください。");
         }
     }
 
@@ -1161,7 +1211,6 @@
             const decoded = JSON.parse(decodeURIComponent(atob(code)));
             if (isValidState(decoded.state) && decoded.equip && typeof decoded.equip === 'object') {
                 showCustomConfirm("現在のデータは上書きされます。本当によろしいですか？", () => {
-                    // ③ 完全な上書きへの修正
                     state = { ...defaultState, ...decoded.state };
                     if (decoded.state.unlocked) {
                         state.unlocked = { ...decoded.state.unlocked };
@@ -1189,13 +1238,34 @@
                              }
                          });
                          if (isValid) {
-                              equipOrder = decoded.equipOrder.filter(o => {
+                              let validOrder = decoded.equipOrder.filter(o => {
                                   if (o.type === 'acc') {
                                       return currentEquip.acc.includes(o.file);
                                   } else {
                                       return currentEquip[o.type] === o.file;
                                   }
                               });
+                              let expectedItems = [];
+                              if (currentEquip.setup) expectedItems.push({type: 'setup', file: currentEquip.setup});
+                              if (currentEquip.tops) expectedItems.push({type: 'tops', file: currentEquip.tops});
+                              if (currentEquip.bottoms) expectedItems.push({type: 'bottoms', file: currentEquip.bottoms});
+                              if (currentEquip.acc && currentEquip.acc.length > 0) {
+                                  currentEquip.acc.forEach(a => expectedItems.push({type: 'acc', file: a}));
+                              }
+                              if (validOrder.length === expectedItems.length) {
+                                  let allPresent = true;
+                                  expectedItems.forEach(exp => {
+                                      let found = validOrder.some(vo => vo.type === exp.type && vo.file === exp.file);
+                                      if (!found) allPresent = false;
+                                  });
+                                  if (allPresent) {
+                                      equipOrder = validOrder;
+                                  } else {
+                                      initEquipOrder();
+                                  }
+                              } else {
+                                  initEquipOrder();
+                              }
                          } else {
                              initEquipOrder();
                          }
@@ -1498,35 +1568,37 @@
         defBtn.appendChild(defText);
         grid.appendChild(defBtn);
 
-        ITEM_DB[category].forEach(item => {
-            if (state.unlocked[item.id]) {
-                const isEquipped = category === 'acc' 
-                    ? currentEquip.acc.includes(item.file)
-                    : currentEquip[category] === item.file;
-                
-                const card = document.createElement('div');
-                card.className = isEquipped ? 'item-card active-equip' : 'item-card';
-                card.onclick = () => toggleEquip(item.type, item.file);
-                
-                const img = document.createElement('img');
-                img.src = item.file;
-                img.onerror = function() {
-                    const fallback = document.createElement('div');
-                    fallback.className = 'no-image';
-                    fallback.innerText = 'NoImg';
-                    if (this.parentNode) {
-                        this.parentNode.replaceChild(fallback, this);
-                    }
-                };
-                
-                const text = document.createElement('span');
-                text.innerText = item.name;
+        if (typeof ITEM_DB !== 'undefined' && ITEM_DB[category]) {
+            ITEM_DB[category].forEach(item => {
+                if (state.unlocked[item.id]) {
+                    const isEquipped = category === 'acc' 
+                        ? currentEquip.acc.includes(item.file)
+                        : currentEquip[category] === item.file;
+                    
+                    const card = document.createElement('div');
+                    card.className = isEquipped ? 'item-card active-equip' : 'item-card';
+                    card.onclick = () => toggleEquip(item.type, item.file);
+                    
+                    const img = document.createElement('img');
+                    img.src = item.file;
+                    img.onerror = function() {
+                        const fallback = document.createElement('div');
+                        fallback.className = 'no-image';
+                        fallback.innerText = 'NoImg';
+                        if (this.parentNode) {
+                            this.parentNode.replaceChild(fallback, this);
+                        }
+                    };
+                    
+                    const text = document.createElement('span');
+                    text.innerText = item.name;
 
-                card.appendChild(img);
-                card.appendChild(text);
-                grid.appendChild(card);
-            }
-        });
+                    card.appendChild(img);
+                    card.appendChild(text);
+                    grid.appendChild(card);
+                }
+            });
+        }
         
         catUnlocked.appendChild(grid);
         unlockedContainer.appendChild(catUnlocked);
@@ -1547,33 +1619,35 @@
         grid.className = 'item-grid';
         let hasLocked = false;
 
-        ITEM_DB[category].forEach(item => {
-            if (!state.unlocked[item.id]) {
-                const card = document.createElement('div');
-                card.className = 'item-card';
-                card.onclick = () => showPreview(item);
+        if (typeof ITEM_DB !== 'undefined' && ITEM_DB[category]) {
+            ITEM_DB[category].forEach(item => {
+                if (!state.unlocked[item.id]) {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.onclick = () => showPreview(item);
 
-                const img = document.createElement('img');
-                img.src = item.file;
-                img.onerror = function() {
-                    const fallback = document.createElement('div');
-                    fallback.className = 'no-image';
-                    fallback.innerText = 'NoImg';
-                    if (this.parentNode) {
-                        this.parentNode.replaceChild(fallback, this);
-                    }
-                };
+                    const img = document.createElement('img');
+                    img.src = item.file;
+                    img.onerror = function() {
+                        const fallback = document.createElement('div');
+                        fallback.className = 'no-image';
+                        fallback.innerText = 'NoImg';
+                        if (this.parentNode) {
+                            this.parentNode.replaceChild(fallback, this);
+                        }
+                    };
 
-                const text = document.createElement('span');
-                text.innerText = item.name;
+                    const text = document.createElement('span');
+                    text.innerText = item.name;
 
-                card.appendChild(img);
-                card.appendChild(text);
+                    card.appendChild(img);
+                    card.appendChild(text);
 
-                grid.appendChild(card);
-                hasLocked = true;
-            }
-        });
+                    grid.appendChild(card);
+                    hasLocked = true;
+                }
+            });
+        }
         
         if (hasLocked) {
             catLocked.appendChild(grid);
@@ -1661,18 +1735,16 @@
         }
         
         applyAvatarImageAll();
-        // ⑥ 不要な全再描画を軽減（クローゼット画面のみ更新）
         renderRoomItems();
         saveGame(); 
     }
 
-    // ① おまかせ着せ替え機能の実装
     function randomEquip() {
         let newEquip = { setup: '', tops: '', bottoms: '', acc: [], bg: '' };
         let newOrder = [];
 
         const getUnlockedFiles = (cat) => {
-            if(!ITEM_DB || !ITEM_DB[cat]) return [];
+            if(typeof ITEM_DB === 'undefined' || !ITEM_DB[cat]) return [];
             return ITEM_DB[cat].filter(item => state.unlocked[item.id]).map(item => item.file);
         };
 
@@ -1714,12 +1786,41 @@
         }
 
         const accs = getUnlockedFiles('acc');
+        let selectedAccCount = 0;
+        
         if (accs.length > 0) {
-            accs.forEach(accFile => {
-                if (Math.random() < 0.5) {
-                    newEquip.acc.push(accFile);
-                    newOrder.push({type: 'acc', file: accFile});
-                }
+            let maxAccCount = Math.min(8, accs.length);
+            let candidates = [];
+            
+            if (maxAccCount < 2) {
+                 selectedAccCount = accs.length;
+            } else {
+                 const probs = { 2: 30, 3: 25, 4: 18, 5: 12, 6: 8, 7: 5, 8: 2 };
+                 let totalProb = 0;
+                 for (let i = 2; i <= maxAccCount; i++) {
+                     candidates.push({ count: i, prob: probs[i] });
+                     totalProb += probs[i];
+                 }
+                 let r = Math.random() * totalProb;
+                 for (let i = 0; i < candidates.length; i++) {
+                     if (r < candidates[i].prob) {
+                         selectedAccCount = candidates[i].count;
+                         break;
+                     }
+                     r -= candidates[i].prob;
+                 }
+            }
+            
+            let shuffledAccs = [...accs];
+            for (let i = shuffledAccs.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledAccs[i], shuffledAccs[j]] = [shuffledAccs[j], shuffledAccs[i]];
+            }
+            
+            let chosenAccs = shuffledAccs.slice(0, selectedAccCount);
+            chosenAccs.forEach(accFile => {
+                newEquip.acc.push(accFile);
+                newOrder.push({type: 'acc', file: accFile});
             });
         }
 
@@ -1804,7 +1905,7 @@
         buyBtnPreview.disabled = true;
         
         updateUI();
-        renderItems(); // ショップとクローゼット両方の更新
+        renderItems();
         saveGame(); 
     }
 
@@ -1886,7 +1987,6 @@
         state.coins += earnedCoins;
         state.affection += earnedAffection;
 
-        // ② コイン獲得演出の追加
         if (earnedCoins === 500) {
             const btn = document.getElementById('btn-report');
             if (btn) {
@@ -1942,7 +2042,6 @@
             }
         }
 
-        // ⑤ 誤字修正
         const hour = new Date().getHours();
         if (hour >= 0 && hour < 7) {
             currentLancelotImg = 'lancelot_4.png';
@@ -2061,7 +2160,7 @@
             loginMsg = '団長、ショップへ行かないのか？素敵なものがたくさんあるようだぞ…？';
         }
 
-        // ⑦ 未使用コード lastReportAction の削除（ここでは使用しないため削除済）
+        lastLoginAction = { img: loginImg, msg: loginMsg };
 
         state.lastLoginTime = now;
         saveGame();
@@ -2167,7 +2266,6 @@
         }
     }
 
-    // ① 画像のプリロード機能
     function preloadImages() {
         const imagesToPreload = [];
         for (let i = 1; i <= 10; i++) {
