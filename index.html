@@ -1192,14 +1192,12 @@
             textarea.value = encoded;
             
             if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(encoded);
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
-機種変更時などのためにメモ帳等に保存してください。");
+            await navigator.clipboard.writeText(encoded);
+            showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             } else {
-                textarea.select();
-                document.execCommand('copy');
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
-機種変更時などのためにメモ帳等に保存してください。");
+            textarea.select();
+            document.execCommand('copy');
+            showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
             showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
@@ -2040,11 +2038,11 @@
             msgToSet = "100億到達おめでとう！俺が初めて騎空艇に乗った時だと考えられない数字だな。適度に休憩を取るんだぞ。";
             currentLancelotImg = 'lancelot_6.png';
         } else {
-            const maxScore = 8000000000;
-            const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
-            if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
-                currentScoreMsg = msgsProgress[rank].msg;
-                currentScoreImg = msgsProgress[rank].img;
+        const maxScore = 8000000000;
+        const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
+        if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
+        msgToSet = msgsProgress[rank].msg;
+        currentLancelotImg = msgsProgress[rank].img;
             }
         }
 
@@ -2150,8 +2148,7 @@
         const hour = new Date(now).getHours();
 
         let loginImg = 'lancelot_1.png';
-        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。
-報告を待っているぞ。";
+        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
 
         if (hour >= 2 && hour < 5) {
             loginImg = 'lancelot_2.png';
