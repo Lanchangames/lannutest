@@ -631,6 +631,23 @@
             transform: none !important;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
         }
+        .equip-btn.active-equip:active:not(:disabled) {
+        background-color: var(--primary);
+        transform: none !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    }
+
+/* PC版：ショッププレビューの高さを抑えて購入ボタンを表示 */
+@media (min-width: 769px) {
+    #game-container.mode-dressup #shop-preview-image-box {
+        width: 300px !important;
+        aspect-ratio: 3 / 4;
+        height: auto !important;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
         
         @media (max-width: 768px) {
             #game-container {
