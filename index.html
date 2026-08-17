@@ -1853,14 +1853,19 @@
         if(previewTarget.type === 'tops' || previewTarget.type === 'bottoms') price = 250;
         
         if (state.coins < price) return;
-        
+                
         state.coins -= price;
         state.unlocked[previewTarget.id] = true;
         
-        setDefaultLancelotImg();
+        const specialWeaponIds = ['acc23', 'acc1000', 'acc1001'];
         
-        setLancelotMessage(`新しいアイテム「${previewTarget.name}」を手に入れたな。クローゼットに入れておいたぞ。`);
-        
+        if (specialWeaponIds.includes(previewTarget.id)) {
+            currentLancelotImg = 'lancelot_10.png';
+            setLancelotMessage(`これは……！団長、${previewTarget.name}を手に入れたのか！羨ましいな。俺は武器を集めるのが好きなんだ！`);
+        } else {
+            setDefaultLancelotImg();
+            setLancelotMessage(`新しいアイテム「${previewTarget.name}」を手に入れたな。クローゼットに入れておいたぞ。`);
+        }         
         const btn = document.getElementById('btn-buy-preview');
         const rect = btn.getBoundingClientRect();
         const effectEl = document.createElement('div');
