@@ -640,10 +640,7 @@
         height: 400px !important;
         margin: 0 auto;
     }
-}
-
-@media (max-width: 768px) {
-        
+}       
         @media (max-width: 768px) {
             #game-container {
                 height: auto;
@@ -2049,8 +2046,8 @@
             const maxScore = 8000000000;
             const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
             if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
-                currentScoreMsg = msgsProgress[rank].msg;
-                currentScoreImg = msgsProgress[rank].img;
+                msgToSet = msgsProgress[rank].msg;
+                currentLancelotImg = msgsProgress[rank].img;
             }
         }
 
@@ -2156,8 +2153,7 @@
         const hour = new Date(now).getHours();
 
         let loginImg = 'lancelot_1.png';
-        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。
-報告を待っているぞ。";
+        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
 
         if (hour >= 2 && hour < 5) {
             loginImg = 'lancelot_2.png';
