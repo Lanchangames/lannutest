@@ -830,7 +830,7 @@
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 10px;">
                     <button onclick="shareOnX()" style="background-color: #0f1419; flex: 1;">Xでシェア</button>
-                    <button onclick="document.getElementById('start-screen').style.display = 'flex';" style="background-color: #64748b; flex: 1;">↩️スタート画面に戻る</button>
+                    <button onclick="backToStart()" style="background-color: #64748b; flex: 1;">↩️スタート画面に戻る</button>
                 </div>
             </div>
 
@@ -1189,14 +1189,16 @@
             
             if (navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(encoded);
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
+機種変更時などのためにメモ帳等に保存してください。");
             } else {
                 textarea.select();
                 document.execCommand('copy');
-                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
+機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
-            showCustomAlert("コードの出力に失敗しました。表示されたコードを手持でコピーしてください。");
+            showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
         }
     }
 
@@ -2037,8 +2039,8 @@
             const maxScore = 8000000000;
             const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
             if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
-                msgToSet = msgsProgress[rank].msg;
-                currentLancelotImg = msgsProgress[rank].img;
+                currentScoreMsg = msgsProgress[rank].msg;
+                currentScoreImg = msgsProgress[rank].img;
             }
         }
 
@@ -2144,7 +2146,8 @@
         const hour = new Date(now).getHours();
 
         let loginImg = 'lancelot_1.png';
-        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
+        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。
+報告を待っているぞ。";
 
         if (hour >= 2 && hour < 5) {
             loginImg = 'lancelot_2.png';
@@ -2171,6 +2174,21 @@
         
         isGameStarted = true;
         resetAfkTimer();
+    }
+    
+    // 【2】「スタート画面に戻る」処理の専用関数化
+    function backToStart() {
+        document.getElementById('start-screen').style.display = 'flex';
+        isGameStarted = false;
+        if (afkTimer) {
+            clearTimeout(afkTimer);
+            afkTimer = null;
+        }
+        if (pokeTimer) {
+            clearTimeout(pokeTimer);
+            pokeTimer = null;
+        }
+        pokeCount = 0;
     }
 
     function shareOnX() {
