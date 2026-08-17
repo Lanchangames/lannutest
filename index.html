@@ -136,15 +136,16 @@
             border-radius: 12px;
             border: 2px solid #cbd5e1;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            max-height: 90vh;
-            overflow: hidden;
-}
+            height: 90vh; /* Changed from max-height to height for fixed PC layout */
+            max-height: 800px;
+            overflow: hidden; /* Prevent container from expanding */
+        }
         
         #content-wrapper {
             display: flex;
             gap: 20px;
             flex: 1;
-            overflow: hidden;
+            min-height: 0; /* Important for inner scroll */
         }
 
         /* 左側カラムの設定 */
@@ -183,8 +184,7 @@
             flex-direction: column;
             gap: 15px;
             padding-right: 10px;
-            overflow: hidden;
-            min-height: 0; 
+            min-height: 0;  /* Important for inner scroll */
         }
 
         #unlocked-list, #locked-list {
@@ -641,8 +641,7 @@
 @media (min-width: 769px) {
     #game-container.mode-dressup #shop-preview-image-box {
         width: 300px !important;
-        aspect-ratio: 3 / 4;
-        height: auto !important;
+        height: 400px !important;
         margin: 0 auto;
     }
 }
@@ -798,7 +797,7 @@
             
             <!-- ショップ画面用プレビューエリア -->
             <div id="shop-preview-area" class="shop-area" style="display: none; width: 100%; flex-direction: column; gap: 10px; flex-shrink: 0;">
-               <div id="shop-preview-image-box" style="width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; overflow: hidden; position: relative; background-color: #fff; flex-shrink: 0;">
+                <div id="shop-preview-image-box" style="width: 100%; height: 480px; border: 2px solid #94a3b8; border-radius: 10px; overflow: hidden; position: relative; background-color: #fff; flex-shrink: 0;">
                     <div id="preview-img-container" style="width: 100%; height: 100%; position: relative; background: rgba(255, 255, 255, 0.7); background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;">
                         <img id="preview-layer-bg" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; z-index: 1;">
                         <img id="preview-layer-base" src="avatar.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; display: block; z-index: 2;">
@@ -1027,7 +1026,7 @@
     let currentShopCategory = 'clothes';
     let currentShopTab = 'setup';
 
-    const COOLDOWN_MS = 20 * 60 * 1000;
+    const COOLDOWN_MS = 15 * 60 * 1000;
     let previewTarget = null;
     let timerInterval = null;
     let typeWriterTimeout = null;
@@ -1206,12 +1205,14 @@
             textarea.value = encoded;
             
             if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(encoded);
-            showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
+                await navigator.clipboard.writeText(encoded);
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
+機種変更時などのためにメモ帳等に保存してください。");
             } else {
-            textarea.select();
-            document.execCommand('copy');
-            showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！\n機種変更時などのためにメモ帳等に保存してください。");
+                textarea.select();
+                document.execCommand('copy');
+                showCustomAlert("バックアップコードを出力し、クリップボードにコピーしました！
+機種変更時などのためにメモ帳等に保存してください。");
             }
         } catch (e) {
             showCustomAlert("コードの出力に失敗しました。表示されたコードを手動でコピーしてください。");
@@ -1373,7 +1374,7 @@
 
         if (pokeCount >= 10 && !state.hasReceivedSecretPresent) {
             state.hasReceivedSecretPresent = true;
-            state.coins += 10000000;
+            state.coins += 1000;
             currentLancelotImg = 'lancelot_4.png';
             setLancelotMessage('仕方ないな、団長は…。俺からのプレゼントだ。みんなには内緒だぞ。');
             updateLancelotImage();
@@ -2052,11 +2053,11 @@
             msgToSet = "100億到達おめでとう！俺が初めて騎空艇に乗った時だと考えられない数字だな。適度に休憩を取るんだぞ。";
             currentLancelotImg = 'lancelot_6.png';
         } else {
-        const maxScore = 8000000000;
-        const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
-        if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
-        msgToSet = msgsProgress[rank].msg;
-        currentLancelotImg = msgsProgress[rank].img;
+            const maxScore = 8000000000;
+            const rank = Math.min(40, Math.floor((state.totalScore / maxScore) * 40));
+            if (typeof msgsProgress !== 'undefined' && msgsProgress[rank]) {
+                currentScoreMsg = msgsProgress[rank].msg;
+                currentScoreImg = msgsProgress[rank].img;
             }
         }
 
@@ -2162,7 +2163,8 @@
         const hour = new Date(now).getHours();
 
         let loginImg = 'lancelot_1.png';
-        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。\n報告を待っているぞ。";
+        let loginMsg = "団長、お疲れさま。古戦場へ行くんだな。
+報告を待っているぞ。";
 
         if (hour >= 2 && hour < 5) {
             loginImg = 'lancelot_2.png';
