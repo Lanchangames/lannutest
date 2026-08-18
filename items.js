@@ -238,7 +238,7 @@ const ITEM_DB = {
         { id: 'acc136', name: '自撮り棒', file: 'acc_136.png', type: 'acc' },
         { id: 'acc137', name: 'ココナッツジュース', file: 'acc_137.png', type: 'acc' },
         { id: 'acc138', name: '白いドラゴンのつの', file: 'acc_138.png', type: 'acc' },
-        { id: 'acc139', name: 'あ', file: 'acc_139.png', type: 'acc' },
+        { id: 'acc139', name: '天使と悪魔のおれ', file: 'acc_139.png', type: 'acc' },
         { id: 'acc140', name: 'あ', file: 'acc_140.png', type: 'acc' },   
         { id: 'acc141', name: 'あ', file: 'acc_141.png', type: 'acc' },
     ],
@@ -275,7 +275,8 @@ const ITEM_DB = {
         { id: 'bg30', name: 'ステージ（暗）', file: 'bg_30.png', type: 'bg' },
         { id: 'bg31', name: '竹林', file: 'bg_31.png', type: 'bg' },
         { id: 'bg32', name: '檻', file: 'bg_32.png', type: 'bg' },
-        { id: 'bg33', name: '騎空艇甲板', file: 'bg_33.png', type: 'bg' }
+        { id: 'bg33', name: '騎空艇甲板', file: 'bg_33.png', type: 'bg' },
+        { id: 'bg34', name: 'アウギュステの海', file: 'bg_34.png', type: 'bg' }
         
         
         
