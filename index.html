@@ -1337,13 +1337,13 @@
 
         if (pokeCount >= 10 && !state.hasReceivedSecretPresent) {
             state.hasReceivedSecretPresent = true;
-            state.coins += 1000;
+            state.coins += 2500;
             currentLancelotImg = 'lancelot_4.png';
             setLancelotMessage('仕方ないな、団長は…。俺からのプレゼントだ。みんなには内緒だぞ。');
             updateLancelotImage();
             updateUI();
             saveGame();
-            showCustomAlert('ランスロットさんから\n1000コインののプレゼントです！');
+            showCustomAlert('ランスロットさんから\n2500コインののプレゼントです！');
             return;
         }
 
@@ -1845,7 +1845,7 @@
         
         let price = 500;
         if(previewTarget.type === 'bg') price = 200;
-        if(previewTarget.type === 'acc') price = 300;
+        if(previewTarget.type === 'acc') price = 150;
         if(previewTarget.type === 'tops' || previewTarget.type === 'bottoms') price = 250;
         
         if (state.coins < price) return;
@@ -1968,18 +1968,18 @@
         }
         state.reportCount++;
         
-        const earnedCoins = 500;
+        const earnedCoins = 800;
         const earnedAffection = 10;
 
         state.coins += earnedCoins;
         state.affection += earnedAffection;
 
-        if (earnedCoins === 500) {
+        if (earnedCoins === 800) {
             const btn = document.getElementById('btn-report');
             if (btn) {
                 const rect = btn.getBoundingClientRect();
                 const effectEl = document.createElement('div');
-                effectEl.innerText = "+500 🪙";
+                effectEl.innerText = "+800 🪙";
                 effectEl.style.position = 'fixed';
                 effectEl.style.left = (rect.left + rect.width / 2) + 'px';
                 effectEl.style.top = rect.top + 'px';
@@ -2142,7 +2142,7 @@
         } else if (state.lastLoginTime && (now - state.lastLoginTime >= 24 * 60 * 60 * 1000)) {
             loginImg = 'lancelot_5.png';
             loginMsg = '団長、忙しかったのか？たまには俺のことを思い出してくれると嬉しいな。';
-        } else if (state.coins >= 3000 && Math.random() < 0.3) {
+        } else if (state.coins >= 5000 && Math.random() < 0.3) {
             loginImg = 'lancelot_5.png';
             loginMsg = '団長、ショップへ行かないのか？素敵なものがたくさんあるようだぞ…？';
         }
