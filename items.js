@@ -31,8 +31,8 @@ const ITEM_DB = {
         { id: 'clothes28', name: '合唱隊の服', file: 'clothes_28.png', type: 'setup' },
         { id: 'clothes29', name: 'ペイントつなぎ', file: 'clothes_29.png', type: 'setup' },
         { id: 'clothes30', name: 'かぐや姫のふく', file: 'clothes_30.png', type: 'setup' },
-        { id: 'clothes31', name: 'アリスのドレス', file: 'clothes_31.png', type: 'setup' },
-        { id: 'clothes32', name: '合唱隊の服', file: 'clothes_32.png', type: 'setup' },
+        { id: 'clothes31', name: 'ああああ', file: 'clothes_31.png', type: 'setup' },
+        { id: 'clothes32', name: 'ああああ', file: 'clothes_32.png', type: 'setup' },
     ],
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
