@@ -242,8 +242,8 @@ const ITEM_DB = {
         { id: 'acc140', name: 'ぬんちゃく', file: 'acc_140.png', type: 'acc' },   
         { id: 'acc141', name: 'いちごホイップ', file: 'acc_141.png', type: 'acc' },   
         { id: 'acc142', name: '桃まんじゅう, file: 'acc_142.png', type: 'acc' },
-        { id: 'acc143', name: 'ああああ', file: 'acc_143.png', type: 'acc' },
-        { id: 'acc144', name: 'ああああ', file: 'acc_144.png', type: 'acc' },
+        { id: 'acc143', name: 'お猪口', file: 'acc_143.png', type: 'acc' },
+        { id: 'acc144', name: 'ひょうたん', file: 'acc_144.png', type: 'acc' },
         { id: 'acc145', name: 'ああああ', file: 'acc_145.png', type: 'acc' },
         { id: 'acc146', name: 'ああああ', file: 'acc_146.png', type: 'acc' },
         { id: 'acc147', name: 'ああああ', file: 'acc_147.png', type: 'acc' },
@@ -285,7 +285,8 @@ const ITEM_DB = {
         { id: 'bg31', name: '竹林', file: 'bg_31.png', type: 'bg' },
         { id: 'bg32', name: '檻', file: 'bg_32.png', type: 'bg' },
         { id: 'bg33', name: '騎空艇甲板', file: 'bg_33.png', type: 'bg' },
-        { id: 'bg34', name: 'アウギュステの海', file: 'bg_34.png', type: 'bg' }
+        { id: 'bg34', name: 'アウギュステの海', file: 'bg_34.png', type: 'bg' },
+        { id: 'bg35', name: 'SSR画面', file: 'bg_35.png', type: 'bg' }
         
         
         
