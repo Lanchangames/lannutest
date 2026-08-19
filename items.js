@@ -312,9 +312,12 @@ const ITEM_DB = {
         { id: 'bg32', name: '檻', file: 'bg_32.png', type: 'bg' },
         { id: 'bg33', name: '騎空艇甲板', file: 'bg_33.png', type: 'bg' },
         { id: 'bg34', name: 'アウギュステの海', file: 'bg_34.png', type: 'bg' },
-        { id: 'bg35', name: 'SSR画面', file: 'bg_35.png', type: 'bg' }
-        
-        
+        { id: 'bg35', name: 'SSR画面', file: 'bg_35.png', type: 'bg' },
+        { id: 'bg36', name: '雑誌の表紙（赤）', file: 'bg_36.png', type: 'bg' },
+        { id: 'bg37', name: '雑誌の表紙（青）', file: 'bg_37.png', type: 'bg' },
+        { id: 'bg38', name: '雑誌の表紙（夢色）', file: 'bg_38.png', type: 'bg' },
+        { id: 'bg39', name: '雑誌の表紙（黄）', file: 'bg_39.png', type: 'bg' },
+
         
     ]
 };
