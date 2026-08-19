@@ -241,7 +241,7 @@ const ITEM_DB = {
         { id: 'acc139', name: '天使と悪魔のおれ', file: 'acc_139.png', type: 'acc' },
         { id: 'acc140', name: 'ぬんちゃく', file: 'acc_140.png', type: 'acc' },   
         { id: 'acc141', name: 'いちごホイップ', file: 'acc_141.png', type: 'acc' },   
-        { id: 'acc142', name: '桃まんじゅう, file: 'acc_142.png', type: 'acc' },
+        { id: 'acc142', name: '桃まんじゅう', file: 'acc_142.png', type: 'acc' },
         { id: 'acc143', name: 'お猪口', file: 'acc_143.png', type: 'acc' },
         { id: 'acc144', name: 'ひょうたん', file: 'acc_144.png', type: 'acc' },
         { id: 'acc145', name: 'ああああ', file: 'acc_145.png', type: 'acc' },
@@ -249,7 +249,7 @@ const ITEM_DB = {
         { id: 'acc147', name: 'ああああ', file: 'acc_147.png', type: 'acc' },
         { id: 'acc148', name: 'ああああ', file: 'acc_148.png', type: 'acc' },   
         { id: 'acc149', name: 'ああああ', file: 'acc_149.png', type: 'acc' },
-    ],
+
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
