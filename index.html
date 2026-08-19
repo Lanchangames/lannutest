@@ -2103,7 +2103,7 @@
         const diff = COOLDOWN_MS - (now - state.lastReportTime);
         
         if (state.lastReportTime === 0 || diff <= 0) {
-            document.getElementById('cooldown-text').innerText = "報告可能です！";
+            document.getElementById('cooldown-text').innerText = "報告可能だぞ！";
             document.getElementById('btn-report').disabled = false;
             if (timerInterval) clearInterval(timerInterval);
         } else {
@@ -2241,7 +2241,7 @@
                         title: 'ランぬの着せ替え画像',
                         text: 'ランぬの着せ替えアバターです！'
                     });
-                    showCustomAlert("保存に成功しました！");
+                    showCustomAlert("団長の端末に保存しておいたぞ！");
                     return;
                 } catch (err) {
                     if (err.name !== 'AbortError') {
@@ -2261,9 +2261,9 @@
             link.download = 'lannu_avatar.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
-            showCustomAlert("保存に成功しました！");
+            showCustomAlert("団長の端末に保存しておいたぞ！");
         } catch (e) {
-            showCustomAlert("画像の保存に失敗しました。");
+            showCustomAlert("画像の保存に失敗したようだ…");
         }
     }
 
