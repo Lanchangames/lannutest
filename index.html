@@ -2256,16 +2256,36 @@
     }
 
     function fallbackDownload(canvas) {
-        try {
-            const link = document.createElement('a');
-            link.download = 'lannu_avatar.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showCustomAlert("団長の端末に保存しておいたぞ！");
-        } catch (e) {
-            showCustomAlert("画像の保存に失敗したようだ…");
+        function fallbackDownload(canvas, blob = null) {
+    try {
+        const link = document.createElement('a');
+        link.download = 'lannu_avatar.png';
+
+        let url;
+
+        if (blob) {
+            url = URL.createObjectURL(blob);
+        } else {
+            url = canvas.toDataURL('image/png');
         }
+
+        link.href = url;
+        link.style.display = 'none';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (blob) {
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        showCustomAlert("団長の端末に保存しておいたぞ！");
+    } catch (e) {
+        console.error("画像保存エラー:", e);
+        showCustomAlert("画像の保存に失敗したようだ…");
     }
+}
 
     function preloadImages() {
         const imagesToPreload = [];
