@@ -2245,7 +2245,7 @@
                     return;
                 } catch (err) {
                     if (err.name !== 'AbortError') {
-                        fallbackDownload(canvas);
+                       fallbackDownload(canvas, blob);
                     }
                     return;
                 }
