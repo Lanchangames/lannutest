@@ -274,8 +274,8 @@ const ITEM_DB = {
         { id: 'acc168', name: 'Y2Kなぼうし', file: 'acc_168.png', type: 'acc' },
         { id: 'acc169', name: 'Y2Kなくつ', file: 'acc_169.png', type: 'acc' },
         { id: 'acc170', name: 'ガラケー', file: 'acc_170.png', type: 'acc' },   
-        { id: 'acc171', name: 'あああああ', file: 'acc_171.png', type: 'acc' },
-
+        { id: 'acc171', name: '人参', file: 'acc_171.png', type: 'acc' },
+        { id: 'acc172', name: '月見団子串', file: 'acc_172.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
@@ -319,6 +319,7 @@ const ITEM_DB = {
         { id: 'bg39', name: '雑誌の表紙（黄）', file: 'bg_39.png', type: 'bg' },
         { id: 'bg40', name: '夜空', file: 'bg_40.png', type: 'bg' },
         { id: 'bg41', name: '広告のボタン', file: 'bg_41.png', type: 'bg' },
+        { id: 'bg42', name: '夜の竹林', file: 'bg_42.png', type: 'bg' },
         
     ]
 };
