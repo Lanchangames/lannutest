@@ -318,6 +318,7 @@ const ITEM_DB = {
         { id: 'bg38', name: '雑誌の表紙（夢色）', file: 'bg_38.png', type: 'bg' },
         { id: 'bg39', name: '雑誌の表紙（黄）', file: 'bg_39.png', type: 'bg' },
         { id: 'bg40', name: '夜空', file: 'bg_40.png', type: 'bg' },
+        { id: 'bg41', name: '広告のボタン', file: 'bg_41.png', type: 'bg' },
         
     ]
 };
