@@ -276,6 +276,7 @@ const ITEM_DB = {
         { id: 'acc170', name: 'ガラケー', file: 'acc_170.png', type: 'acc' },   
         { id: 'acc171', name: '人参', file: 'acc_171.png', type: 'acc' },
         { id: 'acc172', name: '月見団子串', file: 'acc_172.png', type: 'acc' },
+        { id: 'acc173', name: '食べかけのビスケット', file: 'acc_173.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
