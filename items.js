@@ -31,7 +31,7 @@ const ITEM_DB = {
         { id: 'clothes28', name: '合唱隊の服', file: 'clothes_28.png', type: 'setup' },
         { id: 'clothes29', name: 'ペイントつなぎ', file: 'clothes_29.png', type: 'setup' },
         { id: 'clothes30', name: 'かぐや姫のふく', file: 'clothes_30.png', type: 'setup' },
-        { id: 'clothes31', name: 'ああああ', file: 'clothes_31.png', type: 'setup' },
+        { id: 'clothes31', name: '双剣の隊服', file: 'clothes_31.png', type: 'setup' },
         { id: 'clothes32', name: 'ああああ', file: 'clothes_32.png', type: 'setup' },
     ],
     tops: [
@@ -72,7 +72,9 @@ const ITEM_DB = {
         { id: 'tops35', name: 'ファントムのふく', file: 'tops_35.png', type: 'tops' },
         { id: 'tops36', name: 'ヴァンパイアのふく', file: 'tops_36.png', type: 'tops' },
         { id: 'tops37', name: 'Y2Kなふく', file: 'tops_37.png', type: 'tops' },
-        { id: 'tops38', name: 'あ', file: 'tops_38.png', type: 'tops' },
+        { id: 'tops38', name: 'レースのブラウス（白）', file: 'tops_38.png', type: 'tops' },
+        { id: 'tops39', name: 'レースのブラウス（黒）', file: 'tops_39.png', type: 'tops' },
+        { id: 'tops40', name: 'レースのブラウス（青）', file: 'tops_40.png', type: 'tops' },
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
@@ -100,8 +102,9 @@ const ITEM_DB = {
         { id: 'bottoms23', name: 'サンダルズボン', file: 'bottoms_23.png', type: 'bottoms' },
         { id: 'bottoms24', name: 'ファントムズボン', file: 'bottoms_24.png', type: 'bottoms' },
         { id: 'bottoms25', name: 'ヴァンパイアのズボン', file: 'bottoms_25.png', type: 'bottoms' },
-        { id: 'bottoms26', name: 'あ', file: 'bottoms_26.png', type: 'bottoms' },
-        { id: 'bottoms27', name: 'あ', file: 'bottoms_27.png', type: 'bottoms' },
+        { id: 'bottoms26', name: 'レースのズボン（白）', file: 'bottoms_26.png', type: 'bottoms' },
+        { id: 'bottoms27', name: 'レースのズボン（黒）', file: 'bottoms_27.png', type: 'bottoms' },
+        { id: 'bottoms28', name: 'レースのズボン（青）', file: 'bottoms_28.png', type: 'bottoms' },
     ],
     acc: [
         { id: 'acc1', name: 'リボン', file: 'acc_1.png', type: 'acc' },
