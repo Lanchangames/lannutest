@@ -280,6 +280,14 @@ const ITEM_DB = {
         { id: 'acc171', name: '人参', file: 'acc_171.png', type: 'acc' },
         { id: 'acc172', name: '月見団子串', file: 'acc_172.png', type: 'acc' },
         { id: 'acc173', name: '食べかけのビスケット', file: 'acc_173.png', type: 'acc' },
+        { id: 'acc174', name: 'パーシヴァル色の髪', file: 'acc_174.png', type: 'acc' },
+        { id: 'acc175', name: 'パーシヴァル色の目', file: 'acc_175.png', type: 'acc' },
+        { id: 'acc176', name: 'ヴェイン色の髪', file: 'acc_176.png', type: 'acc' },
+        { id: 'acc177', name: 'ヴェイン色の目', file: 'acc_177.png', type: 'acc' },
+        { id: 'acc178', name: 'ジークフリートさん色の髪', file: 'acc_178.png', type: 'acc' },   
+        { id: 'acc179', name: 'ジークフリートさん色の目', file: 'acc_179.png', type: 'acc' },
+        { id: 'acc180', name: '葉っぱ', file: 'acc_180.png', type: 'acc' },
+        { id: 'acc181', name: 'ああああ', file: 'acc_181.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
@@ -326,5 +334,7 @@ const ITEM_DB = {
         { id: 'bg42', name: '夜の竹林', file: 'bg_42.png', type: 'bg' },
         { id: 'bg43', name: 'おかしの家', file: 'bg_43.png', type: 'bg' },
         { id: 'bg44', name: 'ワムの海', file: 'bg_44.png', type: 'bg' },
+        { id: 'bg45', name: '学校', file: 'bg_45.png', type: 'bg' },
+        { id: 'bg46', name: 'あ', file: 'bg_46.png', type: 'bg' },
     ]
 };
