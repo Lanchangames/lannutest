@@ -83,7 +83,7 @@ const ITEM_DB = {
         { id: 'tops40', name: 'レースのブラウス（青）', file: 'tops_40.png', type: 'tops' },
         { id: 'tops41', name: '野球のふく', file: 'tops_41.png', type: 'tops' },
         { id: 'tops42', name: 'マウンテンパーカー', file: 'tops_42.png', type: 'tops' },
-        { id: 'tops43', name: 'レースのブラウス（青）', file: 'tops_43.png', type: 'tops' },
+        { id: 'tops43', name: 'aaaa', file: 'tops_43.png', type: 'tops' },
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
@@ -115,9 +115,9 @@ const ITEM_DB = {
         { id: 'bottoms27', name: 'レースのズボン（黒）', file: 'bottoms_27.png', type: 'bottoms' },
         { id: 'bottoms28', name: 'レースのズボン（青）', file: 'bottoms_28.png', type: 'bottoms' },
         { id: 'bottoms29', name: '野球のズボン', file: 'bottoms_29.png', type: 'bottoms' },
-        { id: 'bottoms30', name: 'レースのズボン（白）', file: 'bottoms_30.png', type: 'bottoms' },
-        { id: 'bottoms31', name: 'レースのズボン（黒）', file: 'bottoms_31.png', type: 'bottoms' },
-        { id: 'bottoms32', name: 'レースのズボン（青）', file: 'bottoms_32.png', type: 'bottoms' },
+        { id: 'bottoms30', name: 'aaa', file: 'bottoms_30.png', type: 'bottoms' },
+        { id: 'bottoms31', name: 'aaa', file: 'bottoms_31.png', type: 'bottoms' },
+        { id: 'bottoms32', name: 'aaa', file: 'bottoms_32.png', type: 'bottoms' },
     ],
     acc: [
         { id: 'acc1', name: 'リボン', file: 'acc_1.png', type: 'acc' },
