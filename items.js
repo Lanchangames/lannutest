@@ -320,7 +320,7 @@ const ITEM_DB = {
         { id: 'acc198', name: '綿帽子', file: 'acc_198.png', type: 'acc' },
         { id: 'acc199', name: 'スケーターのアクセサリー', file: 'acc_199.png', type: 'acc' },
         { id: 'acc200', name: '大正ロマンのマフラー', file: 'acc_200.png', type: 'acc' },   
-        { id: 'acc201', name: 'ああああ', file: 'acc_201.png', type: 'acc' },
+        { id: 'acc201', name: 'おみやげのけん', file: 'acc_201.png', type: 'acc' },
         { id: 'acc202', name: 'ああああ', file: 'acc_202.png', type: 'acc' },
         { id: 'acc203', name: 'ああああ', file: 'acc_203.png', type: 'acc' },
     ],
