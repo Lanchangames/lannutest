@@ -38,7 +38,8 @@ const ITEM_DB = {
         { id: 'clothes35', name: '海賊のふく', file: 'clothes_35.png', type: 'setup' },
         { id: 'clothes36', name: '白無垢', file: 'clothes_36.png', type: 'setup' },
         { id: 'clothes37', name: 'スケートの衣装', file: 'clothes_37.png', type: 'setup' },
-        { id: 'clothes38', name: '大正ロマンの袴', file: 'clothes_38.png', type: 'setup' },
+        { id: 'clothes38', name: '大正ロマンの袴', file: 'clothes_38.png', type: 'setup' },   
+        { id: 'clothes39', name: 'エプロンメイド', file: 'clothes_39.png', type: 'setup' },
     ],
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
@@ -321,8 +322,8 @@ const ITEM_DB = {
         { id: 'acc199', name: 'スケーターのアクセサリー', file: 'acc_199.png', type: 'acc' },
         { id: 'acc200', name: '大正ロマンのマフラー', file: 'acc_200.png', type: 'acc' },   
         { id: 'acc201', name: 'おみやげのけん', file: 'acc_201.png', type: 'acc' },
-        { id: 'acc202', name: 'ああああ', file: 'acc_202.png', type: 'acc' },
-        { id: 'acc203', name: 'ああああ', file: 'acc_203.png', type: 'acc' },
+        { id: 'acc202', name: 'シルフ様色の髪', file: 'acc_202.png', type: 'acc' },
+        { id: 'acc203', name: 'シルフ様色の目', file: 'acc_203.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
