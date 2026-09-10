@@ -329,6 +329,7 @@ const ITEM_DB = {
         { id: 'acc201', name: 'おみやげのけん', file: 'acc_201.png', type: 'acc' },
         { id: 'acc202', name: 'シルフ様色の髪', file: 'acc_202.png', type: 'acc' },
         { id: 'acc203', name: 'シルフ様色の目', file: 'acc_203.png', type: 'acc' },
+        { id: 'acc204', name: 'アルタキエラピック', file: 'acc_204.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
@@ -380,7 +381,7 @@ const ITEM_DB = {
         { id: 'bg47', name: '倉庫', file: 'bg_47.png', type: 'bg' },
         { id: 'bg48', name: '艇の部屋', file: 'bg_48.png', type: 'bg' },
         { id: 'bg49', name: 'はらっぱ', file: 'bg_49.png', type: 'bg' },
-        { id: 'bg50', name: 'フォトジェニックなかべ', file: 'bg_48.png', type: 'bg' },
-        { id: 'bg51', name: 'UFO', file: 'bg_49.png', type: 'bg' },
+        { id: 'bg50', name: 'フォトジェニックなかべ', file: 'bg_50.png', type: 'bg' },
+        { id: 'bg51', name: 'UFO', file: 'bg_51.png', type: 'bg' },
     ]
 };
