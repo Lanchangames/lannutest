@@ -41,7 +41,11 @@ const ITEM_DB = {
         { id: 'clothes38', name: '大正ロマンの袴', file: 'clothes_38.png', type: 'setup' },   
         { id: 'clothes39', name: 'エプロンメイド', file: 'clothes_39.png', type: 'setup' },
         { id: 'clothes40', name: '魔法少女のふく', file: 'clothes_40.png', type: 'setup' },
-    ],
+        { id: 'clothes41', name: 'クロウィンのきぐるみ', file: 'clothes_41.png', type: 'setup' },
+        { id: 'clothes42', name: 'ムートのきぐるみ', file: 'clothes_42.png', type: 'setup' },
+
+
+   ],
     tops: [
         { id: 'tops1', name: '絶対甘党', file: 'tops_1.png', type: 'tops' },
         { id: 'tops2', name: 'ゔぇいんT', file: 'tops_2.png', type: 'tops' },
@@ -376,5 +380,7 @@ const ITEM_DB = {
         { id: 'bg47', name: '倉庫', file: 'bg_47.png', type: 'bg' },
         { id: 'bg48', name: '艇の部屋', file: 'bg_48.png', type: 'bg' },
         { id: 'bg49', name: 'はらっぱ', file: 'bg_49.png', type: 'bg' },
+        { id: 'bg50', name: 'フォトジェニックなかべ', file: 'bg_48.png', type: 'bg' },
+        { id: 'bg51', name: 'UFO', file: 'bg_49.png', type: 'bg' },
     ]
 };
