@@ -330,6 +330,8 @@ const ITEM_DB = {
         { id: 'acc202', name: 'シルフ様色の髪', file: 'acc_202.png', type: 'acc' },
         { id: 'acc203', name: 'シルフ様色の目', file: 'acc_203.png', type: 'acc' },
         { id: 'acc204', name: 'アルタキエラピック', file: 'acc_204.png', type: 'acc' },
+        { id: 'acc205', name: 'ナイトオブアイスピック', file: 'acc_205.png', type: 'acc' },
+        { id: 'acc206', name: 'ラブリーナイトオブアイス', file: 'acc_206.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
