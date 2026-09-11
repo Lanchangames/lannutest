@@ -51,6 +51,7 @@ const ITEM_DB = {
         { id: 'clothes48', name: '忍者のふく', file: 'clothes_48.png', type: 'setup' },
         { id: 'clothes49', name: 'スイーツのふく', file: 'clothes_49.png', type: 'setup' },
         { id: 'clothes50', name: '魔女のドレス', file: 'clothes_50.png', type: 'setup' },
+        { id: 'clothes51', name: 'ピエロのふく', file: 'clothes_51.png', type: 'setup' },
 
 
    ],
