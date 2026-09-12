@@ -468,7 +468,8 @@ const ITEM_DB = {
         { id: 'bg87', name: '炎', file: 'bg_87.png', type: 'bg' },
         { id: 'bg88', name: '夜明け前', file: 'bg_88.png', type: 'bg' },
         { id: 'bg89', name: '夏の空', file: 'bg_89.png', type: 'bg' },
-        { id: 'bg90', name: 'モザイク', file: 'bg_87.png', type: 'bg' },
+        { id: 'bg90', name: 'モザイク', file: 'bg_90.png', type: 'bg' },
+        { id: 'bg91', name: 'きけん', file: 'bg_91.png', type: 'bg' },
 
     ]
 };
