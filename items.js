@@ -109,7 +109,7 @@ const ITEM_DB = {
         { id: 'tops50', name: 'ベスト', file: 'tops_50.png', type: 'tops' },
         { id: 'tops51', name: '変わったねこセーター', file: 'tops_51.png', type: 'tops' },
         { id: 'tops52', name: '変わったねこセーター2', file: 'tops_50.png', type: 'tops' },
-        { id: 'tops53', name: 'paradise sweets Tシャツ',', file: 'tops_50.png', type: 'tops' },
+        { id: 'tops53', name: 'paradise sweets Tシャツ', file: 'tops_50.png', type: 'tops' },
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
