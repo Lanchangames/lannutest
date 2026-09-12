@@ -1,4 +1,3 @@
-// items.js
 const ITEM_DB = {
     setup: [
         { id: 'clothes1', name: 'ループタイのふく', file: 'clothes_1.png', type: 'setup' },
@@ -53,6 +52,8 @@ const ITEM_DB = {
         { id: 'clothes50', name: '魔女のドレス', file: 'clothes_50.png', type: 'setup' },
         { id: 'clothes51', name: 'ピエロのふく', file: 'clothes_51.png', type: 'setup' },
         { id: 'clothes52', name: 'ぐんぷく（白）', file: 'clothes_52.png', type: 'setup' },
+        { id: 'clothes53', name: 'ぐんぷく（黒）', file: 'clothes_53.png', type: 'setup' },
+        { id: 'clothes54', name: 'シェフのふく', file: 'clothes_54.png', type: 'setup' },
 
    ],
     tops: [
@@ -104,6 +105,11 @@ const ITEM_DB = {
         { id: 'tops46', name: '白スーツ上', file: 'tops_46.png', type: 'tops' },
         { id: 'tops47', name: '黒スリーピーススーツ上', file: 'tops_47.png', type: 'tops' },
         { id: 'tops48', name: '白スリーピーススーツ上', file: 'tops_48.png', type: 'tops' },
+        { id: 'tops49', name: 'しましまシャツ', file: 'tops_49.png', type: 'tops' },
+        { id: 'tops50', name: 'ベスト', file: 'tops_50.png', type: 'tops' },
+        { id: 'tops51', name: '変わったねこセーター', file: 'tops_51.png', type: 'tops' },
+        { id: 'tops52', name: '変わったねこセーター2', file: 'tops_50.png', type: 'tops' },
+        { id: 'tops53', name: 'paradise sweets Tシャツ',', file: 'tops_50.png', type: 'tops' },
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
@@ -139,6 +145,8 @@ const ITEM_DB = {
         { id: 'bottoms31', name: '学生のズボン', file: 'bottoms_31.png', type: 'bottoms' },
         { id: 'bottoms32', name: '黒スーツ下', file: 'bottoms_32.png', type: 'bottoms' },
         { id: 'bottoms33', name: '白スーツ下', file: 'bottoms_33.png', type: 'bottoms' },
+        { id: 'bottoms34', name: 'はかま', file: 'bottoms_34.png', type: 'bottoms' },
+        { id: 'bottoms35', name: 'チェックのズボン', file: 'bottoms_35.png', type: 'bottoms' },
     ],
     acc: [
         { id: 'acc1', name: 'リボン', file: 'acc_1.png', type: 'acc' },
@@ -379,6 +387,14 @@ const ITEM_DB = {
         { id: 'acc236', name: 'LOSE', file: 'acc_236.png', type: 'acc' },
         { id: 'acc237', name: '周回中', file: 'acc_237.png', type: 'acc' },
         { id: 'acc238', name: '休憩中', file: 'acc_238.png', type: 'acc' },
+        { id: 'acc239', name: '果てヘアカラー', file: 'acc_239.png', type: 'acc' },
+        { id: 'acc240', name: '落ち葉', file: 'acc_240.png', type: 'acc' },
+        { id: 'acc241', name: '伝票とペン', file: 'acc_241.png', type: 'acc' },
+        { id: 'acc242', name: '格子柄マフラー', file: 'acc_242.png', type: 'acc' },
+        { id: 'acc243', name: '目からビーム', file: 'acc_243.png', type: 'acc' },
+        { id: 'acc244', name: 'ショートジャケット', file: 'acc_244.png', type: 'acc' },
+        { id: 'acc245', name: 'コック帽', file: 'acc_245.png', type: 'acc' },
+        { id: 'acc246', name: 'ジークマンお面', file: 'acc_246.png', type: 'acc' },
     ],
     bg: [
         { id: 'bg1', name: 'ブルー', file: 'bg_1.png', type: 'bg' },
