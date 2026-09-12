@@ -460,7 +460,7 @@ const ITEM_DB = {
         { id: 'bg61', name: 'くしゃくしゃの紙', file: 'bg_61.png', type: 'bg' },
         { id: 'bg62', name: 'マリン', file: 'bg_62.png', type: 'bg' },
         { id: 'bg63', name: 'きんぎょ', file: 'bg_63.png', type: 'bg' },
-        { id: 'bg64', name: 'あおぞら', file: 'bg_64.png', type: 'bg' },
+        { id: 'bg64', name: 'ゆうがた', file: 'bg_64.png', type: 'bg' },
         { id: 'bg65', name: '宇宙', file: 'bg_65.png', type: 'bg' },
         { id: 'bg66', name: 'ステージ', file: 'bg_66.png', type: 'bg' },
         { id: 'bg67', name: '羊皮紙', file: 'bg_67.png', type: 'bg' },
