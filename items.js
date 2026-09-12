@@ -437,9 +437,9 @@ const ITEM_DB = {
         { id: 'bg56', name: 'にじみ水彩', file: 'bg_56.png', type: 'bg' },
         { id: 'bg57', name: '迷彩', file: 'bg_57.png', type: 'bg' },
         { id: 'bg58', name: 'シックな小花', file: 'bg_58.png', type: 'bg' },
-        { id: 'bg59', name: 'ああああ', file: 'bg_59.png', type: 'bg' },
-        { id: 'bg60', name: 'ああああ', file: 'bg_60.png', type: 'bg' },
-        { id: 'bg61', name: 'ああああ', file: 'bg_61.png', type: 'bg' },
+        { id: 'bg59', name: '方眼紙', file: 'bg_59.png', type: 'bg' },
+        { id: 'bg60', name: 'かがやくおれ', file: 'bg_60.png', type: 'bg' },
+        { id: 'bg61', name: 'くしゃくしゃの紙', file: 'bg_61.png', type: 'bg' },
         { id: 'bg62', name: 'マリン', file: 'bg_62.png', type: 'bg' },
         { id: 'bg63', name: 'きんぎょ', file: 'bg_63.png', type: 'bg' },
         { id: 'bg64', name: 'あおぞら', file: 'bg_64.png', type: 'bg' },
@@ -468,5 +468,7 @@ const ITEM_DB = {
         { id: 'bg87', name: '炎', file: 'bg_87.png', type: 'bg' },
         { id: 'bg88', name: '夜明け前', file: 'bg_88.png', type: 'bg' },
         { id: 'bg89', name: '夏の空', file: 'bg_89.png', type: 'bg' },
+        { id: 'bg90', name: 'モザイク', file: 'bg_87.png', type: 'bg' },
+
     ]
 };
