@@ -423,5 +423,14 @@ const ITEM_DB = {
         { id: 'bg49', name: 'はらっぱ', file: 'bg_49.png', type: 'bg' },
         { id: 'bg50', name: 'フォトジェニックなかべ', file: 'bg_50.png', type: 'bg' },
         { id: 'bg51', name: 'UFO', file: 'bg_51.png', type: 'bg' },
+        { id: 'bg52', name: '周回中', file: 'bg_52.png', type: 'bg' },
+        { id: 'bg53', name: '休憩中', file: 'bg_53.png', type: 'bg' },
+        { id: 'bg54', name: 'ネコカフェ', file: 'bg_54.png', type: 'bg' },
+        { id: 'bg55', name: '倉庫', file: 'bg_55.png', type: 'bg' },
+        { id: 'bg56', name: '艇の部屋', file: 'bg_56.png', type: 'bg' },
+        { id: 'bg57', name: 'はらっぱ', file: 'bg_57.png', type: 'bg' },
+        { id: 'bg58', name: 'フォトジェニックなかべ', file: 'bg_58.png', type: 'bg' },
+        { id: 'bg59', name: 'UFO', file: 'bg_59.png', type: 'bg' },
+        { id: 'bg60', name: '周回中', file: 'bg_60.png', type: 'bg' },
     ]
 };
