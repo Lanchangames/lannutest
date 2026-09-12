@@ -470,6 +470,6 @@ const ITEM_DB = {
         { id: 'bg89', name: '夏の空', file: 'bg_89.png', type: 'bg' },
         { id: 'bg90', name: 'モザイク', file: 'bg_90.png', type: 'bg' },
         { id: 'bg91', name: 'きけん', file: 'bg_91.png', type: 'bg' },
-
+        { id: 'bg92', name: 'いなずま', file: 'bg_92.png', type: 'bg' },
     ]
 };
