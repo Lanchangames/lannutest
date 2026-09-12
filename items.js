@@ -74,7 +74,7 @@ const ITEM_DB = {
         { id: 'tops16', name: '学生セーラー(紺）', file: 'tops_16.png', type: 'tops' },
         { id: 'tops17', name: '学生セーラー（ピンク）', file: 'tops_17.png', type: 'tops' },
         { id: 'tops18', name: '幼稚園着', file: 'tops_18.png', type: 'tops' },
-        { id: 'tops19', name: '体操ふく（上）', file: 'tops_19.png', type: 'tops' },
+        { id: 'tops19', name: '体操ふく上', file: 'tops_19.png', type: 'tops' },
         { id: 'tops20', name: 'へそ出しシャツ（白）', file: 'tops_20.png', type: 'tops' },
         { id: 'tops21', name: 'へそ出しシャツ（黒）', file: 'tops_21.png', type: 'tops' },
         { id: 'tops22', name: 'ジャージ上（赤）', file: 'tops_22.png', type: 'tops' },
@@ -100,6 +100,10 @@ const ITEM_DB = {
         { id: 'tops42', name: 'マウンテンパーカー', file: 'tops_42.png', type: 'tops' },
         { id: 'tops43', name: '学生ブレザー', file: 'tops_43.png', type: 'tops' },
         { id: 'tops44', name: '学生カーディガン', file: 'tops_44.png', type: 'tops' },
+        { id: 'tops45', name: '黒スーツ上', file: 'tops_45.png', type: 'tops' },
+        { id: 'tops46', name: '白スーツ上', file: 'tops_46.png', type: 'tops' },
+        { id: 'tops47', name: '黒スリーピーススーツ上', file: 'tops_47.png', type: 'tops' },
+        { id: 'tops48', name: '白スリーピーススーツ上', file: 'tops_48.png', type: 'tops' },
     ],
     bottoms: [
         { id: 'bottoms1', name: 'じーぱん', file: 'bottoms_1.png', type: 'bottoms' },
@@ -133,7 +137,8 @@ const ITEM_DB = {
         { id: 'bottoms29', name: '野球のズボン', file: 'bottoms_29.png', type: 'bottoms' },
         { id: 'bottoms30', name: 'ホットパンツ', file: 'bottoms_30.png', type: 'bottoms' },
         { id: 'bottoms31', name: '学生のズボン', file: 'bottoms_31.png', type: 'bottoms' },
-        { id: 'bottoms32', name: 'aaa', file: 'bottoms_32.png', type: 'bottoms' },
+        { id: 'bottoms32', name: '黒スーツ下', file: 'bottoms_32.png', type: 'bottoms' },
+        { id: 'bottoms33', name: '白スーツ下', file: 'bottoms_33.png', type: 'bottoms' },
     ],
     acc: [
         { id: 'acc1', name: 'リボン', file: 'acc_1.png', type: 'acc' },
@@ -432,5 +437,6 @@ const ITEM_DB = {
         { id: 'bg58', name: 'フォトジェニックなかべ', file: 'bg_58.png', type: 'bg' },
         { id: 'bg59', name: 'UFO', file: 'bg_59.png', type: 'bg' },
         { id: 'bg60', name: '周回中', file: 'bg_60.png', type: 'bg' },
+        { id: 'bg61', name: '休憩中', file: 'bg_61.png', type: 'bg' },
     ]
 };
